@@ -1,33 +1,38 @@
 "use client";
 
 import styles from "@/styles/home/Home.module.scss";
-import { useQuery } from "@tanstack/react-query";
-import { UsersAuthStore } from "@/stores/usersStore";
 import { useAuthUsers } from "@/hooks/useAuthUsers";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useAuthState } from "@/hooks/useAuthState";
+import { useRouter } from "next/navigation";
 
 function AuthorizationPage() {
   const { usersAuth } = useAuthUsers();
   const { inputsAuth, setInputLogin, setInputPassword } = useAuthState();
-  const [isLoggined, setIsLoggined] = useState<boolean>(false);
+  const [isLoggined, setIsLoggined] = useState<boolean | null>(null);
 
-  const onClickAuth = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
+  const router = useRouter();
 
-    usersAuth.forEach((user) => {
-      if (inputsAuth.login === user.login && inputsAuth.password === user.password)
-        setIsLoggined(true);
-      else setIsLoggined(false);
-    });
-  };
+  const onClickAuth = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      e.preventDefault();
+
+      usersAuth.forEach((user) => {
+        if (inputsAuth.login === user.login && inputsAuth.password === user.password) {
+          setIsLoggined(true);
+          router.push("./lobby"); // go to lobby page
+        } else setIsLoggined(false);
+      });
+    },
+    [inputsAuth.login, inputsAuth.password, router, usersAuth]
+  );
 
   return (
     <main className={styles.authContainer}>
       <div className={styles.authForm_wrapper}>
         <h1 className="mb-5 text-center text-white text-xl">Авторизация</h1>
         <p className="mb-5 text-center text-white text-xl">
-          {isLoggined ? "Вы авторизованы" : "Вы не авторизованы"}
+          {isLoggined ? "Вы авторизованы" : isLoggined === null ? " " : "Введите верные данные"}
         </p>
         <form className={styles.authForm}>
           <input
@@ -42,11 +47,13 @@ function AuthorizationPage() {
             value={inputsAuth.password}
             onChange={(ev) => setInputPassword(ev.target.value)}
           />
-          <button onClick={onClickAuth}>Войти в систему</button>
+          <button onClick={onClickAuth} disabled={isLoggined ? true : false}>
+            Войти в систему
+          </button>
         </form>
       </div>
     </main>
   );
 }
 
-export { AuthorizationPage };
+export default AuthorizationPage;

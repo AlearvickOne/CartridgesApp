@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Catamaran, Inter, Reddit_Mono } from "next/font/google";
 import "./globals.scss";
 
-const inter = Inter({ subsets: ["latin"] });
+const catamaran = Catamaran({ subsets: ["latin"], weight: ["100", "200", "400", "900"] });
 
 export const metadata: Metadata = {
   title: "Cartridge App",
@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={catamaran.className}>{children}</body>
     </html>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 
 // Немного измененный useState переделанный под авторизационное окно
 export const useAuthState = () => {
@@ -6,20 +6,31 @@ export const useAuthState = () => {
     login: "",
     password: "",
   });
+  const dontSpace = /\s/g;
 
-  const setInputLogin = (inputValue: string) => {
-    setInputsAuth((prev) => ({
-      ...prev,
-      login: inputValue,
-    }));
-  };
+  const setInputLogin = useCallback(
+    (inputValue: string) => {
+      if (inputValue.length > 20) return;
 
-  const setInputPassword = (inputValue2: string) => {
-    setInputsAuth((prev) => ({
-      ...prev,
-      password: inputValue2,
-    }));
-  };
+      setInputsAuth((prev) => ({
+        ...prev,
+        login: inputValue.replace(dontSpace, ""),
+      }));
+    },
+    [dontSpace]
+  );
+
+  const setInputPassword = useCallback(
+    (inputValue: string) => {
+      if (inputValue.length > 20) return;
+
+      setInputsAuth((prev) => ({
+        ...prev,
+        password: inputValue.replace(dontSpace, ""),
+      }));
+    },
+    [dontSpace]
+  );
 
   return { inputsAuth, setInputLogin, setInputPassword };
 };
