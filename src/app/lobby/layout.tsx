@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, { PropsWithChildren } from "react";
 
-export default function layout({ children }: PropsWithChildren) {
+export default function LobbyLayout({ children }: PropsWithChildren) {
   return (
     <div className="max-w-7xl m-auto">
       <header className="flex justify-between items-center px-5 py-2 mb-5 border-b-2 border-black">
@@ -21,7 +21,7 @@ export default function layout({ children }: PropsWithChildren) {
           </li>
 
           <li className="border-2 p-1 rounded-md border-black">
-            <Link href={"/lobby/list"}>Выход</Link>
+            <Link href={"/"}>Выход</Link>
           </li>
         </ul>
       </header>
