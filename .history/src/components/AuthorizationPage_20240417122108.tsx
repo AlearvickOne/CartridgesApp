@@ -1,30 +1,35 @@
 "use client";
 
 import styles from "@/styles/home/Home.module.scss";
-import { useAuthUsers } from "@/hooks/useAuthUsers";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useAuthState } from "@/hooks/useAuthState";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { error } from "console";
 
 function AuthorizationPage() {
-  const { usersAuth } = useAuthUsers();
   const { inputsAuth, setInputLogin, setInputPassword } = useAuthState();
   const [isLoggined, setIsLoggined] = useState<boolean | null>(null);
 
   const router = useRouter();
 
   const onClickAuth = useCallback(
-    (e: React.MouseEvent<HTMLElement>) => {
+    async (e: React.MouseEvent<HTMLElement>) => {
       e.preventDefault();
 
-      usersAuth.forEach((user) => {
-        if (inputsAuth.login === user.login && inputsAuth.password === user.password) {
-          setIsLoggined(true);
-          router.push("./lobby"); // go to lobby page
-        } else setIsLoggined(false);
+      const res = await signIn("credentials", {
+        login: inputsAuth.login,
+        password: inputsAuth.password,
+        redirect: false,
       });
+
+      if (res && !res.error) {
+        router.push("/lobby2");
+      } else {
+        console.warn(res);
+      }
     },
-    [inputsAuth.login, inputsAuth.password, router, usersAuth]
+    [inputsAuth.login, inputsAuth.password, router]
   );
 
   return (
