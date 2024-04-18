@@ -1,0 +1,37 @@
+"use client";
+import React, { useCallback, useMemo, useState } from "react";
+
+// Немного измененный useState переделанный под авторизационное окно
+export const useAuthState = () => {
+  const [inputsAuth, setInputsAuth] = useState({
+    login: "",
+    password: "",
+  });
+  const dontSpace = /\s/g ;
+
+  const setInputLogin = useCallback(
+    (inputValue: string) => {
+      if (inputValue.length > 20) return;
+
+      setInputsAuth((prev) => ({
+        ...prev,
+        login: ,
+      }));
+    },
+    [dontSpace]
+  );
+
+  const setInputPassword = useCallback(
+    (inputValue: string) => {
+      if (inputValue.length > 20) return;
+
+      setInputsAuth((prev) => ({
+        ...prev,
+        password: inputValue.replace(dontSpace, ""),
+      }));
+    },
+    [dontSpace]
+  );
+
+  return { inputsAuth, setInputLogin, setInputPassword };
+};

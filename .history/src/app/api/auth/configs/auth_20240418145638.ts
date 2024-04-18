@@ -1,0 +1,65 @@
+import NextAuth from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { UsersAuthStore } from "@/stores/usersStore";
+import credentials from "next-auth/providers/credentials";
+import { IUsersAuth } from "@/types/auth.interface";
+
+
+export const configAuth = {
+  {
+    providers: [
+      CredentialsProvider({
+        name: "User Credential",
+        credentials: {
+          login: { label: "Логин", type: "text", required: true },
+          password: { label: "Пароль", type: "password", required: true },
+        },
+        authorize: async (credentials) => {
+          await UsersAuthStore.getAuthUsersActon();
+          const user = UsersAuthStore.usersAuth.find((person) => person?.login === credentials.login);
+  
+          if (user && credentials?.password === user.password) return user as IUsersAuth;
+  
+          return null;
+        },
+      }),
+    ],
+    secret: process.env.NEXTAUTH_SECRET,
+  }
+}
+
+export const {
+  auth,
+  signIn,
+  signOut,
+  handlers: { GET, POST },
+} = NextAuth(configAuth);
+
+// export const {
+//   handlers: { GET, POST },
+//   auth,
+//   signIn,
+//   signOut,
+// } = NextAuth({
+//   providers: [
+//     Credentials({
+//       credentials: {
+//         login: { label: "Логин", type: "text", required: true },
+//         password: { label: "Пароль", type: "password", required: true },
+//       },
+//       authorize: async (credentials) => {
+//         const currentUser = UsersAuthStore.usersAuth.find(
+//           (user) => user.login === credentials.login
+//         );
+
+//         if (currentUser && currentUser.password === credentials.password) {
+//           const { ...items } = currentUser;
+
+//           return items as IUsersAuth;
+//         }
+
+//         return null;
+//       },
+//     }),
+//   ],
+// });

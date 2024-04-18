@@ -1,0 +1,44 @@
+{
+  "name": "cartridge-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbo",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@auth/core": "^0.29.0",
+    "@tanstack/react-query": "^5.29.2",
+    "axios": "^1.6.8",
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.30.8",
+    "mobx": "^6.12.3",
+    "mobx-react-lite": "^4.0.7",
+    "next": "14.2.1",
+    "next-auth": "^5.0.0-beta.16",
+    "react": "^18",
+    "react-dom": "^18",
+    "sass": "^1.75.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.0.2",
+    "@eslint/js": "^9.0.0",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@typescript-eslint/eslint-plugin": "^7.7.0",
+    "@typescript-eslint/parser": "^7.7.0",
+    "drizzle-kit": "^0.20.14",
+    "eslint": "^8.57.0",
+    "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.34.1",
+    "globals": "^15.0.0",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.4.5"
+  },
+  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
+}
