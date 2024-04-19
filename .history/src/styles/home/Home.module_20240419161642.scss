@@ -1,0 +1,24 @@
+.authContainer {
+  @apply flex justify-center items-center h-screen bg-slate-50;
+  transition: all 0.2s;
+
+  .authForm_wrapper {
+    @apply border-[2px] border-black rounded-[7px] py-10 px-5  bg-slate-50   text-black  shadow-upmd shadow-black;
+
+    > h1 {
+      @apply text-black text-3xl;
+    }
+
+    .authForm {
+      @apply flex flex-col min-w-[25rem] min-h-[20rem];
+
+      > input {
+        @apply mb-5 px-2 rounded-sm text-xl tracking-wide outline-gray-900 border-[1px] border-black bg-white text-black w-full h-16;
+      }
+
+      > button {
+        @apply p-2 rounded-sm active:scale-[0.9] text-black h-14 bg-gradient-to-r from-blue-300 via-sky-300 to-blue-300 text-xl border-4;
+      }
+    }
+  }
+}

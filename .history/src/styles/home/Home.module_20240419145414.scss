@@ -1,0 +1,19 @@
+.authContainer {
+  @apply flex justify-center items-center h-screen bg-gray-800;
+
+  .authForm_wrapper {
+    @apply border-[2px] border-black rounded-2xl p-10 bg-gray-600;
+
+    .authForm {
+      @apply flex flex-col;
+
+      > input {
+        @apply mb-5 p-2 outline-gray-900 bg-gray-900 text-white;
+      }
+
+      > button {
+        @apply bg-gray-900 p-2 rounded-xl hover:text-violet-200 text-white;
+      }
+    }
+  }
+}
