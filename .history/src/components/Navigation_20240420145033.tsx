@@ -1,0 +1,50 @@
+"use client";
+
+import { UsersAuthStore } from "@/stores/usersStore";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
+import React, { useEffect } from "react";
+interface IHandleOut {
+  handleOut: () => void;
+  findCurrentUserInDb: (login: string) => void;
+}
+
+const Navigation = ({ handleOut, findCurrentUserInDb }: IHandleOut) => {
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    const res = async () => await findCurrentUserInDb(session?.user?.name!);
+    res();
+  }, [findCurrentUserInDb]);
+
+  console.log(session?.user?.name);
+  return (
+    <>
+      <header className="flex justify-between items-center px-5 py-2 mb-5 border-b-2 border-black">
+        <div className="">
+          <p>info</p>
+          <p>{UsersAuthStore.currentUser?.info?.userName}</p>
+        </div>
+        <ul className="flex gap-5">
+          <li className="border-2 p-1 rounded-md border-black">
+            <Link href={"/lobby/list"}>Добавить заказ</Link>
+          </li>
+          <li className="border-2 p-1 rounded-md border-black">
+            <Link href={"/lobby"}>Не оплаченные заказы</Link>
+          </li>
+          <li className="border-2 p-1 rounded-md border-black">
+            <Link href={"/lobby/list"}>Оплаченные заказы</Link>
+          </li>
+
+          <li className="border-2 p-1 rounded-md border-black">
+            <Link href="#" onClick={() => handleOut()}>
+              Выход
+            </Link>
+          </li>
+        </ul>
+      </header>
+    </>
+  );
+};
+
+export default Navigation;
