@@ -1,0 +1,21 @@
+"use server";
+
+import { LiOrder } from "@/components/widgets/LiOrder";
+import { ordersStoreClass } from "@/stores/ordersStore";
+
+export default async function ListPage() {
+  return (
+    <div>
+      <ul>
+        {ordersStoreClass.orders?.map(
+          async ({ id, title, description, isPaid }) =>
+            isStatusOrder && (
+              <LiOrder id={id} title={title} statusOrder={isPaid}>
+                {description}
+              </LiOrder>
+            )
+        )}
+      </ul>
+    </div>
+  );
+}
