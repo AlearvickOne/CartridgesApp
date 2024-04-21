@@ -1,9 +1,8 @@
 "use client";
 
-import { useGetOrdersData } from "@/hooks/useGetOrdersData";
 import { RequiresClass } from "@/services/requires.class";
-import { QueryClient, useMutation, useQueryClient } from "@tanstack/react-query";
-import { ReactNode, SyntheticEvent, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { ReactNode, useState } from "react";
 
 interface ILiOrder {
   id: string | number;
@@ -15,19 +14,10 @@ interface ILiOrder {
 export const LiOrder = ({ id, title, isPaid, children }: ILiOrder) => {
   const [isOpenDesc, setIsOpenDesc] = useState<boolean>(false);
 
-  const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationKey: ["mutateIsPaid"],
-    mutationFn: async () => await RequiresClass.setOrderDataIsPaidInDb(id, true),
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["orders"] });
-    },
+    mutationFn: () => RequiresClass.setOrderDataIsPaidInDb(id, true),
   });
-
-  const submitHandler = (e: SyntheticEvent) => {
-    e.preventDefault();
-    mutate();
-  };
 
   return (
     <>
@@ -38,7 +28,7 @@ export const LiOrder = ({ id, title, isPaid, children }: ILiOrder) => {
             {isPaid ? (
               <p className="inline mr-5 p-3">Оплачено 👍</p>
             ) : (
-              <button className="mr-5 p-3 border-2" type="submit" onClick={(e) => submitHandler(e)}>
+              <button className="mr-5 p-3 border-2" type="submit">
                 Оплатить
               </button>
             )}

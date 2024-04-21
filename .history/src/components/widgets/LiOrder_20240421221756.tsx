@@ -15,18 +15,20 @@ interface ILiOrder {
 export const LiOrder = ({ id, title, isPaid, children }: ILiOrder) => {
   const [isOpenDesc, setIsOpenDesc] = useState<boolean>(false);
 
-  const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationKey: ["mutateIsPaid"],
-    mutationFn: async () => await RequiresClass.setOrderDataIsPaidInDb(id, true),
+    mutationFn: () => RequiresClass.setOrderDataIsPaidInDb(id, true),
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["orders"] });
+      alert("mutate");
     },
   });
+  const queryClient = useQueryClient();
 
   const submitHandler = (e: SyntheticEvent) => {
     e.preventDefault();
     mutate();
+
+    queryClient.invalidateQueries({ queryKey: ["orders"] });
   };
 
   return (

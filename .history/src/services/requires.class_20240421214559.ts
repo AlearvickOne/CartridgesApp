@@ -18,8 +18,10 @@ class Requires {
     if (!id) return;
     else if (typeof id !== "number") id = id.toString();
 
-    return await axios.put(`${this.URL_ORDERS}/${id}`, {
-      isPaid: isPaid,
+    return await fetch(`${this.URL_ORDERS}/${id}`, {
+      method: "PUT",
+      body: JSON.stringify({ isPaid: isPaid }),
+      mode: "cors",
     });
   }
 }

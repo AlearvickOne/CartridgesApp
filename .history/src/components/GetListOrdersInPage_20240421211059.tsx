@@ -19,7 +19,7 @@ export const GetListOrdersInPage = ({ isPaidOrder }: IGetListOrderInPage) => {
           {data?.map(
             ({ id, title, description, isPaid }: IOrders) =>
               isPaid === isPaidOrder && (
-                <LiOrder key={id} id={id} title={title} isPaid={isPaid}>
+                <LiOrder id={id} title={title} isPaid={isPaid}>
                   {description}
                 </LiOrder>
               )

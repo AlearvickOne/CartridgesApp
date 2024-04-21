@@ -10,6 +10,8 @@ import { useMutation } from "@tanstack/react-query";
 export const GetListOrdersInPage = ({ isPaidOrder }: IGetListOrderInPage) => {
   const { data, isLoading } = useGetOrdersData();
 
+  const { mutate } = useMutation({});
+
   return (
     <div className="">
       {isLoading ? (
@@ -19,7 +21,7 @@ export const GetListOrdersInPage = ({ isPaidOrder }: IGetListOrderInPage) => {
           {data?.map(
             ({ id, title, description, isPaid }: IOrders) =>
               isPaid === isPaidOrder && (
-                <LiOrder key={id} id={id} title={title} isPaid={isPaid}>
+                <LiOrder id={id} title={title} isPaid={isPaid}>
                   {description}
                 </LiOrder>
               )

@@ -1,8 +1,7 @@
 "use client";
 
-import { useGetOrdersData } from "@/hooks/useGetOrdersData";
 import { RequiresClass } from "@/services/requires.class";
-import { QueryClient, useMutation, useQueryClient } from "@tanstack/react-query";
+import { QueryClient, useMutation } from "@tanstack/react-query";
 import { ReactNode, SyntheticEvent, useState } from "react";
 
 interface ILiOrder {
@@ -15,18 +14,20 @@ interface ILiOrder {
 export const LiOrder = ({ id, title, isPaid, children }: ILiOrder) => {
   const [isOpenDesc, setIsOpenDesc] = useState<boolean>(false);
 
-  const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationKey: ["mutateIsPaid"],
-    mutationFn: async () => await RequiresClass.setOrderDataIsPaidInDb(id, true),
+    mutationFn: () => RequiresClass.setOrderDataIsPaidInDb(id, true),
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["orders"] });
+      alert("mutate");
     },
   });
+
+  // const queryClient = new QueryClient();
 
   const submitHandler = (e: SyntheticEvent) => {
     e.preventDefault();
     mutate();
+    // queryClient.invalidateQueries();
   };
 
   return (

@@ -18,8 +18,8 @@ class Requires {
     if (!id) return;
     else if (typeof id !== "number") id = id.toString();
 
-    return await axios.put(`${this.URL_ORDERS}/${id}`, {
-      isPaid: isPaid,
+    return await axios.patch(`${this.URL_ORDERS}/${id}`, {
+      i,
     });
   }
 }

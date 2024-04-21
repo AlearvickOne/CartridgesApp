@@ -14,13 +14,10 @@ class Requires {
     return await axios.get(this.URL_ORDERS);
   }
 
-  async setOrderDataIsPaidInDb(id: string | number, isPaid: boolean) {
-    if (!id) return;
-    else if (typeof id !== "number") id = id.toString();
+  async setOrderDataIsPaidInDb(id: string | number){
+    if(!id) return
 
-    return await axios.put(`${this.URL_ORDERS}/${id}`, {
-      isPaid: isPaid,
-    });
+    return await axios.patch(this.URL_ORDERS/)
   }
 }
 
