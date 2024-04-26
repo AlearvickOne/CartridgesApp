@@ -22,11 +22,12 @@
     "mobx-react": "^9.1.1",
     "mobx-react-lite": "^4.0.7",
     "next": "14.2.1",
-    "next-auth": "^5.0.0-beta.16",
     "patch-package": "^8.0.0",
     "react": "^18",
     "react-dom": "^18",
     "sass": "^1.75.0",
+    "socket.io": "^4.7.5",
+    "socket.io-client": "^4.7.5",
     "zod": "^3.22.4"
   },
   "devDependencies": {
