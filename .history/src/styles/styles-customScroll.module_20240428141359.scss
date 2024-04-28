@@ -1,0 +1,5 @@
+.customScroll {
+  &::-webkit-scrollbar-thumb:vertical {
+    margin-right: 10px; /* Отступ справа для полосы прокрутки */
+  }
+}
