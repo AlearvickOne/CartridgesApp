@@ -20,7 +20,7 @@ const Header = ({}: IHandleOut) => {
       <div className="text-lg bg-slate-100 py-2 px-5 rounded-[10px]">
         <h3>{`${"name"} ${"surname"}`}</h3>
         <hr className="border-2 my-2" />
-        <h3>Аккаунт: {"login"}</h3>
+        <h3>Аккаунт: {UsersAuthStore.currentUser?.name}</h3>
       </div>
       <nav>
         <ul className="flex flex-col gap-5">

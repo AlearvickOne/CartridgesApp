@@ -4,6 +4,7 @@ import { useState } from "react";
 import SyncIcon from "@mui/icons-material/Sync";
 import { deleteSpaceInText } from "@/utils/deleteSpaceInText";
 import { useConnectSocket } from "@/hooks/useConnectSocket";
+import { SocketApiClass } from "@/app/api/socket-api";
 
 function Authorization() {
   const [isClick, setIsClick] = useState<boolean>(false);

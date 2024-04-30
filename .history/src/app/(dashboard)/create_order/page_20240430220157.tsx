@@ -22,7 +22,7 @@ export default async function CreateOrder() {
 
   return (
     <div className=" overflow-auto max-h-screen">
-      <FormCreateOrder createOrderForm={createOrderForm} />
+      <FormCreateOrder />
     </div>
   );
 }

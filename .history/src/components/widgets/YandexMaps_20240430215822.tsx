@@ -1,6 +1,5 @@
 "use client";
 
-import { KeysClass } from "@/constants/constants";
 import { RequiresClass } from "@/services/requires.class";
 import { IYandexMapsProps } from "@/types/forms.interface";
 import { YMaps, Map, SearchControl, Placemark } from "@pbe/react-yandex-maps";
@@ -29,8 +28,8 @@ export const YandexMaps = ({ setAddress }: IYandexMapsProps) => {
   return (
     <YMaps
       query={{
-        apikey: KeysClass.API_KEY_YANDEX_MAP,
-        suggest_apikey: KeysClass.YANDEX_MAPS_GEO_API,
+        apikey: "95fba83b-8fb6-4222-90eb-7995cb591912",
+        suggest_apikey: "51cb953e-f542-45b0-86f8-457566b32925",
       }}
     >
       <div>

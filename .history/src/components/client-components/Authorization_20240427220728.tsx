@@ -4,6 +4,7 @@ import { useState } from "react";
 import SyncIcon from "@mui/icons-material/Sync";
 import { deleteSpaceInText } from "@/utils/deleteSpaceInText";
 import { useConnectSocket } from "@/hooks/useConnectSocket";
+import { SocketApiClass } from "@/app/api/socket-api";
 
 function Authorization() {
   const [isClick, setIsClick] = useState<boolean>(false);
@@ -36,6 +37,8 @@ function Authorization() {
           >
             {isClick ? <SyncIcon className="animate-spin" /> : "Войти в систему"}
           </button>
+
+          <button onClick={() => SocketApiClass.updateOrderIsPaidToTrue(19)}>UpdateIsPaid</button>
 
           {isClick ? <></> : <p className="mt-5 text-center text-rose-800 text-xl">{}</p>}
         </form>

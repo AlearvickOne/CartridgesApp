@@ -4,9 +4,8 @@ import { FormDataNamingOrderClass } from "@/constants/constants";
 import React, { useCallback, useState } from "react";
 import { YandexMaps } from "../widgets/YandexMaps";
 import { Input } from "@material-ui/core";
-import { IFormCreateOrder } from "@/types/orders.interface";
 
-export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
+export const FormCreateOrder = ({ createOrderForm }) => {
   const [address, setAddress] = useState<string>("");
 
   const setAdressClientOrder = useCallback(
