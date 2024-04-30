@@ -9,7 +9,8 @@ export const LiOrder = ({ ...propsOrder }: ILiOrder) => {
   const [isOpenDesc, setIsOpenDesc] = useState<boolean>(false);
 
   const clickUpdatePaid = () => {
-    return SocketApiClass.updateOrderIsPaidToTrue(propsOrder.id);
+    const datePaid = new Date().toLocaleDateString();
+    return SocketApiClass.updateOrderIsPaidToTrue(propsOrder.id, datePaid);
   };
 
   return (
