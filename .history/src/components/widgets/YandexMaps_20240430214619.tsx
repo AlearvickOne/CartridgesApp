@@ -29,7 +29,7 @@ export const YandexMaps = ({ setAddress }: IYandexMapsProps) => {
   return (
     <YMaps
       query={{
-        apikey: "95fba83b-8fb6-4222-90eb-7995cb591912",
+        apikey: KeysClass.API_KEY_YANDEX_MAP,
         suggest_apikey: "51cb953e-f542-45b0-86f8-457566b32925",
       }}
     >

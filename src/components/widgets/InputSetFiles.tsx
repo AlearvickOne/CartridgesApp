@@ -17,6 +17,7 @@ export const InputSetFiles = () => {
   const sizeFile = sizeFilesConverter(endFile);
 
   useEffect(() => {
+    if(!endFile) return
     fileObjectToString(endFile);
   }, [endFile]);
 

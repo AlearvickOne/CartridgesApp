@@ -36,7 +36,7 @@ export const FormCreateOrder = () => {
             <label className="px-3 py-[2px] mb-2">Цена услуги</label>
             <Input
               className="px-3 py-1"
-              name={FormDataNamingOrderClass.NAME_PRICE_ORDER}
+              name={FormDataNamingOrderClass.NAME_DESC_ORDER}
               type="number"
               placeholder="Введите цену услуги ..."
             />
@@ -57,7 +57,7 @@ export const FormCreateOrder = () => {
 
           <textarea
             className="border-2 p-4 rounded-xl resize-none shadow-inset shadow-neutral-400"
-            name={FormDataNamingOrderClass.NAME_DESC_ORDER}
+            name={FormDataNamingOrderClass.NAME_PRICE_ORDER}
             rows={3}
             placeholder="Опишите подробно вашу услугу ..."
           />

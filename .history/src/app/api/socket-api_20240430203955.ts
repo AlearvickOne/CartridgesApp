@@ -35,7 +35,7 @@ class SocketApi {
 
   updateOrderIsPaidToTrue(id: number | string, datePaid: string) {
     if (typeof id === "number") id = id.toString();
-    this.SOCKET.emit("updateOrder", id, datePaid);
+    this.SOCKET.emit("updateOrder", id);
   }
 }
 

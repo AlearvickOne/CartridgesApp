@@ -29,13 +29,13 @@ class SocketApi {
     address: string;
     date: string;
   }) {
-    console.log(newOrder);
+    console.log();
     this.SOCKET.emit("createOrder", newOrder);
   }
 
-  updateOrderIsPaidToTrue(id: number | string, datePaid: string) {
+  updateOrderIsPaidToTrue(id: number | string) {
     if (typeof id === "number") id = id.toString();
-    this.SOCKET.emit("updateOrder", id, datePaid);
+    this.SOCKET.emit("updateOrder", id);
   }
 }
 

@@ -16,7 +16,7 @@ export const GetListOrdersInPage = ({ isPaidOrder }: IGetListOrderInPage) => {
         <ul className={`max-h-screen overflow-y-auto py-10   ${stylesScroll.customScroll}`}>
           {orders?.map(
             ({ description, ...propsOrder }: IOrders) =>
-              propsOrder.isPaid === isPaidOrder && <LiOrder {...propsOrder}>{description}</LiOrder>
+              isPaid === isPaidOrder && <LiOrder propsOrder={propsOrder}>{description}</LiOrder>
           )}
         </ul>
       )}

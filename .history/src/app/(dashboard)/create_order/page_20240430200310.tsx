@@ -11,12 +11,17 @@ export default async function CreateOrder() {
   );
 }
 
-export async function createOrderForm(formdata: FormData) {
+export async function createOrderForm(file: string, formdata: FormData) {
   "use server";
+  if (!file) return;
 
   const newDate = new Date(
     formdata.get(FormDataNamingOrderClass.NAME_DATE_ORIGIN_ORDER)!.toString()
   ).toLocaleDateString();
+
+  const fileObj = JSON.parse(file);
+
+  console.log(fileObj);
 
   SocketApiClass.createOrder({
     title: formdata.get(FormDataNamingOrderClass.NAME_TITLE_ORDER)!.toString(),

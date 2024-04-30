@@ -7,7 +7,7 @@ export interface IOrders {
   isPaid: boolean;
   address: string;
   date: string;
-  datePaid: string;
+  image: File;
   description: string;
 }
 

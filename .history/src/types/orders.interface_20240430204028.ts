@@ -8,6 +8,7 @@ export interface IOrders {
   address: string;
   date: string;
   datePaid: string;
+  image: File;
   description: string;
 }
 

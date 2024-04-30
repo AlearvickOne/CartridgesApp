@@ -29,8 +29,7 @@ export const YandexMaps = ({ setAddress }: IYandexMapsProps) => {
   return (
     <YMaps
       query={{
-        apikey: "95fba83b-8fb6-4222-90eb-7995cb591912",
-        suggest_apikey: "51cb953e-f542-45b0-86f8-457566b32925",
+        apikey: `https://suggest-maps.yandex.ru/v1/suggest?apikey=${KeysClass.API_KEY_YANDEX_MAP}&text=бурдж`,
       }}
     >
       <div>

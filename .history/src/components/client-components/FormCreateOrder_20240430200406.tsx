@@ -4,7 +4,9 @@ import { FormDataNamingOrderClass } from "@/constants/constants";
 import React, { useCallback, useState } from "react";
 import { YandexMaps } from "../widgets/YandexMaps";
 import { Input } from "@material-ui/core";
+import { InputSetFiles } from "../widgets/InputSetFiles";
 import { createOrderForm } from "@/app/(dashboard)/create_order/page";
+import { FilesStoreClass } from "@/stores/filesStore";
 
 export const FormCreateOrder = () => {
   const [address, setAddress] = useState<string>("");
@@ -16,12 +18,14 @@ export const FormCreateOrder = () => {
     [address]
   );
 
+  const updateCreateOrderForm = createOrderForm.bind(null, FilesStoreClass.fileInJsonString!);
+
   return (
     <>
       <div className="flex justify-center my-10">
         <h1 className=" text-[2rem]">Форма добавления заказа</h1>
       </div>
-      <form action={createOrderForm} className="text-[18px] mr-10 mb-10">
+      <form action={updateCreateOrderForm} className="text-[18px] mr-10 mb-10">
         <div className="grid grid-cols-2 gap-8">
           <div className="flex flex-wrap flex-col mb-5">
             <label className="px-3 py-[2px] mb-2">Название услуги</label>
@@ -36,7 +40,7 @@ export const FormCreateOrder = () => {
             <label className="px-3 py-[2px] mb-2">Цена услуги</label>
             <Input
               className="px-3 py-1"
-              name={FormDataNamingOrderClass.NAME_PRICE_ORDER}
+              name={FormDataNamingOrderClass.NAME_DESC_ORDER}
               type="number"
               placeholder="Введите цену услуги ..."
             />
@@ -57,7 +61,7 @@ export const FormCreateOrder = () => {
 
           <textarea
             className="border-2 p-4 rounded-xl resize-none shadow-inset shadow-neutral-400"
-            name={FormDataNamingOrderClass.NAME_DESC_ORDER}
+            name={FormDataNamingOrderClass.NAME_PRICE_ORDER}
             rows={3}
             placeholder="Опишите подробно вашу услугу ..."
           />

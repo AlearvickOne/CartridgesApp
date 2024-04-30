@@ -3,7 +3,7 @@
 import { KeysClass } from "@/constants/constants";
 import { RequiresClass } from "@/services/requires.class";
 import { IYandexMapsProps } from "@/types/forms.interface";
-import { YMaps, Map, SearchControl, Placemark } from "@pbe/react-yandex-maps";
+import { YMaps, Map, SearchControl, Placemark } from "react-yandex-maps";
 import { useEffect, useState } from "react";
 
 export const YandexMaps = ({ setAddress }: IYandexMapsProps) => {
@@ -27,12 +27,7 @@ export const YandexMaps = ({ setAddress }: IYandexMapsProps) => {
   };
 
   return (
-    <YMaps
-      query={{
-        apikey: "95fba83b-8fb6-4222-90eb-7995cb591912",
-        suggest_apikey: "51cb953e-f542-45b0-86f8-457566b32925",
-      }}
-    >
+    <YMaps query={{ apikey: KeysClass.API_KEY_YANDEX_MAP }}>
       <div>
         <Map className="w-full h-[13rem] my-1" state={mapState} onClick={handleSelectedAdress}>
           {selectedAdress && <Placemark geometry={selectedAdress} />}

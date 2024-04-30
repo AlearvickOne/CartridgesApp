@@ -28,10 +28,7 @@ export const YandexMaps = ({ setAddress }: IYandexMapsProps) => {
 
   return (
     <YMaps
-      query={{
-        apikey: "95fba83b-8fb6-4222-90eb-7995cb591912",
-        suggest_apikey: "51cb953e-f542-45b0-86f8-457566b32925",
-      }}
+      query={{ apikey: KeysClass.API_KEY_YANDEX_MAP, suggest_apikey: KeysClass.API_KEY_YANDEX_MAP }}
     >
       <div>
         <Map className="w-full h-[13rem] my-1" state={mapState} onClick={handleSelectedAdress}>

@@ -5,29 +5,28 @@ import { useState } from "react";
 import RubleIcon from "@mui/icons-material/CurrencyRuble";
 import { ILiOrder } from "@/types/orders.interface";
 
-export const LiOrder = ({ ...propsOrder }: ILiOrder) => {
+export const LiOrder = ({ id, title, price, children, isPaid, address, date, image }: ILiOrder) => {
   const [isOpenDesc, setIsOpenDesc] = useState<boolean>(false);
 
-  const clickUpdatePaid = () => {
-    const datePaid = new Date().toLocaleDateString();
-    SocketApiClass.updateOrderIsPaidToTrue(propsOrder.id, datePaid);
-  };
+  console.log(image);
 
   return (
     <>
       <li className="mb-8 border-2 p-5 mr-5">
         <div className="flex justify-between items-center ">
-          <h4>{propsOrder.title}</h4>
-          <p
-            className={`flex items-center ${propsOrder.isPaid ? "text-green-600" : "text-red-600"}`}
-          >
-            {propsOrder.price} <RubleIcon sx={{ fontSize: "15px", margin: "0 8px" }} />
+          <h4>{title}</h4>
+          <p className={`flex items-center ${isPaid ? "text-green-600" : "text-red-600"}`}>
+            {price} <RubleIcon sx={{ fontSize: "15px", margin: "0 8px" }} />
           </p>
           <div className="buttons">
-            {propsOrder.isPaid ? (
+            {isPaid ? (
               <p className="inline mr-5 p-3">Оплачено 👍</p>
             ) : (
-              <button className="mr-5 p-3 border-2" type="submit" onClick={clickUpdatePaid}>
+              <button
+                className="mr-5 p-3 border-2"
+                type="submit"
+                onClick={() => SocketApiClass.updateOrderIsPaidToTrue(id)}
+              >
                 Оплатить
               </button>
             )}
@@ -39,12 +38,11 @@ export const LiOrder = ({ ...propsOrder }: ILiOrder) => {
         {isOpenDesc && (
           <div>
             <div className="">
-              <p>Дата заказа: {propsOrder.date}</p>
-              {propsOrder.isPaid && <p>Дата оплаты: {propsOrder.datePaid}</p>}
-              <p>Адрес заказа: {propsOrder.address} </p>
+              <p>Дата заказа: {date}</p>
+              <p>Адрес заказа: {address} </p>
             </div>
-            <hr className="my-3 border-stone-500" />
-            <p>{propsOrder.children}</p>
+            <hr />
+            <p>{children}</p>
           </div>
         )}
       </li>
