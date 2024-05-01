@@ -1,0 +1,36 @@
+.scaleUpBottomRight {
+  -webkit-animation: scale-up-br 0.6s both;
+  animation: scale-up-br 0.6s both;
+}
+
+/* KEY FRAMES */
+
+@-webkit-keyframes scale-up-br {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
+  }
+}
+@keyframes scale-up-br {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
+  }
+}
+// ------------------------------

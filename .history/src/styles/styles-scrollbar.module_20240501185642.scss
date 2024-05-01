@@ -1,0 +1,21 @@
+.scrollbarThin {
+  scrollbar-width: "thin";
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    z-index: -1;
+    overflow: hidden;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #7a52e7;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #8f5ec7;
+  }
+}

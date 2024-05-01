@@ -1,0 +1,8 @@
+.scrollbarThin {
+  scrollbar-width: "thin";
+
+  &::-webkit-scrollbar {
+    width: 1px;
+    background-color: red;
+  }
+}

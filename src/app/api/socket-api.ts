@@ -1,7 +1,7 @@
 import io from "socket.io-client";
 
 class SocketApi {
-  SOCKET = io("https://joyful-bienenstitch-f520d0.netlify.app/:8800");
+  SOCKET = io("http://localhost:8800");
 
   connectionCheck(): void {
     this.SOCKET.on("connect", () => {

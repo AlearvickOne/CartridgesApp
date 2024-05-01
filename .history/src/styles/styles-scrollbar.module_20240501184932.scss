@@ -1,0 +1,11 @@
+.scrollbarThin {
+  scrollbar-width: "thin";
+
+  &::-webkit-scrollbar {
+  }
+
+  &::-webkit-scrollbar-track {
+    color: red;
+    width: 10px;
+  }
+}
