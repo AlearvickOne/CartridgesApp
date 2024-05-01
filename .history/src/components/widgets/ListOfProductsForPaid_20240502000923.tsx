@@ -40,6 +40,17 @@ export const ListOfProductsForPaid = () => {
 
   return (
     <>
+      <ul className="border-2 py-2 px-3 w-80 h-80  mb-2 rounded-lg bg-white overflow-auto">
+        {products.map(({ id, title, price }) => (
+          <li key={id} className="border-2 p-2 flex justify-between mb-2 ">
+            <h6>{title}</h6>
+            <p>{price}</p>
+            <button>
+              <DeleteIcon />
+            </button>
+          </li>
+        ))}
+      </ul>
       {isActiveWindowProducts && (
         <div
           className={`fixed bottom-32 right-20 z-50 p-5 border-2 rounded-xl ${
@@ -48,18 +59,6 @@ export const ListOfProductsForPaid = () => {
             isAnim ? stylesAnims.scaleUpBottomRight : stylesAnims.scaleDownBottomRight
           } flex justify-center flex-col`}
         >
-          <ul className="border-2 py-2 px-3 w-80 h-80  mb-2 rounded-lg bg-white overflow-auto">
-            {products.map(({ id, title, price }) => (
-              <li key={id} className="border-2 p-2 flex justify-between mb-2 ">
-                <h6>{title}</h6>
-                <p>{price}</p>
-                <button>
-                  <DeleteIcon />
-                </button>
-              </li>
-            ))}
-          </ul>
-
           <button className=" border-2 px-2 py-4 rounded-lg bg-white">Оплатить</button>
         </div>
       )}

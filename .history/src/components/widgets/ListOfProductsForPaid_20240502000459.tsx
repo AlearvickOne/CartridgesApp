@@ -15,9 +15,9 @@ export const ListOfProductsForPaid = () => {
 
   useEffect(() => {
     setProducts(ListOfProductsStore.list);
+    console.log(products);
   }, [ListOfProductsStore.list]);
 
-  console.log(products);
   const handleAnim = () => {
     setIsAnim(!isActiveWindowProducts);
 

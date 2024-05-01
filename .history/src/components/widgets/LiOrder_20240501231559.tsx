@@ -35,7 +35,7 @@ export const LiOrder = ({ ...propsOrder }: ILiOrder) => {
               <button
                 className="mr-5 p-3 border-2"
                 type="submit"
-                onClick={() => ListOfProductsStore.setInList(list)}
+                onClick={ListOfProductsStore.setInList(list)}
               >
                 Оплатить
               </button>

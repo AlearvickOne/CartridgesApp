@@ -2,22 +2,17 @@
 
 import ShoppingIcon from "@mui/icons-material/ShoppingBasket";
 import DeleteIcon from "@mui/icons-material/DeleteForever";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import stylesGradien from "@/styles/styles-gradient.module.scss";
 import stylesAnims from "@/styles/anims/anims.module.scss";
-import { IList, ListOfProductsStore } from "@/stores/storeListOfProducts";
+import { ListOfProductsStore } from "@/stores/storeListOfProducts";
 
 export const ListOfProductsForPaid = () => {
   const [isActiveWindowProducts, setIsActiveWindowProducts] = useState<boolean>(false);
   const [isAnim, setIsAnim] = useState<boolean>();
-  const [products, setProducts] = useState<IList[]>(ListOfProductsStore.list);
+  const list = ListOfProductsStore.list;
 
-  useEffect(() => {
-    setProducts(ListOfProductsStore.list);
-  }, [ListOfProductsStore.list]);
-
-  console.log(products);
   const handleAnim = () => {
     setIsAnim(!isActiveWindowProducts);
 
@@ -49,7 +44,7 @@ export const ListOfProductsForPaid = () => {
           } flex justify-center flex-col`}
         >
           <ul className="border-2 py-2 px-3 w-80 h-80  mb-2 rounded-lg bg-white overflow-auto">
-            {products.map(({ id, title, price }) => (
+            {list?.map(({ id, title, price }) => (
               <li key={id} className="border-2 p-2 flex justify-between mb-2 ">
                 <h6>{title}</h6>
                 <p>{price}</p>
@@ -67,10 +62,10 @@ export const ListOfProductsForPaid = () => {
         <button className="relative border-2 border-black p-4 rounded-[12]" onClick={handleAnim}>
           <p
             className={`absolute bottom-[2.4rem] right-[2.2rem] ${quantityStyle(
-              products.length
+              list?.length
             )} text-white`}
           >
-            {products.length}
+            {listlist?.length}
           </p>
           <ShoppingIcon sx={{ fontSize: 30 }} />
         </button>

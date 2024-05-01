@@ -17,7 +17,6 @@ export const ListOfProductsForPaid = () => {
     setProducts(ListOfProductsStore.list);
   }, [ListOfProductsStore.list]);
 
-  console.log(products);
   const handleAnim = () => {
     setIsAnim(!isActiveWindowProducts);
 
@@ -40,7 +39,7 @@ export const ListOfProductsForPaid = () => {
 
   return (
     <>
-      {isActiveWindowProducts && (
+      {
         <div
           className={`fixed bottom-32 right-20 z-50 p-5 border-2 rounded-xl ${
             stylesGradien.gradientToBottom
@@ -62,7 +61,7 @@ export const ListOfProductsForPaid = () => {
 
           <button className=" border-2 px-2 py-4 rounded-lg bg-white">Оплатить</button>
         </div>
-      )}
+      }
       <div className="fixed bottom-10 right-20 z-50">
         <button className="relative border-2 border-black p-4 rounded-[12]" onClick={handleAnim}>
           <p

@@ -17,7 +17,6 @@ export const ListOfProductsForPaid = () => {
     setProducts(ListOfProductsStore.list);
   }, [ListOfProductsStore.list]);
 
-  console.log(products);
   const handleAnim = () => {
     setIsAnim(!isActiveWindowProducts);
 
@@ -67,10 +66,10 @@ export const ListOfProductsForPaid = () => {
         <button className="relative border-2 border-black p-4 rounded-[12]" onClick={handleAnim}>
           <p
             className={`absolute bottom-[2.4rem] right-[2.2rem] ${quantityStyle(
-              products.length
+              ListOfProductsStore.list?.length
             )} text-white`}
           >
-            {products.length}
+            {ListOfProductsStore.list?.length}
           </p>
           <ShoppingIcon sx={{ fontSize: 30 }} />
         </button>

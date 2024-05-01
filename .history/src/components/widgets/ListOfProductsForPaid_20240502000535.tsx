@@ -14,10 +14,10 @@ export const ListOfProductsForPaid = () => {
   const [products, setProducts] = useState<IList[]>(ListOfProductsStore.list);
 
   useEffect(() => {
+    console.log(products);
     setProducts(ListOfProductsStore.list);
   }, [ListOfProductsStore.list]);
 
-  console.log(products);
   const handleAnim = () => {
     setIsAnim(!isActiveWindowProducts);
 

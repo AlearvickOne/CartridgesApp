@@ -8,14 +8,19 @@ import { IList, ListOfProductsStore } from "@/stores/storeListOfProducts";
 
 export const LiOrder = ({ ...propsOrder }: ILiOrder) => {
   const [isOpenDesc, setIsOpenDesc] = useState<boolean>(false);
-  const [list, setList] = useState<IList>({
-    id: propsOrder.id,
-    title: propsOrder.title,
-    price: propsOrder.price,
-  });
+  const [list, setList] = useState<IList[]>();
 
   const clickUpdatePaid = () => {
     return SocketApiClass.updateOrderIsPaidToTrue(propsOrder.id);
+  };
+
+  const handleSetList = () => {
+    const newObj = {
+      id: propsOrder.id,
+      title: propsOrder.title,
+      price: propsOrder.price,
+    };
+    setList((items) => [...items!]);
   };
 
   return (
@@ -35,7 +40,13 @@ export const LiOrder = ({ ...propsOrder }: ILiOrder) => {
               <button
                 className="mr-5 p-3 border-2"
                 type="submit"
-                onClick={() => ListOfProductsStore.setInList(list)}
+                onClick={() =>
+                  ListOfProductsStore.setInList({
+                    id: propsOrder.id,
+                    title: propsOrder.title,
+                    price: propsOrder.price,
+                  })
+                }
               >
                 Оплатить
               </button>

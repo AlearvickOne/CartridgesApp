@@ -17,7 +17,6 @@ export const ListOfProductsForPaid = () => {
     setProducts(ListOfProductsStore.list);
   }, [ListOfProductsStore.list]);
 
-  console.log(products);
   const handleAnim = () => {
     setIsAnim(!isActiveWindowProducts);
 

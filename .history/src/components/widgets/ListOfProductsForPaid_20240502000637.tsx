@@ -15,7 +15,7 @@ export const ListOfProductsForPaid = () => {
 
   useEffect(() => {
     setProducts(ListOfProductsStore.list);
-  }, [ListOfProductsStore.list]);
+  }, [products]);
 
   console.log(products);
   const handleAnim = () => {

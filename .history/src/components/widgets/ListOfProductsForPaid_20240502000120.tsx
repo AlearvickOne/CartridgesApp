@@ -17,7 +17,6 @@ export const ListOfProductsForPaid = () => {
     setProducts(ListOfProductsStore.list);
   }, [ListOfProductsStore.list]);
 
-  console.log(products);
   const handleAnim = () => {
     setIsAnim(!isActiveWindowProducts);
 
@@ -70,7 +69,7 @@ export const ListOfProductsForPaid = () => {
               products.length
             )} text-white`}
           >
-            {products.length}
+            {productslength}
           </p>
           <ShoppingIcon sx={{ fontSize: 30 }} />
         </button>

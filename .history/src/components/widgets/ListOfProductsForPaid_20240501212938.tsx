@@ -2,31 +2,14 @@
 
 import ShoppingIcon from "@mui/icons-material/ShoppingBasket";
 import DeleteIcon from "@mui/icons-material/DeleteForever";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import stylesGradien from "@/styles/styles-gradient.module.scss";
 import stylesAnims from "@/styles/anims/anims.module.scss";
-import { IList, ListOfProductsStore } from "@/stores/storeListOfProducts";
 
 export const ListOfProductsForPaid = () => {
+  const [quantityShop, setQuantityShop] = useState<number>(1);
   const [isActiveWindowProducts, setIsActiveWindowProducts] = useState<boolean>(false);
-  const [isAnim, setIsAnim] = useState<boolean>();
-  const [products, setProducts] = useState<IList[]>(ListOfProductsStore.list);
-
-  useEffect(() => {
-    setProducts(ListOfProductsStore.list);
-  }, [ListOfProductsStore.list]);
-
-  console.log(products);
-  const handleAnim = () => {
-    setIsAnim(!isActiveWindowProducts);
-
-    if (isAnim === true) {
-      setTimeout(() => {
-        setIsActiveWindowProducts(false);
-      }, 500);
-    } else setIsActiveWindowProducts(true);
-  };
 
   const quantityStyle = (quantity: number | undefined): string => {
     const style = "rounded-full border-[2px] p-1 bg-red-600";
@@ -38,6 +21,69 @@ export const ListOfProductsForPaid = () => {
     else return style + " min-w-2 min-h-2";
   };
 
+  const handleQuantityShop = () => {
+    setIsActiveWindowProducts(!isActiveWindowProducts)
+
+    if(!isActiveWindowProducts) {
+
+      setTimeout(() => setIsActiveWindowProducts(false), 500)
+
+    } 
+  }
+
+  const arratProducts = [
+    {
+      id: 1,
+      title: "title 1",
+      price: 1111,
+    },
+    {
+      id: 2,
+      title: "title 2",
+      price: 2111,
+    },
+    {
+      id: 3,
+      title: "title 3",
+      price: 3111,
+    },
+    {
+      id: 4,
+      title: "title 4",
+      price: 4111,
+    },
+    {
+      id: 5,
+      title: "title 5",
+      price: 5111,
+    },
+    {
+      id: 6,
+      title: "title 6",
+      price: 6111,
+    },
+    {
+      id: 7,
+      title: "title 7",
+      price: 7111,
+    },
+    {
+      id: 8,
+      title: "title 8",
+      price: 8111,
+    },
+    {
+      id: 9,
+      title: "title 9",
+      price: 9111,
+    },
+    {
+      id: 10,
+      title: "title 10",
+      price: 10111,
+    },
+  ];
+
   return (
     <>
       {isActiveWindowProducts && (
@@ -45,11 +91,13 @@ export const ListOfProductsForPaid = () => {
           className={`fixed bottom-32 right-20 z-50 p-5 border-2 rounded-xl ${
             stylesGradien.gradientToBottom
           } ${
-            isAnim ? stylesAnims.scaleUpBottomRight : stylesAnims.scaleDownBottomRight
+            isActiveWindowProducts
+              ? stylesAnims.scaleUpBottomRight
+              : stylesAnims.scaleDownBottomRight
           } flex justify-center flex-col`}
         >
           <ul className="border-2 py-2 px-3 w-80 h-80  mb-2 rounded-lg bg-white overflow-auto">
-            {products.map(({ id, title, price }) => (
+            {arratProducts.map(({ id, title, price }) => (
               <li key={id} className="border-2 p-2 flex justify-between mb-2 ">
                 <h6>{title}</h6>
                 <p>{price}</p>
@@ -63,14 +111,18 @@ export const ListOfProductsForPaid = () => {
           <button className=" border-2 px-2 py-4 rounded-lg bg-white">Оплатить</button>
         </div>
       )}
+
       <div className="fixed bottom-10 right-20 z-50">
-        <button className="relative border-2 border-black p-4 rounded-[12]" onClick={handleAnim}>
+        <button
+          className="relative border-2 border-black p-4 rounded-[12]"
+          onClick={() => }
+        >
           <p
             className={`absolute bottom-[2.4rem] right-[2.2rem] ${quantityStyle(
-              products.length
+              quantityShop
             )} text-white`}
           >
-            {products.length}
+            {quantityShop}
           </p>
           <ShoppingIcon sx={{ fontSize: 30 }} />
         </button>
