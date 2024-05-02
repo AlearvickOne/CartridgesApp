@@ -53,7 +53,8 @@ export const ListOfProductsForPaid = () => {
               <li key={id} className="border-2 p-2 flex justify-between mb-2 ">
                 <h6>{titleOrder}</h6>
                 <p>{priceOrder}</p>
-                <button onClick={() => SocketApiClass.deleteOrderFromOrderBasket(id)}>
+                onClick={() => SocketApiClass.deleteOrderFromOrderBasket(id)}
+                <button>
                   <DeleteIcon />
                 </button>
               </li>

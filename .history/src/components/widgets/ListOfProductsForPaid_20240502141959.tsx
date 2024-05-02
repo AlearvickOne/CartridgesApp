@@ -7,7 +7,6 @@ import { useState } from "react";
 import stylesGradien from "@/styles/styles-gradient.module.scss";
 import stylesAnims from "@/styles/anims/anims.module.scss";
 import { useGetOrdersInBasket } from "@/hooks/useGetOrdersInBasket";
-import { SocketApiClass } from "@/app/api/socket-api";
 
 export const ListOfProductsForPaid = () => {
   const [isActiveWindowProducts, setIsActiveWindowProducts] = useState<boolean>(false);
@@ -15,7 +14,7 @@ export const ListOfProductsForPaid = () => {
   let timer: NodeJS.Timeout | undefined;
 
   const ordersInBasket = useGetOrdersInBasket();
-
+  s;
   const handleAnim = () => {
     setIsAnim(!isActiveWindowProducts);
 
@@ -53,7 +52,7 @@ export const ListOfProductsForPaid = () => {
               <li key={id} className="border-2 p-2 flex justify-between mb-2 ">
                 <h6>{titleOrder}</h6>
                 <p>{priceOrder}</p>
-                <button onClick={() => SocketApiClass.deleteOrderFromOrderBasket(id)}>
+                <button>
                   <DeleteIcon />
                 </button>
               </li>

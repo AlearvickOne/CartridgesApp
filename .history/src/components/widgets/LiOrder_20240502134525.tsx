@@ -1,17 +1,20 @@
 "use client";
 
 import { SocketApiClass } from "@/app/api/socket-api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RubleIcon from "@mui/icons-material/CurrencyRuble";
 import { ILiOrder } from "@/types/orders.interface";
 
 export const LiOrder = ({ ...propsOrder }: ILiOrder) => {
   const [isOpenDesc, setIsOpenDesc] = useState<boolean>(false);
 
-  // TODO
-  // const clickUpdatePaid = () => {
-  //   return SocketApiClass.updateOrderIsPaidToTrue(propsOrder.id);
-  // };
+  const clickUpdatePaid = () => {
+    return SocketApiClass.updateOrderIsPaidToTrue(propsOrder.id);
+  };
+
+  useEffect(() => {
+    SocketApiClass.getOrdersFromBasket();
+  }, []);
 
   return (
     <>

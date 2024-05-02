@@ -6,6 +6,8 @@ import { ListOfProductsForPaid } from "@/components/widgets/ListOfProductsForPai
 import React, { PropsWithChildren } from "react";
 
 export default async function LobbyLayout({ children }: PropsWithChildren) {
+  SocketApiClass.getOrdersFromBasket();
+
   return (
     <div className="flex justify-between relative w-full">
       <ListOfProductsForPaid />

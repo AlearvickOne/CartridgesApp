@@ -8,10 +8,9 @@ import { ILiOrder } from "@/types/orders.interface";
 export const LiOrder = ({ ...propsOrder }: ILiOrder) => {
   const [isOpenDesc, setIsOpenDesc] = useState<boolean>(false);
 
-  // TODO
-  // const clickUpdatePaid = () => {
-  //   return SocketApiClass.updateOrderIsPaidToTrue(propsOrder.id);
-  // };
+  const clickUpdatePaid = () => {
+    return SocketApiClass.updateOrderIsPaidToTrue(propsOrder.id);
+  };
 
   return (
     <>
@@ -30,9 +29,7 @@ export const LiOrder = ({ ...propsOrder }: ILiOrder) => {
               <button
                 className="mr-5 p-3 border-2"
                 type="submit"
-                onClick={() => {
-                  SocketApiClass.setOrderInOrderBasket(propsOrder.id);
-                }}
+                onClick={() => SocketApiClass.setOrderInOrderBasket(propsOrder.id)}
               >
                 Оплатить
               </button>

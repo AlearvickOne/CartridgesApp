@@ -1,5 +1,4 @@
-import { IOrderInBasketInArray } from "@/types/orders-basket.interface";
-import { Dispatch, SetStateAction } from "react";
+import { ListOfProductsStore } from "@/stores/storeListOfProducts";
 import io from "socket.io-client";
 
 class SocketApi {
@@ -42,21 +41,16 @@ class SocketApi {
 
   // --- ORDERS BASKET
 
-  getOrdersFromBasket(setState: Dispatch<SetStateAction<IOrderInBasketInArray | undefined>>) {
-    this.SOCKET.emit("orderBasket: get");
+  async getOrdersFromBasket() {
+    this.SOCKET.emit("getOrdersFromBasket");
 
-    this.SOCKET.on("orderBasket: geted", (ordersBasket) => {
-      setState(ordersBasket);
-      console.log(ordersBasket);
+    this.SOCKET.on("ordersBasket", (ordersBasket) => {
+      ListOfProductsStore.setInList(ordersBasket);
     });
   }
 
   setOrderInOrderBasket(idOrder: number | string) {
-    this.SOCKET.emit("orderBasket: set", idOrder);
-  }
-
-  deleteOrderFromOrderBasket(idOrderBasket: number | string) {
-    this.SOCKET.emit("orderBasket: delete", idOrderBasket);
+    this.SOCKET.emit("setOrderInOrderBasket", idOrder);
   }
 }
 

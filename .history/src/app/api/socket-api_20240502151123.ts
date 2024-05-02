@@ -56,7 +56,7 @@ class SocketApi {
   }
 
   deleteOrderFromOrderBasket(idOrderBasket: number | string) {
-    this.SOCKET.emit("orderBasket: delete", idOrderBasket);
+    this.SOCKET.emit("orderBasket: delete", idOrder);
   }
 }
 

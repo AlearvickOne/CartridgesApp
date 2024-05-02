@@ -53,13 +53,18 @@ export const ListOfProductsForPaid = () => {
               <li key={id} className="border-2 p-2 flex justify-between mb-2 ">
                 <h6>{titleOrder}</h6>
                 <p>{priceOrder}</p>
-                <button onClick={() => SocketApiClass.deleteOrderFromOrderBasket(id)}>
+                <button>
                   <DeleteIcon />
                 </button>
               </li>
             ))}
           </ul>
-          <button className=" border-2 px-2 py-4 rounded-lg bg-white">Оплатить</button>
+          <button
+            className=" border-2 px-2 py-4 rounded-lg bg-white"
+            onClick={() => SocketApiClass.deleteOrderFromOrderBasket(id)}
+          >
+            Оплатить
+          </button>
         </div>
       )}
       <div className="fixed bottom-10 right-20 z-50">

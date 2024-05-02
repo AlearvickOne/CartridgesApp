@@ -2,31 +2,34 @@
 
 import ShoppingIcon from "@mui/icons-material/ShoppingBasket";
 import DeleteIcon from "@mui/icons-material/DeleteForever";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import stylesGradien from "@/styles/styles-gradient.module.scss";
 import stylesAnims from "@/styles/anims/anims.module.scss";
-import { useGetOrdersInBasket } from "@/hooks/useGetOrdersInBasket";
-import { SocketApiClass } from "@/app/api/socket-api";
+import { IList, ListOfProductsStore } from "@/stores/storeListOfProducts";
 
 export const ListOfProductsForPaid = () => {
   const [isActiveWindowProducts, setIsActiveWindowProducts] = useState<boolean>(false);
   const [isAnim, setIsAnim] = useState<boolean>();
-  let timer: NodeJS.Timeout | undefined;
+  const [products, setProducts] = useState<IList[]>(ListOfProductsStore.list);
 
-  const ordersInBasket = useGetOrdersInBasket();
+  useEffect(() => {
+    setProducts(ListOfProductsStore.list);
+  }, [ListOfProductsStore.list]);
 
+  console.log(products);
   const handleAnim = () => {
     setIsAnim(!isActiveWindowProducts);
+
+    let timer: NodeJS.Timeout = null;
 
     if (isAnim === true) {
       timer = setTimeout(() => {
         setIsActiveWindowProducts(false);
-        console.log(1);
       }, 500);
     } else setIsActiveWindowProducts(true);
+    clearTimeout(timer);
   };
-  !!timer && clearTimeout(timer);
 
   const quantityStyle = (quantity: number | undefined): string => {
     const style = "rounded-full border-[2px] p-1 bg-red-600";
@@ -49,16 +52,17 @@ export const ListOfProductsForPaid = () => {
           } flex justify-center flex-col`}
         >
           <ul className="border-2 py-2 px-3 w-80 h-80  mb-2 rounded-lg bg-white overflow-auto">
-            {ordersInBasket?.map(({ id, titleOrder, priceOrder }) => (
+            {products.map(({ id, title, price }) => (
               <li key={id} className="border-2 p-2 flex justify-between mb-2 ">
-                <h6>{titleOrder}</h6>
-                <p>{priceOrder}</p>
-                <button onClick={() => SocketApiClass.deleteOrderFromOrderBasket(id)}>
+                <h6>{title}</h6>
+                <p>{price}</p>
+                <button>
                   <DeleteIcon />
                 </button>
               </li>
             ))}
           </ul>
+
           <button className=" border-2 px-2 py-4 rounded-lg bg-white">Оплатить</button>
         </div>
       )}
@@ -66,10 +70,10 @@ export const ListOfProductsForPaid = () => {
         <button className="relative border-2 border-black p-4 rounded-[12]" onClick={handleAnim}>
           <p
             className={`absolute bottom-[2.4rem] right-[2.2rem] ${quantityStyle(
-              ordersInBasket?.length
+              products.length
             )} text-white`}
           >
-            {ordersInBasket?.length}
+            {products.length}
           </p>
           <ShoppingIcon sx={{ fontSize: 30 }} />
         </button>

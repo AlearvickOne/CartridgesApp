@@ -2,19 +2,18 @@
 
 import ShoppingIcon from "@mui/icons-material/ShoppingBasket";
 import DeleteIcon from "@mui/icons-material/DeleteForever";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import stylesGradien from "@/styles/styles-gradient.module.scss";
 import stylesAnims from "@/styles/anims/anims.module.scss";
-import { useGetOrdersInBasket } from "@/hooks/useGetOrdersInBasket";
+import { ListOfProductsStore } from "@/stores/storeListOfProducts";
 import { SocketApiClass } from "@/app/api/socket-api";
 
 export const ListOfProductsForPaid = () => {
   const [isActiveWindowProducts, setIsActiveWindowProducts] = useState<boolean>(false);
   const [isAnim, setIsAnim] = useState<boolean>();
   let timer: NodeJS.Timeout | undefined;
-
-  const ordersInBasket = useGetOrdersInBasket();
+  await SocketApiClass.getOrdersFromBasket();
 
   const handleAnim = () => {
     setIsAnim(!isActiveWindowProducts);
@@ -40,6 +39,17 @@ export const ListOfProductsForPaid = () => {
 
   return (
     <>
+      <ul className="border-2 py-2 px-3 w-80 h-80  mb-2 rounded-lg bg-white overflow-auto">
+        {ListOfProductsStore.list.map(({ id, title, price }) => (
+          <li key={id} className="border-2 p-2 flex justify-between mb-2 ">
+            <h6>{title}</h6>
+            <p>{price}</p>
+            <button>
+              <DeleteIcon />
+            </button>
+          </li>
+        ))}
+      </ul>
       {isActiveWindowProducts && (
         <div
           className={`fixed bottom-32 right-20 z-50 p-5 border-2 rounded-xl ${
@@ -48,17 +58,6 @@ export const ListOfProductsForPaid = () => {
             isAnim ? stylesAnims.scaleUpBottomRight : stylesAnims.scaleDownBottomRight
           } flex justify-center flex-col`}
         >
-          <ul className="border-2 py-2 px-3 w-80 h-80  mb-2 rounded-lg bg-white overflow-auto">
-            {ordersInBasket?.map(({ id, titleOrder, priceOrder }) => (
-              <li key={id} className="border-2 p-2 flex justify-between mb-2 ">
-                <h6>{titleOrder}</h6>
-                <p>{priceOrder}</p>
-                <button onClick={() => SocketApiClass.deleteOrderFromOrderBasket(id)}>
-                  <DeleteIcon />
-                </button>
-              </li>
-            ))}
-          </ul>
           <button className=" border-2 px-2 py-4 rounded-lg bg-white">Оплатить</button>
         </div>
       )}
@@ -66,10 +65,10 @@ export const ListOfProductsForPaid = () => {
         <button className="relative border-2 border-black p-4 rounded-[12]" onClick={handleAnim}>
           <p
             className={`absolute bottom-[2.4rem] right-[2.2rem] ${quantityStyle(
-              ordersInBasket?.length
+              ListOfProductsStore.list.length
             )} text-white`}
           >
-            {ordersInBasket?.length}
+            {ListOfProductsStore.list.length}
           </p>
           <ShoppingIcon sx={{ fontSize: 30 }} />
         </button>

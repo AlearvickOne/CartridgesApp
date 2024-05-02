@@ -4,11 +4,11 @@ import { IOrdersInArray } from "@/types/orders.interface";
 
 import { useCallback, useEffect, useState } from "react";
 
-export const useGetOrdersData = () => {
-  const [state, setState] = useState<IOrdersInArray>();
+export const useGetOrdersInBasket = () => {
+  const [state, setState] = useState<IOrderInBasketInArray>();
 
   const ConnectionSocket = useCallback(() => {
-    SocketApiClass.getOrders(setState);
+    SocketApiClass.getOrdersFromBasket(setState);
   }, []);
 
   useEffect(() => {

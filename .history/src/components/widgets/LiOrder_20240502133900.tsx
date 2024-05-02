@@ -8,10 +8,9 @@ import { ILiOrder } from "@/types/orders.interface";
 export const LiOrder = ({ ...propsOrder }: ILiOrder) => {
   const [isOpenDesc, setIsOpenDesc] = useState<boolean>(false);
 
-  // TODO
-  // const clickUpdatePaid = () => {
-  //   return SocketApiClass.updateOrderIsPaidToTrue(propsOrder.id);
-  // };
+  const clickUpdatePaid = () => {
+    return SocketApiClass.updateOrderIsPaidToTrue(propsOrder.id);
+  };
 
   return (
     <>

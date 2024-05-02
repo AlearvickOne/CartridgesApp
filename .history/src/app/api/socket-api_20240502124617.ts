@@ -1,5 +1,3 @@
-import { IOrderInBasketInArray } from "@/types/orders-basket.interface";
-import { Dispatch, SetStateAction } from "react";
 import io from "socket.io-client";
 
 class SocketApi {
@@ -42,21 +40,8 @@ class SocketApi {
 
   // --- ORDERS BASKET
 
-  getOrdersFromBasket(setState: Dispatch<SetStateAction<IOrderInBasketInArray | undefined>>) {
-    this.SOCKET.emit("orderBasket: get");
-
-    this.SOCKET.on("orderBasket: geted", (ordersBasket) => {
-      setState(ordersBasket);
-      console.log(ordersBasket);
-    });
-  }
-
   setOrderInOrderBasket(idOrder: number | string) {
-    this.SOCKET.emit("orderBasket: set", idOrder);
-  }
-
-  deleteOrderFromOrderBasket(idOrderBasket: number | string) {
-    this.SOCKET.emit("orderBasket: delete", idOrderBasket);
+    this.SOCKET.emit("setOrderInOrderBasket");
   }
 }
 
