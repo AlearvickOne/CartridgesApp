@@ -19,6 +19,7 @@
     "@pbe/react-yandex-maps": "^1.2.5",
     "@tanstack/react-query": "^5.29.2",
     "axios": "^1.6.8",
+    "clsx": "^2.1.1",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.30.8",
     "mobx": "^6.12.3",
