@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  scrollbar-width: "thin";
+  scrollbar-color: #7a52e7 transparent;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #7a52e7;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #8f5ec7;
+  }
+}
+
+.bg-image {
+  background-image: url("../styles/images/bgImage.jpg");
+  background-size: cover;
+  animation: waterFlow 50s infinite linear; /* Название анимации, продолжительность, повторение и тип анимации */
+}
+
+@keyframes waterFlow {
+  0% {
+    background-position: 0 0;
+  } /* Начальное положение фона */
+  100% {
+    background-position: 100% 100%;
+  } /* Конечное положение фона */
+}

@@ -1,0 +1,39 @@
+import type { Metadata } from "next";
+import { PT_Serif } from "next/font/google";
+import "./globals.scss";
+import simpleParallax from "simple-parallax-js";
+
+import { QueryProvider } from "@/Providers/QueryProvider";
+import { PayPalProvider } from "@/Providers/PayPalProvider";
+
+const catamaran = PT_Serif({ subsets: ["latin"], weight: ["400", "700"] });
+
+export const metadata: Metadata = {
+  title: "Cartridge App",
+  description: "Application cartridge",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  const imageBg = document.getElementsByClassName("bg-image");
+
+  new simpleParallax(imageBg, {
+    delay: 0.6,
+    transition: "cubic-bezier(0,0,0,1)",
+  });
+
+  return (
+    <html lang="ru">
+      <body
+        className={`${catamaran.className} bg-slate-50 max-w-[1366px] max-h-full overflow-hidden bg-image`}
+      >
+        <PayPalProvider>
+          <QueryProvider>{children}</QueryProvider>
+        </PayPalProvider>
+      </body>
+    </html>
+  );
+}
