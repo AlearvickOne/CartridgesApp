@@ -1,0 +1,15 @@
+@import "./keyframes.scss";
+
+.scaleUpBottomRight {
+  -webkit-animation: scale-up-br 0.6s both;
+  animation: scale-up-br 0.6s both;
+}
+
+.scaleDownBottomRight {
+  -webkit-animation: scale-down-br 0.6s both;
+  animation: scale-down-br 0.6s both;
+}
+
+.leftRightWalking {
+  animation: leftRightWalking 200s infinite linear; /* Название анимации, продолжительность, повторение и тип анимации */
+}
