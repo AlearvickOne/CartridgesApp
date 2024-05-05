@@ -120,7 +120,7 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
           <label className="px-3 py-[2px] mb-2 ">Описание услуги</label>
 
           <textarea
-            className="p-2 rounded-xl resize-none shadow-inset shadow-neutral-400 transition-all outline-none hover:outline-black focus:outline-blue-900"
+            className="border-2 p-4 rounded-xl resize-none shadow-inset shadow-neutral-400 outline-none hover: hover:outline-black focus:outline-blue-900"
             name={FormDataNamingOrderClass.NAME_DESC_ORDER}
             rows={3}
             placeholder="Опишите подробно вашу услугу ..."

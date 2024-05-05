@@ -18,6 +18,8 @@ export default async function CreateOrder() {
       })
       .replace(/\//g, ".");
 
+    console.log(newDate);
+
     SocketApiClass.createOrder({
       title: formdata.get(FormDataNamingOrderClass.NAME_TITLE_ORDER)!.toString(),
       description: formdata.get(FormDataNamingOrderClass.NAME_DESC_ORDER)!.toString(),

@@ -108,7 +108,7 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
         </div>
         <div className="flex flex-wrap flex-col mb-5">
           <label className="py-[2px] mb-2">Адрес заказчика услуги (Выберите на карте)</label>
-          <TextField
+          <Input
             className="py-1 mb-2"
             name={FormDataNamingOrderClass.NAME_ADRESS_CLIENT_ORDER}
             type="text"
@@ -120,7 +120,7 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
           <label className="px-3 py-[2px] mb-2 ">Описание услуги</label>
 
           <textarea
-            className="p-2 rounded-xl resize-none shadow-inset shadow-neutral-400 transition-all outline-none hover:outline-black focus:outline-blue-900"
+            className="border-2 p-4 rounded-xl resize-none shadow-inset shadow-neutral-400"
             name={FormDataNamingOrderClass.NAME_DESC_ORDER}
             rows={3}
             placeholder="Опишите подробно вашу услугу ..."

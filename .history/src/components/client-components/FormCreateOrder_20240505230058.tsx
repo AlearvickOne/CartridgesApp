@@ -82,7 +82,7 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
       <form action={submitForm} className="text-[18px] pl-10 mr-10 mb-10">
         <div className="grid grid-cols-2 gap-8">
           <div className="flex flex-wrap flex-col mb-5">
-            <label className="py-[2px] mb-2">Название услуги</label>
+            <label className="px-3 py-[2px] mb-2">Название услуги</label>
             <TextField
               className="px-3 py-1"
               name={FormDataNamingOrderClass.NAME_TITLE_ORDER}
@@ -94,7 +94,7 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
             />
           </div>
           <div className="flex flex-wrap flex-col mb-5">
-            <label className="py-[2px] mb-2">Цена услуги</label>
+            <label className="px-3 py-[2px] mb-2">Цена услуги</label>
             <TextField
               className="px-3 py-1"
               name={FormDataNamingOrderClass.NAME_PRICE_ORDER}
@@ -107,9 +107,9 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
           </div>
         </div>
         <div className="flex flex-wrap flex-col mb-5">
-          <label className="py-[2px] mb-2">Адрес заказчика услуги (Выберите на карте)</label>
-          <TextField
-            className="py-1 mb-2"
+          <label className="px-3 py-[2px] mb-2">Адрес заказчика услуги (Выберите на карте)</label>
+          <Input
+            className="px-3 py-1 mb-2"
             name={FormDataNamingOrderClass.NAME_ADRESS_CLIENT_ORDER}
             type="text"
             defaultValue={address}
@@ -120,7 +120,7 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
           <label className="px-3 py-[2px] mb-2 ">Описание услуги</label>
 
           <textarea
-            className="p-2 rounded-xl resize-none shadow-inset shadow-neutral-400 transition-all outline-none hover:outline-black focus:outline-blue-900"
+            className="border-2 p-4 rounded-xl resize-none shadow-inset shadow-neutral-400"
             name={FormDataNamingOrderClass.NAME_DESC_ORDER}
             rows={3}
             placeholder="Опишите подробно вашу услугу ..."

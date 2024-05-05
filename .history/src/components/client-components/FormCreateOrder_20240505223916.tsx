@@ -9,8 +9,6 @@ import { useCheckConnectSocketStatus } from "@/hooks/useCheckConnectSocketStatus
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
-import { zodValid } from "@/api/zod-valid";
-import { ZodError } from "zod";
 
 export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
   const [address, setAddress] = useState<string>("");
@@ -46,25 +44,6 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
     }));
   };
 
-  const submitForm = async (formdata: FormData) => {
-    try {
-      if (statusConnect === "connected") {
-        zodValid.parse({
-          title: formdata.get(FormDataNamingOrderClass.NAME_TITLE_ORDER)!,
-          price: +formdata.get(FormDataNamingOrderClass.NAME_DESC_ORDER)!,
-        });
-
-        createOrderForm(formdata);
-        setStatusSubmit("submit");
-      } else setStatusSubmit("error");
-    } catch (error) {
-      if (error instanceof ZodError) {
-        console.log(error);
-        setStatusSubmit("error");
-      }
-    }
-  };
-
   return (
     <div className="bg-slate-50 p-2  mt-5 rounded-xl shadow-upmd shadow-zinc-500">
       <div className="grid grid-rows-2 justify-items-center mt-10 ">
@@ -79,10 +58,18 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
             : ""}
         </p>
       </div>
-      <form action={submitForm} className="text-[18px] pl-10 mr-10 mb-10">
+      <form
+        action={async (formdata) => {
+          if (statusConnect === "connected") {
+            createOrderForm(formdata);
+            setStatusSubmit("submit");
+          } else setStatusSubmit("error");
+        }}
+        className="text-[18px] pl-10 mr-10 mb-10"
+      >
         <div className="grid grid-cols-2 gap-8">
           <div className="flex flex-wrap flex-col mb-5">
-            <label className="py-[2px] mb-2">Название услуги</label>
+            <label className="px-3 py-[2px] mb-2">Название услуги</label>
             <TextField
               className="px-3 py-1"
               name={FormDataNamingOrderClass.NAME_TITLE_ORDER}
@@ -94,7 +81,7 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
             />
           </div>
           <div className="flex flex-wrap flex-col mb-5">
-            <label className="py-[2px] mb-2">Цена услуги</label>
+            <label className="px-3 py-[2px] mb-2">Цена услуги</label>
             <TextField
               className="px-3 py-1"
               name={FormDataNamingOrderClass.NAME_PRICE_ORDER}
@@ -107,9 +94,9 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
           </div>
         </div>
         <div className="flex flex-wrap flex-col mb-5">
-          <label className="py-[2px] mb-2">Адрес заказчика услуги (Выберите на карте)</label>
-          <TextField
-            className="py-1 mb-2"
+          <label className="px-3 py-[2px] mb-2">Адрес заказчика услуги (Выберите на карте)</label>
+          <Input
+            className="px-3 py-1 mb-2"
             name={FormDataNamingOrderClass.NAME_ADRESS_CLIENT_ORDER}
             type="text"
             defaultValue={address}
@@ -120,7 +107,7 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
           <label className="px-3 py-[2px] mb-2 ">Описание услуги</label>
 
           <textarea
-            className="p-2 rounded-xl resize-none shadow-inset shadow-neutral-400 transition-all outline-none hover:outline-black focus:outline-blue-900"
+            className="border-2 p-4 rounded-xl resize-none shadow-inset shadow-neutral-400"
             name={FormDataNamingOrderClass.NAME_DESC_ORDER}
             rows={3}
             placeholder="Опишите подробно вашу услугу ..."

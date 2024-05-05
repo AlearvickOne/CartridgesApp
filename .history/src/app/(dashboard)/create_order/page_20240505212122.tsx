@@ -1,7 +1,9 @@
 "use server";
 import { SocketApiClass } from "@/api/socket-api";
+import { zodValid } from "@/api/zod-valid";
 import { FormCreateOrder } from "@/components/client-components/FormCreateOrder";
 import { FormDataNamingOrderClass } from "@/constants/constants";
+import { title } from "process";
 
 export default async function CreateOrder() {
   async function createOrderForm(formdata: FormData) {
@@ -18,8 +20,12 @@ export default async function CreateOrder() {
       })
       .replace(/\//g, ".");
 
+      const valid = zodValid.parse(
+        {title: formdata.get(FormDataNamingOrderClass.NAME_TITLE_ORDER)!}
+      )
+
     SocketApiClass.createOrder({
-      title: formdata.get(FormDataNamingOrderClass.NAME_TITLE_ORDER)!.toString(),
+      title: .toString(),
       description: formdata.get(FormDataNamingOrderClass.NAME_DESC_ORDER)!.toString(),
       price: Number(formdata.get(FormDataNamingOrderClass.NAME_PRICE_ORDER)),
       address: formdata.get(FormDataNamingOrderClass.NAME_ADRESS_CLIENT_ORDER)!.toString(),
