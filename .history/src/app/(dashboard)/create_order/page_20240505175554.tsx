@@ -10,13 +10,7 @@ export default async function CreateOrder() {
     // Так сделано, потому что формат ввода даты в форме является локально
     const newDate = new Date(
       formdata.get(FormDataNamingOrderClass.NAME_DATE_ORIGIN_ORDER)!.toString()
-    )
-      .toLocaleDateString("en-US", {
-        month: "2-digit",
-        day: "2-digit",
-        year: "numeric",
-      })
-      .replace(/\//g, ".");
+    ).toLocaleDateString("en-US", { month: "numeric", day: "numeric", year: "numeric" });
 
     console.log(newDate);
 

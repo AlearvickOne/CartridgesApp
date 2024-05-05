@@ -113,8 +113,8 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
               name={FormDataNamingOrderClass.NAME_DATE_ORIGIN_ORDER}
-              format={"                  DD-MM-YYYY"}
-              defaultValue={dayjs()}
+              format={new Date().toLocaleDateString()}
+              value={new Date().toLocaleDateString()}
               maxDate={dayjs()}
             />
           </LocalizationProvider>

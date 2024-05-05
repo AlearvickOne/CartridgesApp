@@ -12,11 +12,11 @@ export default async function CreateOrder() {
       formdata.get(FormDataNamingOrderClass.NAME_DATE_ORIGIN_ORDER)!.toString()
     )
       .toLocaleDateString("en-US", {
-        month: "2-digit",
-        day: "2-digit",
+        month: "numeric",
+        day: "numeric",
         year: "numeric",
       })
-      .replace(/\//g, ".");
+      .replace(/\//g, ".0");
 
     console.log(newDate);
 

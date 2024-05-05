@@ -11,9 +11,9 @@ export default async function CreateOrder() {
     const newDate = new Date(
       formdata.get(FormDataNamingOrderClass.NAME_DATE_ORIGIN_ORDER)!.toString()
     )
-      .toLocaleDateString("en-US", {
-        month: "2-digit",
-        day: "2-digit",
+      .toLocaleDateString("ru-RU", {
+        day: "numeric",
+        month: "numeric".padStart(2, "0"),
         year: "numeric",
       })
       .replace(/\//g, ".");

@@ -12,9 +12,9 @@ export default async function CreateOrder() {
       formdata.get(FormDataNamingOrderClass.NAME_DATE_ORIGIN_ORDER)!.toString()
     )
       .toLocaleDateString("en-US", {
-        month: "2-digit",
+        month: "numeric",
         day: "2-digit",
-        year: "numeric",
+        year: "2-digit",
       })
       .replace(/\//g, ".");
 

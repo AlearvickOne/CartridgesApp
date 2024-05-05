@@ -7,18 +7,7 @@ export default async function CreateOrder() {
   async function createOrderForm(formdata: FormData) {
     "use server";
 
-    // Так сделано, потому что формат ввода даты в форме является локально
-    const newDate = new Date(
-      formdata.get(FormDataNamingOrderClass.NAME_DATE_ORIGIN_ORDER)!.toString()
-    )
-      .toLocaleDateString("en-US", {
-        month: "2-digit",
-        day: "2-digit",
-        year: "numeric",
-      })
-      .replace(/\//g, ".");
-
-    console.log(newDate);
+    const newDate = new Date(formdata.get(FormDataNamingOrderClass.NAME_DATE_ORIGIN_ORDER) as Date);
 
     SocketApiClass.createOrder({
       title: formdata.get(FormDataNamingOrderClass.NAME_TITLE_ORDER)!.toString(),

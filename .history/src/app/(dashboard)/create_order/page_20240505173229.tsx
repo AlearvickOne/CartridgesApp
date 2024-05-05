@@ -7,25 +7,21 @@ export default async function CreateOrder() {
   async function createOrderForm(formdata: FormData) {
     "use server";
 
-    // Так сделано, потому что формат ввода даты в форме является локально
     const newDate = new Date(
       formdata.get(FormDataNamingOrderClass.NAME_DATE_ORIGIN_ORDER)!.toString()
     )
-      .toLocaleDateString("en-US", {
-        month: "2-digit",
-        day: "2-digit",
-        year: "numeric",
-      })
-      .replace(/\//g, ".");
+      .toISOString()
+      .split("T")[0];
 
-    console.log(newDate);
+    const dateComponents = newDate.split("-");
+    const rearrangedDate = dateComponents[1] + "-" + dateComponents[2] + "-" + dateComponents[0];
 
     SocketApiClass.createOrder({
       title: formdata.get(FormDataNamingOrderClass.NAME_TITLE_ORDER)!.toString(),
       description: formdata.get(FormDataNamingOrderClass.NAME_DESC_ORDER)!.toString(),
       price: Number(formdata.get(FormDataNamingOrderClass.NAME_PRICE_ORDER)),
       address: formdata.get(FormDataNamingOrderClass.NAME_ADRESS_CLIENT_ORDER)!.toString(),
-      date: newDate,
+      date: newDate.toISOString().split("T")[0],
     });
   }
 
