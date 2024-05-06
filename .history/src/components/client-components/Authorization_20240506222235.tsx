@@ -39,7 +39,7 @@ function Authorization() {
       push(AllPagesClass.NOT_PAID_ORDERS_PAGE);
     },
     onError: () => {
-      setIsError(true);
+      setIsError;
       setIsClick(false);
     },
   });

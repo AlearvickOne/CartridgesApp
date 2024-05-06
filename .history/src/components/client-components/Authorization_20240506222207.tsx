@@ -31,17 +31,13 @@ function Authorization() {
     mutationKey: ["auth"],
     mutationFn: (data: IAuthForm) => {
       setIsClick(true);
-      setIsError(false);
       return authService.main(isLoginForm ? "login" : "register", data);
     },
     onSuccess: () => {
       reset();
       push(AllPagesClass.NOT_PAID_ORDERS_PAGE);
     },
-    onError: () => {
-      setIsError(true);
-      setIsClick(false);
-    },
+    onError: () => setIsClick(false),
   });
 
   const onSubmit: SubmitHandler<IAuthForm> = (data) => {

@@ -15,7 +15,6 @@ const caveat = Lobster({ subsets: ["latin"], weight: ["400"] });
 function Authorization() {
   const [isLoginForm, setIsLoginForm] = useState<boolean>(true);
   const [isClick, setIsClick] = useState<boolean>(false);
-  const [isError, setIsError] = useState<boolean>(false);
   const { push } = useRouter();
 
   const {
@@ -29,19 +28,12 @@ function Authorization() {
 
   const { mutate } = useMutation({
     mutationKey: ["auth"],
-    mutationFn: (data: IAuthForm) => {
-      setIsClick(true);
-      setIsError(false);
-      return authService.main(isLoginForm ? "login" : "register", data);
-    },
+    mutationFn: (data: IAuthForm) => authService.main(isLoginForm ? "login" : "register", data),
     onSuccess: () => {
       reset();
       push(AllPagesClass.NOT_PAID_ORDERS_PAGE);
     },
-    onError: () => {
-      setIsError(true);
-      setIsClick(false);
-    },
+    onError: () => setIsClick(false),
   });
 
   const onSubmit: SubmitHandler<IAuthForm> = (data) => {
@@ -64,26 +56,31 @@ function Authorization() {
             type="text"
             placeholder="Введите логин"
             {...register("login", {
-              required: true,
+              required: "login is required",
               maxLength: 20,
               minLength: 5,
               pattern: /^[^\s]+$/,
             })}
           />
+          {errors.login && <span>логин является обязательным</span>}
           <input
             type="password"
             placeholder="Введите пароль"
             {...register("password", {
-              required: true,
+              required: "password is required",
               maxLength: 20,
               minLength: 8,
               pattern: /^[^\s]+$/,
             })}
           />
-          {errors && <span>Поля являются обязательными</span>}
+          {errors.password && <span>пароль является обязательным</span>}
 
-          {isError && <p>Неверный логин или пароль</p>}
-          <button type="submit" className={isClick ? styles.disabled : ""}>
+          {isClick && <p>Неверный логин или пароль</p>}
+          <button
+            type="submit"
+            onClick={() => errors && setIsClick(true)}
+            className={isClick ? styles.disabled : ""}
+          >
             {isClick ? <SyncIcon className="animate-spin" /> : "Войти в систему"}
           </button>
         </form>

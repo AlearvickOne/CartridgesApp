@@ -1,5 +1,5 @@
 import axios, { CreateAxiosDefaults } from "axios";
-import { getAccessToken, removeFromStorage } from "@/api/services/auth-token.services";
+import { getAccessTokens, removeFromStorage } from "@/api/services/auth-token.services";
 
 import { errorServerCatch } from "./errorsServerCatch";
 import { authService } from "./services/authService";
@@ -9,7 +9,7 @@ const options: CreateAxiosDefaults = {
   headers: {
     "Content-Type": "application/json",
   },
-  withCredentials: true,
+  withCredentials: false,
 };
 
 const axiosClassic = axios.create(options);

@@ -9,7 +9,7 @@ const options: CreateAxiosDefaults = {
   headers: {
     "Content-Type": "application/json",
   },
-  withCredentials: true,
+  withCredentials: false,
 };
 
 const axiosClassic = axios.create(options);

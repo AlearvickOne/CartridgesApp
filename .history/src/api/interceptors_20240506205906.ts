@@ -7,9 +7,9 @@ import { authService } from "./services/authService";
 const options: CreateAxiosDefaults = {
   baseURL: "http://localhost:8800/",
   headers: {
-    "Content-Type": "application/json",
+    "Content-Type": "*",
   },
-  withCredentials: true,
+  withCredentials: false,
 };
 
 const axiosClassic = axios.create(options);

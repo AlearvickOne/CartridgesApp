@@ -31,17 +31,13 @@ function Authorization() {
     mutationKey: ["auth"],
     mutationFn: (data: IAuthForm) => {
       setIsClick(true);
-      setIsError(false);
       return authService.main(isLoginForm ? "login" : "register", data);
     },
     onSuccess: () => {
       reset();
       push(AllPagesClass.NOT_PAID_ORDERS_PAGE);
     },
-    onError: () => {
-      setIsError(true);
-      setIsClick(false);
-    },
+    onError: () => setIsClick(false),
   });
 
   const onSubmit: SubmitHandler<IAuthForm> = (data) => {
@@ -82,7 +78,7 @@ function Authorization() {
           />
           {errors && <span>Поля являются обязательными</span>}
 
-          {isError && <p>Неверный логин или пароль</p>}
+          {errors.login && <p>Неверный логин или пароль</p>}
           <button type="submit" className={isClick ? styles.disabled : ""}>
             {isClick ? <SyncIcon className="animate-spin" /> : "Войти в систему"}
           </button>
