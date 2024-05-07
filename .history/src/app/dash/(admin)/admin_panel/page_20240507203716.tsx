@@ -3,5 +3,5 @@
 import { AdminPanel } from "@/components/client-components/AdminPanel";
 
 export default async function AdminPanelPage() {
-  return <AdminPanel />;
+  return <AdminPanelPage />;
 }

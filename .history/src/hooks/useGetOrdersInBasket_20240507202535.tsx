@@ -7,14 +7,14 @@ import { useGetProfileUser } from "./ProfilesUser/useGetProfileUser";
 
 export const useGetOrdersInBasket = () => {
   const [state, setState] = useState<IBasket>();
-  const { data, isSuccess } = useGetProfileUser();
+  const { data, isLoading, isSuccess } = useGetProfileUser();
 
   const ConnectionSocket = () => {
-    if (isSuccess === true && data) {
+    if (isSuccess) {
+      SocketApiClass.getOrdersFromBasket(setState, data?.id);
       console.log(isSuccess);
     }
   };
-  SocketApiClass.getOrdersFromBasket(setState, data?.id);
 
   useEffect(() => {
     ConnectionSocket();

@@ -2,11 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { EnumTokens } from "./types/enums";
 import { AllPagesClass } from "./app/all-pages.class";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function middleware(request: NextRequest, response: NextResponse) {
   const { url, cookies } = request;
 
   const refreshToken = cookies.get(EnumTokens.REFRESH_TOKEN)?.value;
+
+  console.log(request);
 
   const isAuthPage = url.includes(AllPagesClass.AUTORIZATION_PAGE);
 
@@ -26,5 +27,5 @@ export async function middleware(request: NextRequest, response: NextResponse) {
 }
 
 export const config = {
-  matcher: ["/auth", "/dash/:path*", "/dash"],
+  matcher: ["/auth", "/db", "/db/:page*"],
 };

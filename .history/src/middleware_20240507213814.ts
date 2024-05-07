@@ -8,6 +8,8 @@ export async function middleware(request: NextRequest, response: NextResponse) {
 
   const refreshToken = cookies.get(EnumTokens.REFRESH_TOKEN)?.value;
 
+  console.log(request);
+
   const isAuthPage = url.includes(AllPagesClass.AUTORIZATION_PAGE);
 
   if (isAuthPage && refreshToken) {

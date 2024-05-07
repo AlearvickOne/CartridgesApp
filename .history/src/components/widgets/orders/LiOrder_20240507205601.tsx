@@ -5,7 +5,6 @@ import { useState } from "react";
 import RubleIcon from "@mui/icons-material/CurrencyRuble";
 import { ILiOrder } from "@/types/orders.interface";
 import { useGetProfileUser } from "@/hooks/ProfilesUser/useGetProfileUser";
-import { EnumRoles } from "@/types/enums";
 
 export const LiOrder = ({ ...propsOrder }: ILiOrder) => {
   const [isOpenDesc, setIsOpenDesc] = useState<boolean>(false);
@@ -59,8 +58,7 @@ export const LiOrder = ({ ...propsOrder }: ILiOrder) => {
         </div>
         {isOpenDesc && (
           <div>
-            <div>
-              {data?.role === EnumRoles.ADMIN && <p>id Заказа: {propsOrder.id}</p>}
+            <div className="">
               <p>Дата заказа: {propsOrder.date}</p>
               {propsOrder.isPaid && <p>Дата оплаты: {propsOrder.datePaid}</p>}
               <p>Адрес заказа: {propsOrder.address} </p>

@@ -60,7 +60,7 @@ export const LiOrder = ({ ...propsOrder }: ILiOrder) => {
         {isOpenDesc && (
           <div>
             <div>
-              {data?.role === EnumRoles.ADMIN && <p>id Заказа: {propsOrder.id}</p>}
+              {data?.role === EnumRoles.ADMIN && <p>id: {propsOrder.id}</p>}
               <p>Дата заказа: {propsOrder.date}</p>
               {propsOrder.isPaid && <p>Дата оплаты: {propsOrder.datePaid}</p>}
               <p>Адрес заказа: {propsOrder.address} </p>

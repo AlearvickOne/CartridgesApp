@@ -1,14 +1,25 @@
 "use client";
+
 import { useGetProfilesUsers } from "@/hooks/ProfilesUser/useGetProfilesUsers";
-import { TextField } from "@material-ui/core";
+import { Checkbox, TextField } from "@material-ui/core";
 import { Lobster } from "next/font/google";
+import { useState } from "react";
 
 const lobsterFont = Lobster({ subsets: ["latin"], weight: ["400"] });
 
 export const AdminPanel = () => {
+  const [usersPanel, setUsersPanel] = useState<number[]>([]);
   const { data } = useGetProfilesUsers();
 
-  console.log(data);
+  console.log(usersPanel);
+
+  const handleCheckBox = (setId: number) => {
+    usersPanel.forEach((el) => {});
+
+    setId
+      ? setUsersPanel((prev) => prev.filter((id) => id !== setId))
+      : setUsersPanel((prev) => [...prev, setId]);
+  };
 
   return (
     <div className="py-24  overflow-auto h-screen w-full flex flex-center items-center flex-col">
@@ -21,58 +32,19 @@ export const AdminPanel = () => {
             className="w-full rounded-lg p-2 bg-gradient-to-b from-violet-400 to-violet-600"
           >
             <ul className="p-5 overflow-auto h-[300px] bg-white z-10 rounded-xl">
-              <li className="p-2 mb-2 border-2 rounded-[15px] flex justify-between">
-                <p>id</p>
-                <p>логин</p>
-                <p>имя, фамилия</p>
-                <p>роль</p>
-              </li>
-              <li className="p-2 mb-2 border-2 rounded-[15px] flex justify-between">
-                <p>id</p>
-                <p>логин</p>
-                <p>имя, фамилия</p>
-                <p>роль</p>
-              </li>{" "}
-              <li className="p-2 mb-2 border-2 rounded-[15px] flex justify-between">
-                <p>id</p>
-                <p>логин</p>
-                <p>имя, фамилия</p>
-                <p>роль</p>
-              </li>{" "}
-              <li className="p-2 mb-2 border-2 rounded-[15px] flex justify-between">
-                <p>id</p>
-                <p>логин</p>
-                <p>имя, фамилия</p>
-                <p>роль</p>
-              </li>{" "}
-              <li className="p-2 mb-2 border-2 rounded-[15px] flex justify-between">
-                <p>id</p>
-                <p>логин</p>
-                <p>имя, фамилия</p>
-                <p>роль</p>
-              </li>{" "}
-              <li className="p-2 mb-2 border-2 rounded-[15px] flex justify-between">
-                <p>id</p>
-                <p>логин</p>
-                <p>имя, фамилия</p>
-                <p>роль</p>
-              </li>{" "}
-              <li className="p-2 mb-2 border-2 rounded-[15px] flex justify-between">
-                <p>id</p>
-                <p>логин</p>
-                <p>имя, фамилия</p>
-                <p>роль</p>
-              </li>{" "}
-              <li className="p-2 mb-2 border-2 rounded-[15px] flex justify-between">
-                <p>id</p>
-                <p>логин</p>
-                <p>имя, фамилия</p>
-                <p>роль</p>
-              </li>
+              {data?.map((el) => (
+                <li className="p-2 mb-2 border-2 rounded-[15px] flex justify-between">
+                  <p>{el.id}</p>
+                  <p>{el.login}</p>
+                  <p>{`${el.name} ${el.surname}`}</p>
+                  <p>{el.role}</p>
+                  <Checkbox onClick={() => handleCheckBox(+el.id)} />
+                </li>
+              ))}
             </ul>
             <div className="flex justify-between items-center my-2">
               <button className="p-3 rounded-lg bg-violet-200 hover:shadow-upmd hover:shadow-violet-400 transition-all">
-                Удалить пользователя
+                {usersPanel.length < 1 ? "Удалить пользователя" : "Удалить пользователей"}
               </button>
               <button className="p-3 rounded-lg bg-violet-200 hover:shadow-upmd hover:shadow-violet-400 transition-all">
                 Удалить всех
@@ -90,6 +62,12 @@ export const AdminPanel = () => {
             </button>
           </div>
           <div className="">
+            <div className="">
+              <label htmlFor="">
+                Только оплаченные
+                <Checkbox value={"Только выполненные"} />
+              </label>
+            </div>
             <button className="p-3 rounded-lg bg-violet-200 hover:shadow-upmd hover:shadow-violet-400 transition-all">
               Очистить все заказы
             </button>

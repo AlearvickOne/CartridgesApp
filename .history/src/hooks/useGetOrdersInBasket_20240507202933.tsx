@@ -11,10 +11,10 @@ export const useGetOrdersInBasket = () => {
 
   const ConnectionSocket = () => {
     if (isSuccess === true && data) {
+      SocketApiClass.getOrdersFromBasket(setState, data.id);
       console.log(isSuccess);
     }
   };
-  SocketApiClass.getOrdersFromBasket(setState, data?.id);
 
   useEffect(() => {
     ConnectionSocket();
