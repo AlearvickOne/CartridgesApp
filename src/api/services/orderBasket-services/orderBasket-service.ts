@@ -10,8 +10,13 @@ class OrderBasketService {
     return response.data;
   }
 
-  async deleteOrderFromBasket(id: string) {
-    const response = await axiosWithAuth.patch(`${this.DELETE_ORDER_FROM_BASKET_URL}/${id}`);
+  async deleteOrderFromBasket(idOrder: string) {
+    const response = await axiosWithAuth.patch(`${this.DELETE_ORDER_FROM_BASKET_URL}/${idOrder}`);
+    return response;
+  }
+
+  async setOrderInBasket(idOrder: number, idBasket: number) {
+    const response = await axiosWithAuth.patch(`${this.BASE_URL}/update/${idOrder}/${idBasket}`);
     return response;
   }
 }
