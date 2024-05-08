@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { EnumPaidStatus } from "./enums";
 
 export interface IOrders {
-  id: string | number;
+  id: number;
   title: string;
   price: number;
   isPaid: EnumPaidStatus;

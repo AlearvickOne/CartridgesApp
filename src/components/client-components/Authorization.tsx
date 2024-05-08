@@ -4,18 +4,13 @@ import { useState } from "react";
 import SyncIcon from "@mui/icons-material/Sync";
 import { IAuthForm } from "@/types/auth.interface";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useRouter } from "next/navigation";
-import { useMutation } from "@tanstack/react-query";
-import { authService } from "@/api/services/authService";
-import { AllPagesClass, LOBSTER_FONT } from "@/constants/constants";
-
-
+import { LOBSTER_FONT } from "@/constants/constants";
+import { useMutationAuth } from "@/hooks/Auth/useMutationAuth";
 
 function Authorization() {
   const [isLoginForm, setIsLoginForm] = useState<boolean>(true);
   const [isClick, setIsClick] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
-  const { push } = useRouter();
 
   const {
     register,
@@ -26,22 +21,7 @@ function Authorization() {
     mode: "onChange",
   });
 
-  const { mutate } = useMutation({
-    mutationKey: ["auth"],
-    mutationFn: (data: IAuthForm) => {
-      setIsClick(true);
-      setIsError(false);
-      return authService.main(isLoginForm ? "login" : "register", data);
-    },
-    onSuccess: () => {
-      reset();
-      push(AllPagesClass.NOT_PAID_ORDERS_PAGE);
-    },
-    onError: () => {
-      setIsError(true);
-      setIsClick(false);
-    },
-  });
+  const { mutate } = useMutationAuth(setIsClick, setIsError, isLoginForm, reset);
 
   const onSubmit: SubmitHandler<IAuthForm> = (data) => {
     mutate(data);

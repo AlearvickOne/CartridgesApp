@@ -1,4 +1,4 @@
-import { TPaid } from "./orders.interface";
+import { EnumPaidStatus } from "./enums";
 
 export interface IBasket {
   id: number | string;
@@ -10,7 +10,7 @@ export interface IOrdersBasket {
   title: string;
   description: string;
   price: number;
-  isPaid: TPaid;
+  isPaid: EnumPaidStatus;
 }
 
 export type IOrderInBasketInArray = [IBasket];

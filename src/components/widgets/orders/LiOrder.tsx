@@ -1,16 +1,23 @@
 "use client";
 
 import { SocketApiClass } from "@/api/socket-api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RubleIcon from "@mui/icons-material/CurrencyRuble";
 import { ILiOrder } from "@/types/orders.interface";
 import { useGetProfileUser } from "@/hooks/ProfilesUser/useGetProfileUser";
 import { EnumRoles } from "@/types/enums";
+import { useGetBasket } from "@/hooks/OrdersBasket/useGetBasket";
+import { useInvalidateBasket } from "@/hooks/ReactQuery/useInvalidateBasket";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const LiOrder = ({ ...propsOrder }: ILiOrder) => {
   const [isOpenDesc, setIsOpenDesc] = useState<boolean>(false);
+  const [isClickButton, setIsClickButton] = useState<boolean>(false);
 
   const { data } = useGetProfileUser();
+  const bakset = useGetBasket();
+
+  const queryClient = useQueryClient();
 
   const paidStatusButton = () => {
     const style = "inline mr-2 p-3";
@@ -26,7 +33,8 @@ export const LiOrder = ({ ...propsOrder }: ILiOrder) => {
             className="mr-3 p-3 rounded-lg bg-violet-200 hover:shadow-upmd hover:shadow-violet-400 transition-all"
             type="submit"
             onClick={() => {
-              SocketApiClass.setOrderInBasket(propsOrder.id);
+              SocketApiClass.setOrderInBasket(propsOrder.id, +bakset.data!.id);
+              queryClient.invalidateQueries({ queryKey: ["getBasket"] });
             }}
           >
             Оплатить

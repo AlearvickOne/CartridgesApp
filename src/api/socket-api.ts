@@ -1,11 +1,10 @@
-import { IBasket } from "@/types/orders-basket.interface";
-import { Dispatch, SetStateAction } from "react";
+import { DisString } from "@/types/Dispatch.types";
 import io from "socket.io-client";
 
 class SocketApi {
   SOCKET = io("http://localhost:8800");
 
-  async connectionCheck(setStatus: React.Dispatch<React.SetStateAction<string | undefined>>) {
+  async connectionCheck(setStatus: DisString) {
     if (this.SOCKET.connected) {
       setStatus("connected");
     }
@@ -35,29 +34,8 @@ class SocketApi {
     this.SOCKET.emit("createOrder", newOrder);
   }
 
-  // --- ORDERS BASKET
-
-  getOrdersFromBasket(
-    setState: Dispatch<SetStateAction<IBasket | undefined>>,
-    idUser: number | string | undefined
-  ) {
-    this.SOCKET.emit("orderBasket:get", idUser);
-
-    this.SOCKET.on("orderBasket:geted", (ordersBasket) => {
-      setState(ordersBasket);
-    });
-  }
-
-  setOrderInBasket(idOrder: number | string) {
-    this.SOCKET.emit("orderBasket:set", idOrder);
-  }
-
-  deleteOrderFromBasket(idOrderBasket: number | string) {
-    this.SOCKET.emit("orderBasket:delete", idOrderBasket);
-  }
-
-  paymentOrdersInBasket(idBasket: number) {
-    this.SOCKET.emit("orderBasket:payment", idBasket);
+  setOrderInBasket(idOrder: number, idBasket: number) {
+    this.SOCKET.emit("orderBasket:set", idOrder, idBasket);
   }
 }
 

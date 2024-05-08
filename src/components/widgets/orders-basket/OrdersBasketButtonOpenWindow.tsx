@@ -1,11 +1,10 @@
-import { useGetOrdersInBasket } from "@/hooks/useGetOrdersInBasket";
-
 import ShoppingIcon from "@mui/icons-material/ShoppingBasket";
-import { Dispatch, SetStateAction } from "react";
 import clsx from "clsx";
+import { DisBoolean } from "@/types/Dispatch.types";
+import { useGetBasket } from "@/hooks/OrdersBasket/useGetBasket";
 
 interface IOrdersBasketButtonOpenWindow {
-  setIsAnim: Dispatch<SetStateAction<boolean>>;
+  setIsAnim: DisBoolean;
   isActiveWindowProducts: boolean;
 }
 
@@ -16,11 +15,11 @@ export const OrdersBasketButtonOpenWindow = ({
   const handleAnim = () => {
     setIsAnim(!isActiveWindowProducts);
   };
-  const ordersInBasket = useGetOrdersInBasket();
+  const { data } = useGetBasket();
 
   return (
     <>
-      {ordersInBasket !== undefined && (
+      {data?.orders !== undefined && (
         <div
           className={`fixed bottom-10 right-20 z-50 bg-slate-100 rounded-[17px] transition-all hover:shadow-upmd  hover:shadow-indigo-400 bg-gradient-to-b from-violet-400 to-indigo-600`}
         >
@@ -28,15 +27,14 @@ export const OrdersBasketButtonOpenWindow = ({
             <p
               className={`absolute bottom-[2.4rem] right-[2.2rem] rounded-full p-1 bg-red-600 ${clsx(
                 {
-                  "opacity-0": ordersInBasket.length === 0,
-                  "min-w-[2.2rem] min-h-2": ordersInBasket.length! < 10,
-                  "min-w-[2.3rem] min-h-2":
-                    ordersInBasket.length! >= 10 && ordersInBasket.length! < 100,
-                  "min-w-2 min-h-2": ordersInBasket.length! >= 100,
+                  "opacity-0": data.orders.length === 0,
+                  "min-w-[2.2rem] min-h-2": data.orders.length! < 10,
+                  "min-w-[2.3rem] min-h-2": data.orders.length! >= 10 && data.orders.length! < 100,
+                  "min-w-2 min-h-2": data.orders.length! >= 100,
                 }
               )} text-white`}
             >
-              {ordersInBasket.length}
+              {data.orders.length}
             </p>
             <ShoppingIcon sx={{ fontSize: 30, color: "white" }} />
           </button>

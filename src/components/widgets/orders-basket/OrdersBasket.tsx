@@ -22,11 +22,11 @@ export const OrdersBasket = () => {
 
   return (
     <div className="fixed ">
-      {/* <OrdersBasketWindow isActiveWindowProducts={isActiveWindowProducts} isAnim={isAnim} />
+      <OrdersBasketWindow isActiveWindowProducts={isActiveWindowProducts} isAnim={isAnim} />
       <OrdersBasketButtonOpenWindow
         setIsAnim={setIsAnim}
         isActiveWindowProducts={isActiveWindowProducts}
-      /> */}
+      />
     </div>
   );
 };
