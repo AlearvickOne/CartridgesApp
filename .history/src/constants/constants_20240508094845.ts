@@ -1,10 +1,5 @@
 import { Lobster, PT_Serif } from "next/font/google";
 
-/* FONTS */  
-export const LOBSTER_FONT =  Lobster({ subsets: ["latin"], weight: ["400"] });
-export const PT_SERIF_FONT = PT_Serif({ subsets: ["latin"], weight: ["400", "700"] });
-/* ----------------- */
-
 class AllPages {
   readonly ADMIN_PANEL_PAGE = "/dash/admin_panel";
   readonly AUTORIZATION_PAGE = "/auth";
@@ -27,7 +22,13 @@ class Keys {
   readonly YANDEX_MAPS_GEO_API = process.env.NEXT_PUBLIC_YANDEX_MAPS_GEO_API;
 }
 
+class Fonts {
+  readonly LOBSTER = Lobster({ subsets: ["latin"], weight: ["400"] });
+  readonly PT_SERIF = PT_Serif({ subsets: ["latin"], weight: ["400", "700"] });
+}
 
 export const AllPagesClass = new AllPages();
+
 export const FormDataNamingOrderClass = new FormDataNamingOrder();
 export const KeysClass = new Keys();
+export const FontsClass = new Fonts();

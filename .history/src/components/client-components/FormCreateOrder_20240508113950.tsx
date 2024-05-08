@@ -18,7 +18,7 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
   const [inputsValue, setInputsValue] = useState({
     titleValue: "",
     titleValueError: "Минимальное количество символов - 3",
-    priceValue: "",
+    priceValue: 0,
     priceValueError: "Минимальное количество символов - 2",
   });
   const [statusSubmit, setStatusSubmit] = useState<EnumFormCreateStatus>(
@@ -43,11 +43,9 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
   }, []);
 
   const priceChange = useCallback((e: TReactEvent) => {
-    if (isNaN(+e.target.value)) return;
-
     setInputsValue((prev) => ({
       ...prev,
-      priceValue: e.target.value.substring(0, 7),
+      priceValue: +e.target.value.substring(0, 7),
     }));
   }, []);
 
@@ -109,7 +107,7 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
               id="price-order"
               className="px-3 py-1"
               name={FormDataNamingOrderClass.NAME_PRICE_ORDER}
-              type="text"
+              type="number"
               placeholder="Введите цену услуги ..."
               value={inputsValue.priceValue}
               onChange={priceChange}

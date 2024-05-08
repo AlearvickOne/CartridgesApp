@@ -12,13 +12,14 @@ import dayjs from "dayjs";
 import { zodValid } from "@/api/zod-valid";
 import { ZodError } from "zod";
 import { EnumFormCreateStatus } from "@/types/enums";
+import { useForm } from "react-hook-form";
 
 export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
   const [address, setAddress] = useState<string>("");
   const [inputsValue, setInputsValue] = useState({
     titleValue: "",
     titleValueError: "Минимальное количество символов - 3",
-    priceValue: "",
+    priceValue: "10",
     priceValueError: "Минимальное количество символов - 2",
   });
   const [statusSubmit, setStatusSubmit] = useState<EnumFormCreateStatus>(
@@ -33,6 +34,13 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
     [address]
   );
 
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({ mode: "onChange" });
+
   type TReactEvent = React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>;
 
   const titleChange = useCallback((e: TReactEvent) => {
@@ -43,11 +51,9 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
   }, []);
 
   const priceChange = useCallback((e: TReactEvent) => {
-    if (isNaN(+e.target.value)) return;
-
     setInputsValue((prev) => ({
       ...prev,
-      priceValue: e.target.value.substring(0, 7),
+      priceValue: typeof e.target.value === "number" ? e.target.value.substring(0, 7) : "",
     }));
   }, []);
 
@@ -93,12 +99,16 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
             <TextField
               id="title-order"
               className="px-3 py-1"
-              name={FormDataNamingOrderClass.NAME_TITLE_ORDER}
               type="text"
               placeholder="Введите название услуги ..."
-              value={inputsValue.titleValue}
-              onChange={titleChange}
               helperText={inputsValue.titleValueError}
+              value={inputsValue.titleValue}
+              {...register(FormDataNamingOrderClass.NAME_TITLE_ORDER, {
+                required: true,
+                maxLength: 20,
+                minLength: 5,
+                onChange: (e) => titleChange(e),
+              })}
             />
           </div>
           <div className="flex flex-wrap flex-col mb-5">
@@ -108,12 +118,16 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
             <TextField
               id="price-order"
               className="px-3 py-1"
-              name={FormDataNamingOrderClass.NAME_PRICE_ORDER}
               type="text"
               placeholder="Введите цену услуги ..."
-              value={inputsValue.priceValue}
-              onChange={priceChange}
               helperText={inputsValue.priceValueError}
+              value={inputsValue.priceValue}
+              {...register(FormDataNamingOrderClass.NAME_PRICE_ORDER, {
+                required: true,
+                maxLength: 6,
+                minLength: 2,
+                onChange: (e) => priceChange(e),
+              })}
             />
           </div>
         </div>

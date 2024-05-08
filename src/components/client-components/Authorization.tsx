@@ -2,15 +2,14 @@
 import styles from "@/styles/home/Home.module.scss";
 import { useState } from "react";
 import SyncIcon from "@mui/icons-material/Sync";
-import { Lobster } from "next/font/google";
 import { IAuthForm } from "@/types/auth.interface";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import { authService } from "@/api/services/authService";
-import { AllPagesClass } from "@/app/all-pages.class";
+import { AllPagesClass, LOBSTER_FONT } from "@/constants/constants";
 
-const lobsterFont = Lobster({ subsets: ["latin"], weight: ["400"] });
+
 
 function Authorization() {
   const [isLoginForm, setIsLoginForm] = useState<boolean>(true);
@@ -51,12 +50,12 @@ function Authorization() {
     <main className={styles.authContainer}>
       <div className={styles.authForm_wrapper}>
         <h1
-          className={`${lobsterFont.className} mb-5 text-center text-2xl border-b-2 border-black pb-2`}
+          className={`${LOBSTER_FONT.className} mb-5 text-center text-2xl border-b-2 border-black pb-2`}
         >
           Авторизация
         </h1>
         <form
-          className={`${styles.authForm} ${lobsterFont.className}`}
+          className={`${styles.authForm} ${LOBSTER_FONT.className}`}
           onSubmit={handleSubmit(onSubmit)}
         >
           <input

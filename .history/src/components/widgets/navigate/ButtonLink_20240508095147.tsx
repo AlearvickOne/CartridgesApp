@@ -4,6 +4,12 @@ import { AllPagesClass } from "@/constants/constants";
 import { useMutation } from "@tanstack/react-query";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import React, { ReactNode } from "react";
+
+interface IButtonLink {
+  fnOnClick: () => void;
+  children: ReactNode;
+}
 
 export const ButtonSignOut = () => {
   const { push } = useRouter();

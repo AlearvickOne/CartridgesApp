@@ -18,7 +18,7 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
   const [inputsValue, setInputsValue] = useState({
     titleValue: "",
     titleValueError: "Минимальное количество символов - 3",
-    priceValue: "",
+    priceValue: "0",
     priceValueError: "Минимальное количество символов - 2",
   });
   const [statusSubmit, setStatusSubmit] = useState<EnumFormCreateStatus>(

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { EnumTokens } from "./types/enums";
-import { AllPagesClass } from "./app/all-pages.class";
+import { AllPagesClass } from "@/constants/constants";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function middleware(request: NextRequest, response: NextResponse) {

@@ -1,6 +1,6 @@
 "use client";
 
-import { LOBSTER_FONT } from "@/constants/constants";
+import { FontsClass } from "@/constants/constants";
 import { useGetProfilesUsers } from "@/hooks/ProfilesUser/useGetProfilesUsers";
 import { Checkbox, TextField } from "@material-ui/core";
 import { useState } from "react";
@@ -22,7 +22,7 @@ export const AdminPanel = () => {
   return (
     <div className="py-24  overflow-auto h-screen w-full flex flex-center items-center flex-col">
       <div className="bg-stone-100 rounded-xl w-full h-screen pt-5 border-2 border-purple-600">
-        <h1 className={` text-center text-xl ${LOBSTER_FONT.className}`}>Панель управления</h1>
+        <h1 className={` text-center text-xl ${FontsClass.LOBSTER}`}>Панель управления</h1>
         <hr className="border-b-2 my-2 border-violet-800" />
         <div className="px-5 mb-5">
           <div
@@ -50,7 +50,7 @@ export const AdminPanel = () => {
             </div>
           </div>
         </div>
-        <h1 className={` text-center text-xl ${LOBSTER_FONT.className}`}>Удаление заказов</h1>
+        <h1 className={` text-center text-xl ${FontsClass.LOBSTER}`}>Удаление заказов</h1>
         <hr className="border-b-2 my-2 border-violet-800" />
         <div id="ordersMenu" className="px-5 my-5 flex justify-between items-center w-full">
           <div className="flex flex-col w-[20rem]">

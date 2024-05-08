@@ -18,7 +18,7 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
   const [inputsValue, setInputsValue] = useState({
     titleValue: "",
     titleValueError: "Минимальное количество символов - 3",
-    priceValue: "",
+    priceValue: 0,
     priceValueError: "Минимальное количество символов - 2",
   });
   const [statusSubmit, setStatusSubmit] = useState<EnumFormCreateStatus>(
@@ -43,12 +43,11 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
   }, []);
 
   const priceChange = useCallback((e: TReactEvent) => {
-    if (isNaN(+e.target.value)) return;
-
-    setInputsValue((prev) => ({
-      ...prev,
-      priceValue: e.target.value.substring(0, 7),
-    }));
+    if (isNaN(e.target.value))
+      setInputsValue((prev) => ({
+        ...prev,
+        priceValue: e.target.value.substring(0, 7),
+      }));
   }, []);
 
   const submitForm = async (formdata: FormData) => {

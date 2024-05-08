@@ -1,6 +1,6 @@
 "use server";
 
-import { AllPagesClass } from "@/constants/constants";
+import { AllPagesClass } from ""@/constants/constants"";
 import { LiLink } from "@/components/widgets/navigate/LiLink";
 
 import stylesGradient from "@/styles/styles-gradient.module.scss";
