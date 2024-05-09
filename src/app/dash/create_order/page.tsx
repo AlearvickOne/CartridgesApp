@@ -4,7 +4,7 @@ import { FormCreateOrder } from "@/components/client-components/FormCreateOrder"
 import { FormDataNamingOrderClass } from "@/constants/constants";
 
 export default async function CreateOrder() {
-  async function createOrderForm(formdata: FormData) {
+  async function createOrderForm(idUserProvider: number, formdata: FormData) {
     "use server";
 
     // Так сделано, потому что дата не правильно выводится в бэке
@@ -19,6 +19,7 @@ export default async function CreateOrder() {
       .replace(/\//g, ".");
 
     SocketApiClass.createOrder({
+      idProvider: idUserProvider,
       title: formdata.get(FormDataNamingOrderClass.NAME_TITLE_ORDER)!.toString(),
       description: formdata.get(FormDataNamingOrderClass.NAME_DESC_ORDER)!.toString(),
       price: Number(formdata.get(FormDataNamingOrderClass.NAME_PRICE_ORDER)),

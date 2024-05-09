@@ -22,7 +22,7 @@ export interface IGetListOrderInPage {
 }
 
 export interface IFormCreateOrder {
-  createOrderForm: (formdata: FormData) => void;
+  createOrderForm: (idUserProvider: number, formdata: FormData) => void;
 }
 
 export type IOrdersInArray = [IOrders];

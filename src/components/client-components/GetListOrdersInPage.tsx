@@ -1,18 +1,25 @@
 "use client";
+import { observer } from "mobx-react-lite";
 
 import { LiOrder } from "@/components/widgets/orders/LiOrder";
-import { IGetListOrderInPage, IOrderNotDesc, IOrders } from "@/types/orders.interface";
+import {
+  IGetListOrderInPage,
+  IOrderNotDesc,
+  IOrders,
+  IOrdersInArray,
+} from "@/types/orders.interface";
 import { useGetOrdersData } from "@/hooks/useGetOrdersData";
 import { CircularProgress } from "@mui/material";
+import { useGetOrdersByProvider } from "@/hooks/orders/useGetOrdersByProvider";
+import { CheckBoxOrderProviderStore } from "@/stores/checkBoxOrderProviderStore";
+import { useEffect, useState } from "react";
+import { UseQueryResult } from "@tanstack/react-query";
+import { EnumPaidStatus } from "@/types/enums";
 
 export const GetListOrdersInPage = ({ isPaidOrder }: IGetListOrderInPage) => {
   const orders = useGetOrdersData();
-
-  const check = (propsOrder: IOrderNotDesc) => {
-    if (Array.isArray(isPaidOrder))
-      return propsOrder.isPaid === isPaidOrder[0] || propsOrder.isPaid === isPaidOrder[1];
-    else return propsOrder.isPaid === isPaidOrder;
-  };
+  const ordersByProvider = useGetOrdersByProvider();
+  const [isClick, setIsClick] = useState(false);
 
   return (
     <div>
@@ -21,17 +28,41 @@ export const GetListOrdersInPage = ({ isPaidOrder }: IGetListOrderInPage) => {
           <CircularProgress color="warning" size={100} />
         </div>
       ) : (
-        <ul className={`max-h-screen overflow-y-auto py-10`}>
-          {orders?.map(
-            ({ description, ...propsOrder }: IOrders) =>
-              check(propsOrder) && (
-                <LiOrder key={propsOrder.id} {...propsOrder}>
-                  {description}
-                </LiOrder>
-              )
-          )}
-        </ul>
+        <GetElements
+          ordersByProvider={ordersByProvider}
+          orders={orders}
+          isPaidOrder={isPaidOrder}
+        />
       )}
     </div>
   );
 };
+
+// ----------------------------------
+
+interface IGetElements {
+  ordersByProvider: any;
+  orders: IOrdersInArray | undefined;
+  isPaidOrder: EnumPaidStatus | EnumPaidStatus[];
+}
+
+const GetElements = observer(({ ordersByProvider, orders, isPaidOrder }: IGetElements) => {
+  const check = (propsOrder: IOrderNotDesc) => {
+    if (Array.isArray(isPaidOrder))
+      return propsOrder.isPaid === isPaidOrder[0] || propsOrder.isPaid === isPaidOrder[1];
+    else return propsOrder.isPaid === isPaidOrder;
+  };
+
+  return (
+    <ul className={`max-h-screen overflow-y-auto py-10`}>
+      {(CheckBoxOrderProviderStore.isClickProviderCheckBox ? ordersByProvider : orders)?.map(
+        ({ description, ...propsOrder }: IOrders) =>
+          check(propsOrder) && (
+            <LiOrder key={propsOrder.id} {...propsOrder}>
+              {description}
+            </LiOrder>
+          )
+      )}
+    </ul>
+  );
+});

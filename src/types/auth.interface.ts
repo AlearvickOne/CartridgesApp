@@ -1,8 +1,17 @@
 import { EnumRoles } from "./enums";
 
-export interface IAuthForm {
+export interface ILoginForm {
   login: string;
   password: string;
+}
+
+export interface IRegisterForm {
+  login: string;
+  password: string;
+  email: string;
+  name: string;
+  surname: string;
+  role: EnumRoles;
 }
 
 export interface IUser {

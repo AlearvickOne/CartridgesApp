@@ -1,7 +1,7 @@
 import { authService } from "@/api/services/authService";
 import { AllPagesClass } from "@/constants/constants";
 import { DisBoolean } from "@/types/Dispatch.types";
-import { IAuthForm } from "@/types/auth.interface";
+import { ILoginForm, IRegisterForm } from "@/types/auth.interface";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { UseFormReset } from "react-hook-form";
@@ -10,13 +10,13 @@ export const useMutationAuth = (
   setIsClick: DisBoolean,
   setIsError: DisBoolean,
   isLoginForm: boolean,
-  reset: UseFormReset<IAuthForm>
+  reset: UseFormReset<ILoginForm | IRegisterForm>
 ) => {
   const { push } = useRouter();
 
   return useMutation({
     mutationKey: ["auth"],
-    mutationFn: (data: IAuthForm) => {
+    mutationFn: (data: ILoginForm | IRegisterForm) => {
       setIsClick(true);
       setIsError(false);
       return authService.main(isLoginForm ? "login" : "register", data);

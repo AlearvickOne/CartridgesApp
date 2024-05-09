@@ -24,7 +24,16 @@ class SocketApi {
     });
   }
 
+  getSordedOrdersByIdProvider(idProvider: number, setState: any) {
+    this.SOCKET.emit("orders:getSortByIdProvider", idProvider);
+
+    this.SOCKET.on("orders:sordedByIdProvider", (orders) => {
+      setState(orders);
+    });
+  }
+
   createOrder(newOrder: {
+    idProvider: number;
     title: string;
     description: string;
     price: number;

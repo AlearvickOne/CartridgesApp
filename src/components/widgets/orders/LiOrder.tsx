@@ -7,7 +7,6 @@ import { ILiOrder } from "@/types/orders.interface";
 import { useGetProfileUser } from "@/hooks/ProfilesUser/useGetProfileUser";
 import { EnumRoles } from "@/types/enums";
 import { useGetBasket } from "@/hooks/OrdersBasket/useGetBasket";
-import { useInvalidateBasket } from "@/hooks/ReactQuery/useInvalidateBasket";
 import { useQueryClient } from "@tanstack/react-query";
 import { useSetOrderInBasket } from "@/hooks/OrdersBasket/useSetOrderInBasket";
 

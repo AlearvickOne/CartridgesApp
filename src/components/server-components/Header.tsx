@@ -2,18 +2,21 @@
 
 import { AllPagesClass } from "@/constants/constants";
 import { LiLink } from "@/components/widgets/navigate/LiLink";
-
 import stylesGradient from "@/styles/styles-gradient.module.scss";
 import { ButtonSignOut } from "../widgets/navigate/ButtonLink";
 import { UserCard } from "../widgets/navigate/UserCard";
 import { LiLinkAdmin } from "../widgets/navigate/LiLinkAdmin";
+import { CheckBoxOrderProvider } from "../widgets/orders/CheckBoxOrderProvider";
 
-const Header = () => {
+const Header = async () => {
   return (
     <header
       className={`flex flex-col justify-between items-center px-5 py-2 border-b-2 border-black w-[18rem] max-w-[18rem] h-screen ${stylesGradient.gradientToBottom}`}
     >
-      <UserCard />
+      <div>
+        <UserCard />
+        <CheckBoxOrderProvider />
+      </div>
       <nav>
         <ul className="flex flex-col gap-5 my-2">
           <LiLinkAdmin />
