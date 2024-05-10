@@ -4,10 +4,9 @@ import stylesAnims from "@/styles/anims/anims.module.scss";
 import stylesGradien from "@/styles/styles-gradient.module.scss";
 import DeleteIcon from "@mui/icons-material/DeleteForever";
 import { useGetBasket } from "@/hooks/OrdersBasket/useGetBasket";
-// import { PayPalButton } from "../pay-pal/PayPalButton";
+import { PayPalButton } from "../pay-pal/PayPalButton";
 import { DollarIcon, RubleIcon } from "@/styles/mui-icons/ValutesIcon";
 import { useDeleteOrderFromBasket } from "@/hooks/OrdersBasket/useDeleteOrderFromBasket";
-import { SocketApiClass } from "@/api/socket-api";
 import { usePaymentsOrdersFromBasket } from "@/hooks/OrdersBasket/usePaymentsOrdersFromBasket";
 
 interface IOrdersBasketWindow {
@@ -18,7 +17,6 @@ interface IOrdersBasketWindow {
 export const OrdersBasketWindow = ({ isActiveWindowProducts, isAnim }: IOrdersBasketWindow) => {
   const { data } = useGetBasket();
   const deleteOrderBasket = useDeleteOrderFromBasket();
-  const paymentOrdersBasket = usePaymentsOrdersFromBasket();
   const rubSum = reduceSumValue(data?.orders, "rub");
   const usdSum = reduceSumValue(data?.orders, "usd");
 
@@ -52,11 +50,7 @@ export const OrdersBasketWindow = ({ isActiveWindowProducts, isAnim }: IOrdersBa
             Общая сумма {rubSum}
             <RubleIcon colorName={"white"} /> - {usdSum} <DollarIcon colorName={"while"} />
           </p>
-          <button
-            className=" border-2 px-2 py-4 rounded-lg bg-white"
-            onClick={() => data && paymentOrdersBasket.mutate(+data.id)}
-          ></button>
-          {/* <PayPalButton valute={usdSum} /> */}
+          <PayPalButton valute={usdSum} dataBasket={data!} />
         </div>
       )}
     </>

@@ -50,7 +50,7 @@ const GetElements = observer(({ ordersByProvider, orders, isPaidOrder }: IGetEle
   };
 
   return (
-    <ul className={`max-h-screen overflow-y-auto py-10`}>
+    <ul className={`min-h-screen overflow-y-auto py-10`}>
       {(CheckBoxOrderProviderStore.isClickProviderCheckBox ? ordersByProvider : orders)?.map(
         ({ description, ...propsOrder }: IOrders) =>
           check(propsOrder) && (
