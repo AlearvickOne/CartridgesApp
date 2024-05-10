@@ -7,6 +7,8 @@ import { useGetBasket } from "@/hooks/OrdersBasket/useGetBasket";
 // import { PayPalButton } from "../pay-pal/PayPalButton";
 import { DollarIcon, RubleIcon } from "@/styles/mui-icons/ValutesIcon";
 import { useDeleteOrderFromBasket } from "@/hooks/OrdersBasket/useDeleteOrderFromBasket";
+import { SocketApiClass } from "@/api/socket-api";
+import { usePaymentsOrdersFromBasket } from "@/hooks/OrdersBasket/usePaymentsOrdersFromBasket";
 
 interface IOrdersBasketWindow {
   isActiveWindowProducts: boolean;
@@ -15,7 +17,8 @@ interface IOrdersBasketWindow {
 
 export const OrdersBasketWindow = ({ isActiveWindowProducts, isAnim }: IOrdersBasketWindow) => {
   const { data } = useGetBasket();
-  const { mutate } = useDeleteOrderFromBasket();
+  const deleteOrderBasket = useDeleteOrderFromBasket();
+  const paymentOrdersBasket = usePaymentsOrdersFromBasket();
   const rubSum = reduceSumValue(data?.orders, "rub");
   const usdSum = reduceSumValue(data?.orders, "usd");
 
@@ -36,7 +39,10 @@ export const OrdersBasketWindow = ({ isActiveWindowProducts, isAnim }: IOrdersBa
                 <p className="text-[14px] flex justify-end items-center text-red-600">
                   {price} <RubleIcon colorName={"red"} />
                 </p>
-                <button className="text-end" onClick={() => mutate(id.toString())}>
+                <button
+                  className="text-end"
+                  onClick={() => deleteOrderBasket.mutate(id.toString())}
+                >
                   <DeleteIcon />
                 </button>
               </li>
@@ -48,7 +54,7 @@ export const OrdersBasketWindow = ({ isActiveWindowProducts, isAnim }: IOrdersBa
           </p>
           <button
             className=" border-2 px-2 py-4 rounded-lg bg-white"
-            // onClick={() => SocketApiClass.paymentOrdersInBasket(0)}
+            onClick={() => data && paymentOrdersBasket.mutate(+data.id)}
           ></button>
           {/* <PayPalButton valute={usdSum} /> */}
         </div>

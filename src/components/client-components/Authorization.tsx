@@ -6,7 +6,8 @@ import { IRegisterForm } from "@/types/auth.interface";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { LOBSTER_FONT } from "@/constants/constants";
 import { useMutationAuth } from "@/hooks/Auth/useMutationAuth";
-import { EnumRoles } from "@/types/enums";
+import { LoginFormAuth } from "../widgets/auth/LoginFormAuth";
+import { RegisterFormAuth } from "../widgets/auth/RegisterFormAuth";
 
 function Authorization() {
   const [isLoginForm, setIsLoginForm] = useState<boolean>(true);
@@ -55,109 +56,27 @@ function Authorization() {
         </h1>
         <form className={`${styles.authForm} font-thin`} onSubmit={handleSubmit(onSubmit)}>
           {isLoginForm ? (
-            <>
-              <input
-                type="text"
-                placeholder="Введите логин"
-                {...register("login", {
-                  required: true,
-                  maxLength: 20,
-                  minLength: 5,
-                  onChange: (e) => changeInput("login", e),
-                })}
-              />
-              {errors.login?.message}
-              <input
-                type="password"
-                placeholder="Введите пароль"
-                {...register("password", {
-                  required: true,
-                  maxLength: 20,
-                  minLength: 8,
-                  onChange: (e) => changeInput("password", e),
-                })}
-              />
-              {errors && (
-                <span className="text-center text-xl font-thin">Проверьте введенные данные</span>
-              )}
-            </>
+            <LoginFormAuth
+              register={register}
+              changeInput={changeInput}
+              errors={errors}
+              isError={isError}
+            />
           ) : (
-            <>
-              <input
-                type="text"
-                placeholder="Введите логин"
-                {...register("login", {
-                  required: true,
-                  maxLength: 20,
-                  minLength: 5,
-
-                  onChange: (e) => changeInput("login", e),
-                })}
-              />
-              <input
-                type="password"
-                placeholder="Введите пароль"
-                {...register("password", {
-                  required: true,
-                  maxLength: 20,
-                  minLength: 5,
-
-                  onChange: (e) => changeInput("password", e),
-                })}
-              />
-              <input
-                type="email"
-                placeholder="Введите email"
-                {...register("email", {
-                  required: true,
-                  onChange: (e) => changeInput("email", e),
-                })}
-              />
-              <input
-                type="text"
-                placeholder="Введите ваше имя"
-                {...register("name", {
-                  required: true,
-                  maxLength: 20,
-                  onChange: (e) => changeInput("name", e),
-                })}
-              />
-              <input
-                type="text"
-                placeholder="Введите вашу фамилию"
-                {...register("surname", {
-                  required: true,
-                  maxLength: 20,
-                  onChange: (e) => changeInput("surname", e),
-                })}
-              />
-              <div className="flex flex-col  mb-4">
-                <label htmlFor="role" className="text-center text-xl mb-2">
-                  Кто вы?
-                </label>
-                <select
-                  id="role"
-                  className="text-center p-2 text-xl"
-                  {...register("role", {
-                    required: true,
-                    pattern: /^[^\s]+$/,
-                  })}
-                >
-                  <option value={EnumRoles.PROVIDER}>Исполнитель заказа</option>
-                  <option value={EnumRoles.CLIENT}>Клиент</option>
-                </select>
-              </div>
-              {errors && (
-                <span className="text-center text-xl">
-                  Кирилица разрешена только в полях - 'имя', 'фамилия'
-                </span>
-              )}
-            </>
+            <RegisterFormAuth
+              register={register}
+              changeInput={changeInput}
+              errors={errors}
+              isError={isError}
+            />
           )}
 
-          {isError && <p className="text-center">Неверный логин или пароль</p>}
           <button type="submit" className={`${isClick ? styles.disabled : ""} mt-2`}>
-            {isClick ? <SyncIcon className="animate-spin" /> : "Войти в систему"}
+            {isClick ? (
+              <SyncIcon className="animate-spin" />
+            ) : (
+              `${isLoginForm ? "Войти в систему" : "Зарегистрироваться"}`
+            )}
           </button>
           <button
             type="button"

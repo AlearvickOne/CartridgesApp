@@ -13,7 +13,7 @@ import { AddressTextCreateOrderForm } from "../widgets/create_orders/AddressText
 import { DescriptionTextCreateOrderForm } from "../widgets/create_orders/DescriptionTextCreateOrderForm";
 import { DateCreateOrderForm } from "../widgets/create_orders/DateCreateOrderForm";
 import { ButtonViolet } from "../widgets/ButtonViolet";
-import { useGetProfileUser } from "@/hooks/ProfilesUser/useGetProfileUser";
+import { StoreDataUser } from "@/stores/StoreDataUser";
 
 export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
   const [statusSubmit, setStatusSubmit] = useState<EnumFormCreateStatus>(
@@ -21,7 +21,7 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
   );
 
   const statusConnect = useCheckConnectSocketStatus();
-  const currentUser = useGetProfileUser();
+  const currentUser = StoreDataUser.data!;
 
   // ---------------------------------------------------------
   const submitForm = async (formdata: FormData) => {
@@ -31,7 +31,7 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
           title: formdata.get(FormDataNamingOrderClass.NAME_TITLE_ORDER)!,
           price: formdata.get(FormDataNamingOrderClass.NAME_DESC_ORDER)!,
         });
-        createOrderForm(+currentUser.data!.id, formdata);
+        createOrderForm(+currentUser.id, formdata);
         setStatusSubmit(EnumFormCreateStatus.SUBMIT);
       } else setStatusSubmit(EnumFormCreateStatus.ERROR);
     } catch (error) {

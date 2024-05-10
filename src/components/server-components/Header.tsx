@@ -20,7 +20,7 @@ const Header = async () => {
         <ul className="flex flex-col gap-5 my-2">
           <LiLinkAdmin />
           <LiLinkProviderUser link={AllPagesClass.CREATE_ORDER_PAGE}>
-            Добавить заказ
+            Вписать свой заказ
           </LiLinkProviderUser>
           <LiLink link={AllPagesClass.NOT_PAID_ORDERS_PAGE}>Не оплаченные заказы</LiLink>
           <LiLink link={AllPagesClass.YES_PAID_ORDERS_PAGE}>Оплаченные заказы</LiLink>

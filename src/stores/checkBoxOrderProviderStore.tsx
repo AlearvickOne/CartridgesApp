@@ -1,4 +1,3 @@
-import { DisBoolean } from "@/types/Dispatch.types";
 import { action, makeObservable, observable } from "mobx";
 
 class CheckBoxOrderProvider {
@@ -13,10 +12,6 @@ class CheckBoxOrderProvider {
 
   async setClickProviderCheckBox(isClick: boolean) {
     this.isClickProviderCheckBox = isClick;
-  }
-
-  getClickProviderCheckBox(setState: DisBoolean) {
-    setState(this.isClickProviderCheckBox);
   }
 }
 

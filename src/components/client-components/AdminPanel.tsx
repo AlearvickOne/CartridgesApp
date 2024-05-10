@@ -9,8 +9,6 @@ export const AdminPanel = () => {
   const [usersPanel, setUsersPanel] = useState<number[]>([]);
   const { data } = useGetProfilesUsers();
 
-  console.log(usersPanel);
-
   const handleCheckBox = (setId: number) => {
     const userId = usersPanel.filter((id) => id === setId);
 

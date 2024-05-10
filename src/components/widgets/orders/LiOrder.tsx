@@ -3,16 +3,15 @@
 import { memo, useState } from "react";
 import RubleIcon from "@mui/icons-material/CurrencyRuble";
 import { ILiOrder } from "@/types/orders.interface";
-import { useGetProfileUser } from "@/hooks/ProfilesUser/useGetProfileUser";
 import { EnumPaidStatus, EnumRoles } from "@/types/enums";
 import { useGetBasket } from "@/hooks/OrdersBasket/useGetBasket";
 
 import { useSetOrderInBasket } from "@/hooks/OrdersBasket/useSetOrderInBasket";
+import { StoreDataUser } from "@/stores/StoreDataUser";
 
 export const LiOrder = memo(({ ...propsOrder }: ILiOrder) => {
   const [isOpenDesc, setIsOpenDesc] = useState<boolean>(false);
 
-  const { data } = useGetProfileUser();
   const bakset = useGetBasket();
   const setOrderInBasket = useSetOrderInBasket();
 
@@ -25,7 +24,7 @@ export const LiOrder = memo(({ ...propsOrder }: ILiOrder) => {
       case "waiting":
         return <p className={style}>В корзине</p>;
       default:
-        return data?.role === EnumRoles.CLIENT ? (
+        return StoreDataUser.data?.role === EnumRoles.CLIENT ? (
           <button
             className="mr-3 p-3 rounded-lg bg-violet-200 hover:shadow-upmd hover:shadow-violet-400 transition-all"
             type="submit"
@@ -66,7 +65,7 @@ export const LiOrder = memo(({ ...propsOrder }: ILiOrder) => {
         {isOpenDesc && (
           <div>
             <div>
-              {data?.role === EnumRoles.ADMIN && <p>id Заказа: {propsOrder.id}</p>}
+              {StoreDataUser.data?.role === EnumRoles.ADMIN && <p>id Заказа: {propsOrder.id}</p>}
               <p>Дата заказа: {propsOrder.date}</p>
               {propsOrder.isPaid === EnumPaidStatus.PAID && (
                 <p>Дата оплаты: {propsOrder.datePaid}</p>

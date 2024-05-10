@@ -1,4 +1,6 @@
+import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { EnumRoles } from "./enums";
+import { ChangeEvent } from "react";
 
 export interface ILoginForm {
   login: string;
@@ -25,6 +27,13 @@ export interface IUser {
 export interface IAuthResponse {
   accessToken: string;
   user: IUser;
+}
+
+export interface IAuthComponents {
+  register: UseFormRegister<IRegisterForm>;
+  changeInput: (type: string, e: ChangeEvent<HTMLInputElement>) => void;
+  errors: FieldErrors<IRegisterForm>;
+  isError: boolean;
 }
 
 export interface IUserNotPass extends Omit<IUser, "password"> {}

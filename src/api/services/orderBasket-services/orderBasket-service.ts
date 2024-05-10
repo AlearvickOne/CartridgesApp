@@ -19,6 +19,11 @@ class OrderBasketService {
     const response = await axiosWithAuth.patch(`${this.BASE_URL}/update/${idOrder}/${idBasket}`);
     return response;
   }
+
+  async paymentsOrdersInBasket(idBasket: number) {
+    const response = await axiosWithAuth.patch(`${this.BASE_URL}/payments/${idBasket}`);
+    return response;
+  }
 }
 
 export const OrderBasketServiceClass = new OrderBasketService();
