@@ -1,25 +1,23 @@
 "use client";
 
-import { SocketApiClass } from "@/api/socket-api";
-import { useEffect, useState } from "react";
+import { memo, useState } from "react";
 import RubleIcon from "@mui/icons-material/CurrencyRuble";
 import { ILiOrder } from "@/types/orders.interface";
 import { useGetProfileUser } from "@/hooks/ProfilesUser/useGetProfileUser";
-import { EnumRoles } from "@/types/enums";
+import { EnumPaidStatus, EnumRoles } from "@/types/enums";
 import { useGetBasket } from "@/hooks/OrdersBasket/useGetBasket";
-import { useQueryClient } from "@tanstack/react-query";
+
 import { useSetOrderInBasket } from "@/hooks/OrdersBasket/useSetOrderInBasket";
 
-export const LiOrder = ({ ...propsOrder }: ILiOrder) => {
+export const LiOrder = memo(({ ...propsOrder }: ILiOrder) => {
   const [isOpenDesc, setIsOpenDesc] = useState<boolean>(false);
-  const [isClickButton, setIsClickButton] = useState<boolean>(false);
 
   const { data } = useGetProfileUser();
   const bakset = useGetBasket();
   const setOrderInBasket = useSetOrderInBasket();
 
   const paidStatusButton = () => {
-    const style = "inline mr-2 p-3";
+    const style = "inline mr-2 py-3";
 
     switch (propsOrder.isPaid) {
       case "paid":
@@ -27,7 +25,7 @@ export const LiOrder = ({ ...propsOrder }: ILiOrder) => {
       case "waiting":
         return <p className={style}>В корзине</p>;
       default:
-        return (
+        return data?.role === EnumRoles.CLIENT ? (
           <button
             className="mr-3 p-3 rounded-lg bg-violet-200 hover:shadow-upmd hover:shadow-violet-400 transition-all"
             type="submit"
@@ -37,6 +35,8 @@ export const LiOrder = ({ ...propsOrder }: ILiOrder) => {
           >
             Оплатить
           </button>
+        ) : (
+          <p className={style}>В ожидании</p>
         );
     }
   };
@@ -53,7 +53,7 @@ export const LiOrder = ({ ...propsOrder }: ILiOrder) => {
           >
             {propsOrder.price} <RubleIcon sx={{ fontSize: "15px", margin: "0 8px" }} />
           </p>
-          <div className="buttons">
+          <div className="flex justify-between">
             {paidStatusButton()}
             <button
               className="p-3 rounded-lg bg-violet-200 hover:shadow-upmd hover:shadow-violet-400 transition-all"
@@ -68,7 +68,9 @@ export const LiOrder = ({ ...propsOrder }: ILiOrder) => {
             <div>
               {data?.role === EnumRoles.ADMIN && <p>id Заказа: {propsOrder.id}</p>}
               <p>Дата заказа: {propsOrder.date}</p>
-              {propsOrder.isPaid && <p>Дата оплаты: {propsOrder.datePaid}</p>}
+              {propsOrder.isPaid === EnumPaidStatus.PAID && (
+                <p>Дата оплаты: {propsOrder.datePaid}</p>
+              )}
               <p>Адрес заказа: {propsOrder.address} </p>
             </div>
             <hr className="my-3 border-stone-500" />
@@ -78,4 +80,4 @@ export const LiOrder = ({ ...propsOrder }: ILiOrder) => {
       </li>
     </>
   );
-};
+});

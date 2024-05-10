@@ -1,17 +1,14 @@
 import { FormDataNamingOrderClass } from "@/constants/constants";
 import { TextField } from "@material-ui/core";
-import React, { useCallback, useState } from "react";
+import { useState } from "react";
 import { YandexMaps } from "../yandex-widgets/YandexMaps";
 
 export const AddressTextCreateOrderForm = () => {
   const [address, setAddress] = useState<string>("");
 
-  const setAdressClientOrder = useCallback(
-    (address: string) => {
-      setAddress(address);
-    },
-    [address]
-  );
+  const setAdressClientOrder = (address: string) => {
+    setAddress(address);
+  };
 
   return (
     <div className="flex flex-wrap flex-col mb-5">

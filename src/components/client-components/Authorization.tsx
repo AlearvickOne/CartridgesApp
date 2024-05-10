@@ -1,8 +1,8 @@
 "use client";
 import styles from "@/styles/home/Home.module.scss";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import SyncIcon from "@mui/icons-material/Sync";
-import { ILoginForm, IRegisterForm } from "@/types/auth.interface";
+import { IRegisterForm } from "@/types/auth.interface";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { LOBSTER_FONT } from "@/constants/constants";
 import { useMutationAuth } from "@/hooks/Auth/useMutationAuth";
@@ -18,27 +18,42 @@ function Authorization() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<ILoginForm | IRegisterForm>({
+  } = useForm<IRegisterForm>({
     mode: "onChange",
   });
 
   const { mutate } = useMutationAuth(setIsClick, setIsError, isLoginForm, reset);
 
-  const onSubmit: SubmitHandler<ILoginForm | IRegisterForm> = (data) => {
+  const changeInput = (type: string, e: ChangeEvent<HTMLInputElement>) => {
+    const login = /[^a-zA-Z0-9]/g;
+    const password = /[^a-zA-Z0-9]/g;
+    const email = /[^a-zA-Z0-9.@_-]/g;
+    const nameOrSurname = /[^a-zA-Zа-яА-Я]/g;
+
+    if (type === "login") {
+      e.target.value = e.target.value.replace(login, "");
+    } else if (type === "password") {
+      e.target.value = e.target.value.replace(password, "");
+    } else if (type === "email") {
+      e.target.value = e.target.value.replace(email, "");
+    } else if (type === "name" || type === "surname") {
+      e.target.value = e.target.value.replace(nameOrSurname, "");
+    }
+  };
+
+  const onSubmit: SubmitHandler<IRegisterForm> = (data) => {
     mutate(data);
+    console.log(data);
   };
   return (
     <main className={styles.authContainer}>
       <div className={styles.authForm_wrapper}>
         <h1
-          className={`${LOBSTER_FONT.className} mb-5 text-center text-2xl border-b-2 border-black pb-2`}
+          className={`${LOBSTER_FONT.className} font-thin mb-5 text-center text-2xl border-b-2 border-black pb-2`}
         >
           {isLoginForm ? "Авторизация" : "Регистрация"}
         </h1>
-        <form
-          className={`${styles.authForm} ${LOBSTER_FONT.className}`}
-          onSubmit={handleSubmit(onSubmit)}
-        >
+        <form className={`${styles.authForm} font-thin`} onSubmit={handleSubmit(onSubmit)}>
           {isLoginForm ? (
             <>
               <input
@@ -48,9 +63,10 @@ function Authorization() {
                   required: true,
                   maxLength: 20,
                   minLength: 5,
-                  pattern: /^[^\s]+$/,
+                  onChange: (e) => changeInput("login", e),
                 })}
               />
+              {errors.login?.message}
               <input
                 type="password"
                 placeholder="Введите пароль"
@@ -58,9 +74,12 @@ function Authorization() {
                   required: true,
                   maxLength: 20,
                   minLength: 8,
-                  pattern: /^[^\s]+$/,
+                  onChange: (e) => changeInput("password", e),
                 })}
               />
+              {errors && (
+                <span className="text-center text-xl font-thin">Проверьте введенные данные</span>
+              )}
             </>
           ) : (
             <>
@@ -71,7 +90,8 @@ function Authorization() {
                   required: true,
                   maxLength: 20,
                   minLength: 5,
-                  pattern: /^[^\s]+$/,
+
+                  onChange: (e) => changeInput("login", e),
                 })}
               />
               <input
@@ -81,7 +101,8 @@ function Authorization() {
                   required: true,
                   maxLength: 20,
                   minLength: 5,
-                  pattern: /^[^\s]+$/,
+
+                  onChange: (e) => changeInput("password", e),
                 })}
               />
               <input
@@ -89,9 +110,7 @@ function Authorization() {
                 placeholder="Введите email"
                 {...register("email", {
                   required: true,
-                  maxLength: 20,
-                  minLength: 5,
-                  pattern: /^[^\s]+$/,
+                  onChange: (e) => changeInput("email", e),
                 })}
               />
               <input
@@ -100,8 +119,7 @@ function Authorization() {
                 {...register("name", {
                   required: true,
                   maxLength: 20,
-                  minLength: 5,
-                  pattern: /^[^\s]+$/,
+                  onChange: (e) => changeInput("name", e),
                 })}
               />
               <input
@@ -110,8 +128,7 @@ function Authorization() {
                 {...register("surname", {
                   required: true,
                   maxLength: 20,
-                  minLength: 5,
-                  pattern: /^[^\s]+$/,
+                  onChange: (e) => changeInput("surname", e),
                 })}
               />
               <div className="flex flex-col  mb-4">
@@ -123,8 +140,6 @@ function Authorization() {
                   className="text-center p-2 text-xl"
                   {...register("role", {
                     required: true,
-                    maxLength: 20,
-                    minLength: 5,
                     pattern: /^[^\s]+$/,
                   })}
                 >
@@ -132,10 +147,13 @@ function Authorization() {
                   <option value={EnumRoles.CLIENT}>Клиент</option>
                 </select>
               </div>
+              {errors && (
+                <span className="text-center text-xl">
+                  Кирилица разрешена только в полях - 'имя', 'фамилия'
+                </span>
+              )}
             </>
           )}
-
-          {errors && <span className="text-center">Проверьте введенные данные</span>}
 
           {isError && <p className="text-center">Неверный логин или пароль</p>}
           <button type="submit" className={`${isClick ? styles.disabled : ""} mt-2`}>

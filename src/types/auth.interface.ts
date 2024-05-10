@@ -8,10 +8,10 @@ export interface ILoginForm {
 export interface IRegisterForm {
   login: string;
   password: string;
-  email: string;
-  name: string;
-  surname: string;
-  role: EnumRoles;
+  email?: string;
+  name?: string;
+  surname?: string;
+  role?: EnumRoles;
 }
 
 export interface IUser {

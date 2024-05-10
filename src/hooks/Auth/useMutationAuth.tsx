@@ -16,7 +16,7 @@ export const useMutationAuth = (
 
   return useMutation({
     mutationKey: ["auth"],
-    mutationFn: (data: ILoginForm | IRegisterForm) => {
+    mutationFn: (data: IRegisterForm) => {
       setIsClick(true);
       setIsError(false);
       return authService.main(isLoginForm ? "login" : "register", data);

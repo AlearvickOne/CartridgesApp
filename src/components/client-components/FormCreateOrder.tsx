@@ -2,10 +2,8 @@
 
 import { FormDataNamingOrderClass } from "@/constants/constants";
 import { useState } from "react";
-
 import { IFormCreateOrder } from "@/types/orders.interface";
 import { useCheckConnectSocketStatus } from "@/hooks/useCheckConnectSocketStatus";
-
 import { zodValid } from "@/api/zod-valid";
 import { ZodError } from "zod";
 import { EnumFormCreateStatus } from "@/types/enums";
@@ -25,13 +23,6 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
   const statusConnect = useCheckConnectSocketStatus();
   const currentUser = useGetProfileUser();
 
-  const [inputsValue, setInputsValue] = useState({
-    titleValue: "",
-    titleValueHelper: "Минимальное количество символов - 3",
-    priceValue: "",
-    priceValueHelper: "Минимальное количество символов - 2",
-  });
-
   // ---------------------------------------------------------
   const submitForm = async (formdata: FormData) => {
     try {
@@ -40,14 +31,11 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
           title: formdata.get(FormDataNamingOrderClass.NAME_TITLE_ORDER)!,
           price: formdata.get(FormDataNamingOrderClass.NAME_DESC_ORDER)!,
         });
-
-        console.log(formdata);
-        createOrderForm(+currentUser.data?.id!, formdata);
+        createOrderForm(+currentUser.data!.id, formdata);
         setStatusSubmit(EnumFormCreateStatus.SUBMIT);
       } else setStatusSubmit(EnumFormCreateStatus.ERROR);
     } catch (error) {
       if (error instanceof ZodError) {
-        console.log(error);
         setStatusSubmit(EnumFormCreateStatus.ERROR);
       }
     }
@@ -62,16 +50,8 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
       </div>
       <form action={submitForm} className="text-[18px] pl-10 mr-10 mb-10">
         <div className="grid grid-cols-2 gap-8">
-          <TitleTextCreateOrderForm
-            textValue={inputsValue.titleValue}
-            textValueHelper={inputsValue.titleValueHelper}
-            setInputsValue={setInputsValue}
-          />
-          <PriceTextCreateOrderForm
-            textValue={inputsValue.priceValue}
-            textValueHelper={inputsValue.priceValueHelper}
-            setInputsValue={setInputsValue}
-          />
+          <TitleTextCreateOrderForm />
+          <PriceTextCreateOrderForm />
         </div>
         <AddressTextCreateOrderForm />
         <DescriptionTextCreateOrderForm />
@@ -90,11 +70,11 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
 };
 
 const checkStatusSubmit = (statusSubmit: EnumFormCreateStatus): string => {
-  return statusSubmit === "loading"
+  return statusSubmit === EnumFormCreateStatus.LOADING
     ? "Идет отправка заказа"
-    : statusSubmit === "error"
+    : statusSubmit === EnumFormCreateStatus.ERROR
     ? "Произошла ошибка, попробуйте снова"
-    : statusSubmit === "submit"
+    : statusSubmit === EnumFormCreateStatus.SUBMIT
     ? "форма отправлена"
     : "";
 };

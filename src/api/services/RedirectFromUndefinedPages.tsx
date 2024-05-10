@@ -1,5 +1,5 @@
 "use client";
-import { AllPagesClass } from "@/app/all-pages.class";
+import { AllPagesClass } from "@/constants/constants";
 import { useRouter } from "next/navigation";
 
 export const RedirectFromUndefinedPages = () => {

@@ -1,4 +1,5 @@
-import { DisString } from "@/types/Dispatch.types";
+import { DisArrayOrders, DisString } from "@/types/Dispatch.types";
+
 import io from "socket.io-client";
 
 class SocketApi {
@@ -24,7 +25,7 @@ class SocketApi {
     });
   }
 
-  getSordedOrdersByIdProvider(idProvider: number, setState: any) {
+  getSordedOrdersByIdProvider(idProvider: number, setState: DisArrayOrders) {
     this.SOCKET.emit("orders:getSortByIdProvider", idProvider);
 
     this.SOCKET.on("orders:sordedByIdProvider", (orders) => {

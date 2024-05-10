@@ -4,9 +4,9 @@ import { KeysClass } from "@/constants/constants";
 import { RequiresClass } from "@/api/services/requires.class";
 import { IYandexMapsProps } from "@/types/forms.interface";
 import { YMaps, Map, SearchControl, Placemark } from "@pbe/react-yandex-maps";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 
-export const YandexMaps = ({ setAddress }: IYandexMapsProps) => {
+export const YandexMaps = memo(({ setAddress }: IYandexMapsProps) => {
   const [selectedAdress, setSelectedAdress] = useState<number[] | undefined>([
     55.751574,
     37.573856,
@@ -41,4 +41,4 @@ export const YandexMaps = ({ setAddress }: IYandexMapsProps) => {
       </div>
     </YMaps>
   );
-};
+});

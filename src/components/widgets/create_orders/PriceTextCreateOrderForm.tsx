@@ -1,20 +1,11 @@
 import { FormDataNamingOrderClass } from "@/constants/constants";
-import { ITextInputsCreateOrder } from "@/types/create-orders.interface";
 import { TextField } from "@material-ui/core";
-import React, { ChangeEvent, useCallback } from "react";
+import React, { ChangeEvent, memo, useCallback } from "react";
 
-export const PriceTextCreateOrderForm = ({
-  textValue,
-  textValueHelper,
-  setInputsValue,
-}: ITextInputsCreateOrder) => {
+export const PriceTextCreateOrderForm = memo(() => {
   const priceChange = useCallback((e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     if (isNaN(+e.target.value)) return;
-
-    setInputsValue((prev) => ({
-      ...prev,
-      priceValue: e.target.value.substring(0, 7),
-    }));
+    e.target.value = e.target.value.substring(0, 20);
   }, []);
 
   return (
@@ -28,10 +19,9 @@ export const PriceTextCreateOrderForm = ({
         name={FormDataNamingOrderClass.NAME_PRICE_ORDER}
         type="text"
         placeholder="Введите цену услуги ..."
-        value={textValue}
         onChange={priceChange}
-        helperText={textValueHelper}
+        helperText={"Минимальное количество символов - 2"}
       />
     </div>
   );
-};
+});

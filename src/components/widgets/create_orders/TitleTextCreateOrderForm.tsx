@@ -1,18 +1,10 @@
 import { FormDataNamingOrderClass } from "@/constants/constants";
-import { ITextInputsCreateOrder } from "@/types/create-orders.interface";
 import { TextField } from "@material-ui/core";
-import React, { ChangeEvent, useCallback } from "react";
+import React, { ChangeEvent, memo, useCallback } from "react";
 
-export const TitleTextCreateOrderForm = ({
-  textValue,
-  textValueHelper,
-  setInputsValue,
-}: ITextInputsCreateOrder) => {
+export const TitleTextCreateOrderForm = memo(() => {
   const titleChange = useCallback((e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    setInputsValue((prev) => ({
-      ...prev,
-      titleValue: e.target.value.substring(0, 20),
-    }));
+    e.target.value = e.target.value.substring(0, 20);
   }, []);
 
   return (
@@ -26,10 +18,9 @@ export const TitleTextCreateOrderForm = ({
         className="px-3 py-1"
         name={FormDataNamingOrderClass.NAME_TITLE_ORDER}
         placeholder="Введите название услуги ..."
-        value={textValue}
         onChange={titleChange}
-        helperText={textValueHelper}
+        helperText={"Минимальное количество символов - 3"}
       />
     </div>
   );
-};
+});

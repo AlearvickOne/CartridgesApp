@@ -12,15 +12,11 @@ import { useGetOrdersData } from "@/hooks/useGetOrdersData";
 import { CircularProgress } from "@mui/material";
 import { useGetOrdersByProvider } from "@/hooks/orders/useGetOrdersByProvider";
 import { CheckBoxOrderProviderStore } from "@/stores/checkBoxOrderProviderStore";
-import { useEffect, useState } from "react";
-import { UseQueryResult } from "@tanstack/react-query";
 import { EnumPaidStatus } from "@/types/enums";
 
 export const GetListOrdersInPage = ({ isPaidOrder }: IGetListOrderInPage) => {
   const orders = useGetOrdersData();
-  const ordersByProvider = useGetOrdersByProvider();
-  const [isClick, setIsClick] = useState(false);
-
+  const ordersByProvider = useGetOrdersByProvider(orders);
   return (
     <div>
       {!orders ? (
@@ -41,7 +37,7 @@ export const GetListOrdersInPage = ({ isPaidOrder }: IGetListOrderInPage) => {
 // ----------------------------------
 
 interface IGetElements {
-  ordersByProvider: any;
+  ordersByProvider: IOrders[] | undefined;
   orders: IOrdersInArray | undefined;
   isPaidOrder: EnumPaidStatus | EnumPaidStatus[];
 }

@@ -6,7 +6,7 @@ import stylesGradient from "@/styles/styles-gradient.module.scss";
 import { ButtonSignOut } from "../widgets/navigate/ButtonLink";
 import { UserCard } from "../widgets/navigate/UserCard";
 import { LiLinkAdmin } from "../widgets/navigate/LiLinkAdmin";
-import { CheckBoxOrderProvider } from "../widgets/orders/CheckBoxOrderProvider";
+import { LiLinkProviderUser } from "../widgets/navigate/LiLinkProviderUser";
 
 const Header = async () => {
   return (
@@ -15,12 +15,13 @@ const Header = async () => {
     >
       <div>
         <UserCard />
-        <CheckBoxOrderProvider />
       </div>
       <nav>
         <ul className="flex flex-col gap-5 my-2">
           <LiLinkAdmin />
-          <LiLink link={AllPagesClass.CREATE_ORDER_PAGE}>Добавить заказ</LiLink>
+          <LiLinkProviderUser link={AllPagesClass.CREATE_ORDER_PAGE}>
+            Добавить заказ
+          </LiLinkProviderUser>
           <LiLink link={AllPagesClass.NOT_PAID_ORDERS_PAGE}>Не оплаченные заказы</LiLink>
           <LiLink link={AllPagesClass.YES_PAID_ORDERS_PAGE}>Оплаченные заказы</LiLink>
         </ul>

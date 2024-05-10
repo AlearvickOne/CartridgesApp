@@ -2,14 +2,18 @@
 
 import { useGetProfileUser } from "../ProfilesUser/useGetProfileUser";
 import { SocketApiClass } from "@/api/socket-api";
-import { useState } from "react";
+import { IOrders, IOrdersInArray } from "@/types/orders.interface";
+import { useEffect, useState } from "react";
 
-export const useGetOrdersByProvider = () => {
-  const [state, setState] = useState();
-  const { data, isSuccess } = useGetProfileUser();
+export const useGetOrdersByProvider = (orders: IOrdersInArray | undefined) => {
+  const [state, setState] = useState<IOrders[]>();
+  const { data } = useGetProfileUser();
 
-  if (isSuccess) {
-    SocketApiClass.getSordedOrdersByIdProvider(+data!.id, setState);
-    return state;
-  }
+  useEffect(() => {
+    if (data) {
+      SocketApiClass.getSordedOrdersByIdProvider(+data!.id, setState);
+    }
+  }, [orders]);
+
+  return state;
 };

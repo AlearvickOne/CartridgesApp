@@ -1,10 +1,15 @@
 "use client";
-
 import { CheckBoxOrderProviderStore } from "@/stores/checkBoxOrderProviderStore";
+import { IUser } from "@/types/auth.interface";
+import { EnumRoles } from "@/types/enums";
 import { Checkbox } from "@mui/material";
 import { useEffect, useState } from "react";
 
-export const CheckBoxOrderProvider = () => {
+interface ICheckBox {
+  dataUser: IUser | undefined;
+}
+
+export const CheckBoxOrderProvider = ({ dataUser }: ICheckBox) => {
   const [isClickCheck, setIsClickCheck] = useState(false);
 
   useEffect(() => {
@@ -15,11 +20,16 @@ export const CheckBoxOrderProvider = () => {
   }, [isClickCheck]);
 
   return (
-    <div className="bg-slate-100 p-2 pr-5 rounded-[10px]">
-      <Checkbox onClick={() => setIsClickCheck(!isClickCheck)} id="myOrders" />
-      <label className="ml-3" htmlFor="myOrders">
-        Только свои заказы
-      </label>
-    </div>
+    <>
+      {dataUser?.role === EnumRoles.PROVIDER && (
+        <div className="bg-slate-100 p-2 pr-5 rounded-[10px]">
+          <Checkbox onClick={() => setIsClickCheck(!isClickCheck)} id="myOrders" />
+
+          <label className="ml-3" htmlFor="myOrders">
+            Только свои заказы
+          </label>
+        </div>
+      )}
+    </>
   );
 };

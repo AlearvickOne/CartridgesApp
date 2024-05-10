@@ -2,9 +2,9 @@ import { FormDataNamingOrderClass } from "@/constants/constants";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
-import React from "react";
+import { memo } from "react";
 
-export const DateCreateOrderForm = () => {
+export const DateCreateOrderForm = memo(() => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
@@ -15,4 +15,4 @@ export const DateCreateOrderForm = () => {
       />
     </LocalizationProvider>
   );
-};
+});
