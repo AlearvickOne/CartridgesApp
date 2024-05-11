@@ -58,11 +58,12 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
         </div>
         <AddressTextCreateOrderForm />
         <DescriptionTextCreateOrderForm />
-        <div className="flex md:justify-between md:items-center md:flex-row flex-col">
+        <div className="flex md:justify-between items-center  md:flex-row flex-col">
           <DateCreateOrderForm />
           <ButtonViolet
             typeBtn="submit"
             OnClickFn={() => setStatusSubmit(EnumFormCreateStatus.LOADING)}
+            otherClasses="w-[14rem] "
           >
             Добавить
           </ButtonViolet>

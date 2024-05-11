@@ -4,14 +4,22 @@ import { LOBSTER_FONT } from "@/constants/constants";
 import { useGetProfilesUsers } from "@/hooks/ProfilesUser/useGetProfilesUsers";
 import { Checkbox } from "@mui/material";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ButtonViolet } from "../widgets/ButtonViolet";
-import { TextField } from "@material-ui/core";
 import { useDeleteUsers } from "@/hooks/ProfilesUser/useDeleteUsers";
+import { SocketApiClass } from "@/api/socket-api";
+import { IOrdersInArray } from "@/types/orders.interface";
 
 export const AdminPanel = () => {
   const [usersPanel, setUsersPanel] = useState<number[]>([]);
+  const [isDeletedOnlyPaid, setIsDeletedOnlyPaid] = useState<boolean>(false);
   const { data } = useGetProfilesUsers();
+  const [orders, setOrders] = useState<IOrdersInArray>();
+  const [selectOrder, setSelectOrder] = useState<unknown>();
+
+  useEffect(() => {
+    SocketApiClass.getOrders(setOrders);
+  }, []);
 
   const deleteUsers = useDeleteUsers();
 
@@ -24,8 +32,8 @@ export const AdminPanel = () => {
   };
 
   return (
-    <div className="py-24 overflow-auto h-screen w-full flex flex-center items-center flex-col">
-      <div className="bg-stone-100 rounded-xl w-full h-screen pt-5 border-2 border-purple-600">
+    <div className="py-24 overflow-auto min-h-screen w-full flex flex-center items-center flex-col">
+      <div className="bg-stone-100 rounded-xl w-full  pt-5 border-2 border-purple-600">
         <h1 className={` text-center text-xl ${LOBSTER_FONT.className}`}>Панель управления</h1>
         <hr className="border-b-2 my-2 border-violet-800" />
         <div className="px-5 mb-5">
@@ -76,8 +84,22 @@ export const AdminPanel = () => {
           className="px-5 my-5 flex justify-between flex-col md:flex-row items-center w-full"
         >
           <div className="flex flex-col w-[20rem]">
-            <TextField className="px-3 py-1" type="text" placeholder="Введите id заказа" />
-            <ButtonViolet typeBtn="submit" OnClickFn={() => {}} otherClasses="h-full  mt-2">
+            <select
+              className="h-8 border-2 border-violet-800 rounded-[6px] text-center"
+              onChange={(e) => setSelectOrder(e.target.value)}
+            >
+              {orders?.map(({ id }) => (
+                <option key={id} value={id}>
+                  ID Заказа: {id}
+                </option>
+              ))}
+            </select>
+            {/* <TextField className="px-3 py-1" type="text" placeholder="Введите id заказа" /> */}
+            <ButtonViolet
+              typeBtn="submit"
+              OnClickFn={() => SocketApiClass.deleteOrder(Number(selectOrder))}
+              otherClasses="h-full  mt-2"
+            >
               Удалить заказ
             </ButtonViolet>
           </div>
@@ -86,10 +108,14 @@ export const AdminPanel = () => {
             <div>
               <label>
                 Только оплаченные
-                <Checkbox />
+                <Checkbox onClick={() => setIsDeletedOnlyPaid(!isDeletedOnlyPaid)} />
               </label>
             </div>
-            <ButtonViolet typeBtn="submit" OnClickFn={() => {}} otherClasses="h-full">
+            <ButtonViolet
+              typeBtn="submit"
+              OnClickFn={() => SocketApiClass.deleteAllOrders(isDeletedOnlyPaid)}
+              otherClasses="h-full"
+            >
               Очистить все заказы
             </ButtonViolet>
           </div>
