@@ -7,7 +7,6 @@ import { useGetBasket } from "@/hooks/OrdersBasket/useGetBasket";
 import { PayPalButton } from "../pay-pal/PayPalButton";
 import { DollarIcon, RubleIcon } from "@/styles/mui-icons/ValutesIcon";
 import { useDeleteOrderFromBasket } from "@/hooks/OrdersBasket/useDeleteOrderFromBasket";
-import { usePaymentsOrdersFromBasket } from "@/hooks/OrdersBasket/usePaymentsOrdersFromBasket";
 
 interface IOrdersBasketWindow {
   isActiveWindowProducts: boolean;
@@ -24,7 +23,7 @@ export const OrdersBasketWindow = ({ isActiveWindowProducts, isAnim }: IOrdersBa
     <>
       {isActiveWindowProducts && (
         <div
-          className={`fixed bottom-32 md:right-20  right-5 z-50 p-5 rounded-xl ${
+          className={`fixed bottom-32 md:right-20  right-5 p-2 z-50 md:p-5 rounded-xl ${
             stylesGradien.gradientToBottom
           } ${
             isAnim ? stylesAnims.scaleUpBottomRight : stylesAnims.scaleDownBottomRight

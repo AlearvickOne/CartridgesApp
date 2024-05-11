@@ -8,6 +8,14 @@ class UserServiceForAdmin {
     const response = await axiosWithAuth.get<IUser[]>(this.BASE_URL);
     return response.data;
   }
+
+  async deleteUsers(arrayId: number[]) {
+    const response = await axiosWithAuth.delete<IUser[]>(`${this.BASE_URL}/delete/users`, {
+      data: arrayId,
+    });
+
+    return response;
+  }
 }
 
 export const UserServiceForAdminClass = new UserServiceForAdmin();

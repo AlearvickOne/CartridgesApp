@@ -4,16 +4,17 @@ interface IButtonViolet {
   typeBtn: "button" | "submit" | "reset";
   OnClickFn: () => void;
   children: ReactNode;
+  otherClasses?: string;
 }
 
-export const ButtonViolet = ({ typeBtn, OnClickFn, children }: IButtonViolet) => {
+export const ButtonViolet = ({ typeBtn, OnClickFn, otherClasses, children }: IButtonViolet) => {
   return (
     <button
       type={typeBtn}
-      className="md:text-right rounded-lg md:px-2 w-full py-2 md:ml-5 mt-2  bg-violet-200 hover:shadow-upmd hover:shadow-violet-400 transition-all"
+      className={`rounded-lg md:px-2 w-full p-2   bg-violet-200 hover:shadow-upmd hover:shadow-violet-400 transition-all ${otherClasses}`}
       onClick={OnClickFn}
     >
-      <div className="px-2">{children}</div>
+      {children}
     </button>
   );
 };

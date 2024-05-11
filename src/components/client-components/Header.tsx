@@ -9,13 +9,14 @@ import { LiLinkAdmin } from "../widgets/navigate/LiLinkAdmin";
 import { LiLinkProviderUser } from "../widgets/navigate/LiLinkProviderUser";
 import { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
+
 const Header = () => {
   const [isClickOpenMenu, setIsClickOpenMenu] = useState(false);
 
   return (
     <>
       <div className="fixed top-0 left-0 md:hidden bg-violet-800 w-screen h-[3rem] border-b-2 border-blue-400 z-50 ">
-        <button className="" onClick={() => setIsClickOpenMenu(!isClickOpenMenu)}>
+        <button onClick={() => setIsClickOpenMenu(!isClickOpenMenu)}>
           <MenuIcon sx={{ fontSize: "3rem", color: "white" }} />
         </button>
       </div>
@@ -30,16 +31,21 @@ const Header = () => {
           <UserCard />
         </div>
         <nav>
-          <ul className="flex flex-col gap-5 my-2">
-            <LiLinkAdmin />
-            <LiLinkProviderUser link={AllPagesClass.CREATE_ORDER_PAGE}>
-              Вписать свой заказ
-            </LiLinkProviderUser>
-            <LiLink link={AllPagesClass.NOT_PAID_ORDERS_PAGE}>Не оплаченные заказы</LiLink>
-            <LiLink link={AllPagesClass.YES_PAID_ORDERS_PAGE}>Оплаченные заказы</LiLink>
-          </ul>
+          <button
+            className="w-full cursor-default"
+            onClick={() => setIsClickOpenMenu(!isClickOpenMenu)}
+          >
+            <ul className="flex flex-col gap-5 my-2">
+              <LiLinkAdmin />
+              <LiLinkProviderUser link={AllPagesClass.CREATE_ORDER_PAGE}>
+                Вписать свой заказ
+              </LiLinkProviderUser>
+              <LiLink link={AllPagesClass.NOT_PAID_ORDERS_PAGE}>Не оплаченные заказы</LiLink>
+              <LiLink link={AllPagesClass.YES_PAID_ORDERS_PAGE}>Оплаченные заказы</LiLink>
+            </ul>
+          </button>
         </nav>
-        <div className="mt-5 md:mb-5">
+        <div className="mt-5 md:mb-5 text-center">
           <ButtonSignOut />
         </div>
       </header>

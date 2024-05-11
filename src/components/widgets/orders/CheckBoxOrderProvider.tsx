@@ -22,11 +22,11 @@ export const CheckBoxOrderProvider = ({ dataUser }: ICheckBox) => {
   return (
     <>
       {dataUser?.role === EnumRoles.PROVIDER && (
-        <div className="bg-slate-100 p-2 pr-5 rounded-[10px]">
+        <div className="bg-slate-100 p-2 pr-5 rounded-[10px] text-center">
           <Checkbox onClick={() => setIsClickCheck(!isClickCheck)} id="myOrders" />
 
           <label className="ml-3" htmlFor="myOrders">
-            Только свои заказы
+            Только мои заказы
           </label>
         </div>
       )}

@@ -18,7 +18,7 @@ export const GetListOrdersInPage = ({ isPaidOrder }: IGetListOrderInPage) => {
   const orders = useGetOrdersData();
   const ordersByProvider = useGetOrdersByProvider(orders);
   return (
-    <div>
+    <>
       {!orders ? (
         <div className="flex justify-center items-center min-h-screen ">
           <CircularProgress color="warning" size={100} />
@@ -30,7 +30,7 @@ export const GetListOrdersInPage = ({ isPaidOrder }: IGetListOrderInPage) => {
           isPaidOrder={isPaidOrder}
         />
       )}
-    </div>
+    </>
   );
 };
 
@@ -50,7 +50,7 @@ const GetElements = observer(({ ordersByProvider, orders, isPaidOrder }: IGetEle
   };
 
   return (
-    <ul className={`min-h-screen overflow-y-auto py-10 mt-10 md:mt-0`}>
+    <ul className={`h-screen overflow-auto py-10 mt-10 md:mt-0`}>
       {(CheckBoxOrderProviderStore.isClickProviderCheckBox ? ordersByProvider : orders)?.map(
         ({ description, ...propsOrder }: IOrders) =>
           check(propsOrder) && (

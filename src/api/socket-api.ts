@@ -44,6 +44,14 @@ class SocketApi {
     this.SOCKET.emit("createOrder", newOrder);
   }
 
+  deleteOrder(idOrder: number) {
+    this.SOCKET.emit("order:delete", idOrder);
+  }
+
+  deleteAllOrders(onlyPaid: boolean) {
+    onlyPaid ? this.SOCKET.emit("order:deleteOnlyPaid") : this.SOCKET.emit("order:deleteAll");
+  }
+
   setOrderInBasket(idOrder: number, idBasket: number) {
     this.SOCKET.emit("orderBasket:set", idOrder, idBasket);
   }

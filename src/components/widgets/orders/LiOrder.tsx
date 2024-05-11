@@ -42,8 +42,8 @@ export const LiOrder = memo(({ ...propsOrder }: ILiOrder) => {
 
   return (
     <>
-      <li className="md:mb-8 border-2 md:p-5 md:mr-5 rounded-xl md:ml-6 md:w-auto w-[22rem] bg-slate-50 shadow-upmd shadow-zinc-500 md:text-[18px] text-sm p-2 ml-3 mx-4 mb-5 text-wrap overflow-hidden">
-        <div className="grid grid-cols-4 items-center gap-x-3  md:justify-items-end">
+      <li className="md:mb-8 border-2 md:border-white border-gray-700 md:p-5 md:mr-5 rounded-xl md:ml-6 md:w-auto w-full bg-slate-50 md:shadow-upmd md:shadow-zinc-500 md:text-[18px] text-[12px] p-2 mr-2 mb-5 ">
+        <div className="grid grid-cols-4 items-center gap-x-3  md:justify-items-center">
           <h4 className="justify-self-start text-wrap">{propsOrder.title}</h4>
           <p
             className={`flex items-center ${
@@ -53,11 +53,9 @@ export const LiOrder = memo(({ ...propsOrder }: ILiOrder) => {
             {propsOrder.price} <RubleIcon sx={{ fontSize: "15px", margin: "0 8px" }} />
           </p>
           {paidStatusButton()}
-          <div className="flex justify-between items-center justify-items-end">
-            <ButtonViolet typeBtn="button" OnClickFn={() => setIsOpenDesc(!isOpenDesc)}>
-              Подробнее
-            </ButtonViolet>
-          </div>
+          <ButtonViolet typeBtn="button" OnClickFn={() => setIsOpenDesc(!isOpenDesc)}>
+            Подробнее
+          </ButtonViolet>
         </div>
         {isOpenDesc && (
           <div className="mt-3">

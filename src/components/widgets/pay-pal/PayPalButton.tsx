@@ -13,6 +13,7 @@ export const PayPalButton = ({ valute, dataBasket }: IPayPalButton) => {
 
   return (
     <PayPalButtons
+      className="mb-2  w-full h-full"
       createOrder={(data, actions) => {
         return actions.order.create({
           purchase_units: [
