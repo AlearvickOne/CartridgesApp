@@ -19,9 +19,7 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body
-        className={`${
-          stylesAnims.leftRightWalking
-        } ${PT_SERIF_FONT.className} max-w-screen  max-h-screen overflow-hidden bg-image`}
+        className={`${stylesAnims.leftRightWalking} ${PT_SERIF_FONT.className} max-w-screen  max-h-screen overflow-hidden bg-image`}
       >
         <PayPalProvider>
           <QueryProvider>{children}</QueryProvider>

@@ -1,13 +1,23 @@
 @import "./keyframes.scss";
 
 .scaleUpBottomRight {
-  -webkit-animation: scale-up-br 0.6s both;
-  animation: scale-up-br 0.6s both;
+  -webkit-animation: scale-up-br 0.3s both;
+  animation: scale-up-br 0.3s both;
+
+  @media (max-width: 768px) {
+    -webkit-animation: scale-up-open 0.3s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+    animation: scale-up-open 0.3s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  }
 }
 
 .scaleDownBottomRight {
-  -webkit-animation: scale-down-br 0.6s both;
-  animation: scale-down-br 0.6s both;
+  -webkit-animation: scale-down-br 0.3s both;
+  animation: scale-down-br 0.3s both;
+
+  @media (max-width: 768px) {
+    -webkit-animation: scale-down-open 0.3s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+    animation: scale-down-open 0.3s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  }
 }
 
 .leftRightWalking {

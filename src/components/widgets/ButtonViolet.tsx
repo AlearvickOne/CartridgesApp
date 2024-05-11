@@ -10,10 +10,10 @@ export const ButtonViolet = ({ typeBtn, OnClickFn, children }: IButtonViolet) =>
   return (
     <button
       type={typeBtn}
-      className="text-right rounded-lg px-5 py-2 ml-5  bg-violet-200 hover:shadow-upmd hover:shadow-violet-400 transition-all"
+      className="md:text-right rounded-lg md:px-2 w-full py-2 md:ml-5 mt-2  bg-violet-200 hover:shadow-upmd hover:shadow-violet-400 transition-all"
       onClick={OnClickFn}
     >
-      {children}
+      <div className="px-2">{children}</div>
     </button>
   );
 };

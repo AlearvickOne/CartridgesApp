@@ -21,7 +21,7 @@ export const OrdersBasketButtonOpenWindow = ({
     <>
       {data?.orders !== undefined && (
         <div
-          className={`fixed bottom-10 right-20 z-50 bg-slate-100 rounded-[17px] transition-all hover:shadow-upmd  hover:shadow-indigo-400 bg-gradient-to-b from-violet-400 to-indigo-600`}
+          className={`fixed bottom-10 md:right-20 right-10 z-50 bg-slate-100 rounded-[17px] transition-all hover:shadow-upmd  hover:shadow-indigo-400 bg-gradient-to-b from-violet-400 to-indigo-600`}
         >
           <button className="relative  p-4 rounded-[12]" onClick={handleAnim}>
             <p

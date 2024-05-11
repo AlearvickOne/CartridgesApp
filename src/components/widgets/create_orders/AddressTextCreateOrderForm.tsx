@@ -17,7 +17,7 @@ export const AddressTextCreateOrderForm = () => {
       </label>
       <TextField
         id="address-order"
-        className="py-1 mb-2"
+        className="py-1 mb-2 text-[14px]"
         name={FormDataNamingOrderClass.NAME_ADRESS_CLIENT_ORDER}
         type="text"
         defaultValue={address}

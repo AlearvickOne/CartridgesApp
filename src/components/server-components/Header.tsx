@@ -14,13 +14,13 @@ const Header = () => {
 
   return (
     <>
-      <div className="fixed top-0 left-0 md:hidden bg-violet-800 w-screen h-[3rem] border-b-2 border-blue-400 z-50">
+      <div className="fixed top-0 left-0 md:hidden bg-violet-800 w-screen h-[3rem] border-b-2 border-blue-400 z-50 ">
         <button className="" onClick={() => setIsClickOpenMenu(!isClickOpenMenu)}>
           <MenuIcon sx={{ fontSize: "3rem", color: "white" }} />
         </button>
       </div>
       <header
-        className={`fixed z-40 mt-10 md:mt-0 ${
+        className={`fixed z-40 mt-10 md:mt-0 w-screen h-screen ${
           isClickOpenMenu ? "" : "hidden md:block"
         } w-full md:static md:flex md:flex-col justify-between items-center px-5 py-2 border-b-2 border-black md:w-[18rem] md:max-w-[18rem] h-screen ${
           stylesGradient.gradientToBottom

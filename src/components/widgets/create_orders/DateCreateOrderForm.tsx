@@ -8,8 +8,9 @@ export const DateCreateOrderForm = memo(() => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
+        className="text-center"
         name={FormDataNamingOrderClass.NAME_DATE_ORIGIN_ORDER}
-        format={"                  DD-MM-YYYY"}
+        format={"                        DD-MM-YYYY"}
         defaultValue={dayjs()}
         maxDate={dayjs()}
       />

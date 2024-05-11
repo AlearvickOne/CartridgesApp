@@ -8,6 +8,7 @@ import { useGetBasket } from "@/hooks/OrdersBasket/useGetBasket";
 
 import { useSetOrderInBasket } from "@/hooks/OrdersBasket/useSetOrderInBasket";
 import { StoreDataUser } from "@/stores/StoreDataUser";
+import { ButtonViolet } from "../ButtonViolet";
 
 export const LiOrder = memo(({ ...propsOrder }: ILiOrder) => {
   const [isOpenDesc, setIsOpenDesc] = useState<boolean>(false);
@@ -16,24 +17,23 @@ export const LiOrder = memo(({ ...propsOrder }: ILiOrder) => {
   const setOrderInBasket = useSetOrderInBasket();
 
   const paidStatusButton = () => {
-    const style = "inline mr-2 py-3";
+    const style = "inline mr-2 text-nowrap py-3 md:text-center";
 
     switch (propsOrder.isPaid) {
       case "paid":
-        return <p className={style}>Оплачено 👍</p>;
+        return <p className={style}>Оплачено</p>;
       case "waiting":
         return <p className={style}>В корзине</p>;
       default:
         return StoreDataUser.data?.role === EnumRoles.CLIENT ? (
-          <button
-            className="mr-3 p-3 rounded-lg bg-violet-200 hover:shadow-upmd hover:shadow-violet-400 transition-all"
-            type="submit"
-            onClick={() => {
+          <ButtonViolet
+            typeBtn="submit"
+            OnClickFn={() => {
               setOrderInBasket.mutate({ idOrder: propsOrder.id, idBasket: +bakset.data!.id });
             }}
           >
             Оплатить
-          </button>
+          </ButtonViolet>
         ) : (
           <p className={style}>В ожидании</p>
         );
@@ -42,9 +42,9 @@ export const LiOrder = memo(({ ...propsOrder }: ILiOrder) => {
 
   return (
     <>
-      <li className="mb-8 border-2 p-5 mr-5 rounded-xl ml-6  bg-slate-50 shadow-upmd shadow-zinc-500">
-        <div className="grid grid-cols-3 gap-x-[1px]  items-center ">
-          <h4 className="text-left">{propsOrder.title}</h4>
+      <li className="md:mb-8 border-2 md:p-5 md:mr-5 rounded-xl md:ml-6 md:w-auto w-[22rem] bg-slate-50 shadow-upmd shadow-zinc-500 md:text-[18px] text-sm p-2 ml-3 mx-4 mb-5 text-wrap overflow-hidden">
+        <div className="grid grid-cols-4 items-center gap-x-3  md:justify-items-end">
+          <h4 className="justify-self-start text-wrap">{propsOrder.title}</h4>
           <p
             className={`flex items-center ${
               propsOrder.isPaid === "paid" ? "text-green-600" : "text-red-600"
@@ -52,18 +52,15 @@ export const LiOrder = memo(({ ...propsOrder }: ILiOrder) => {
           >
             {propsOrder.price} <RubleIcon sx={{ fontSize: "15px", margin: "0 8px" }} />
           </p>
-          <div className="flex justify-between">
-            {paidStatusButton()}
-            <button
-              className="p-3 rounded-lg bg-violet-200 hover:shadow-upmd hover:shadow-violet-400 transition-all"
-              onClick={() => setIsOpenDesc(!isOpenDesc)}
-            >
+          {paidStatusButton()}
+          <div className="flex justify-between items-center justify-items-end">
+            <ButtonViolet typeBtn="button" OnClickFn={() => setIsOpenDesc(!isOpenDesc)}>
               Подробнее
-            </button>
+            </ButtonViolet>
           </div>
         </div>
         {isOpenDesc && (
-          <div>
+          <div className="mt-3">
             <div>
               {StoreDataUser.data?.role === EnumRoles.ADMIN && <p>id Заказа: {propsOrder.id}</p>}
               <p>Дата заказа: {propsOrder.date}</p>
@@ -73,7 +70,7 @@ export const LiOrder = memo(({ ...propsOrder }: ILiOrder) => {
               <p>Адрес заказа: {propsOrder.address} </p>
             </div>
             <hr className="my-3 border-stone-500" />
-            <p>{propsOrder.children}</p>
+            <p className=" break-words">{propsOrder.children}</p>
           </div>
         )}
       </li>

@@ -43,19 +43,22 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
   // ---------------------------------------------------------
 
   return (
-    <div className="bg-slate-50 p-2  mt-5 rounded-xl shadow-upmd shadow-zinc-500">
+    <div className="bg-slate-50 p-2 md:mt-5 mt-14 rounded-xl shadow-upmd shadow-zinc-500">
       <div className="grid grid-rows-2 justify-items-center mt-10 ">
-        <h1 className="text-[2rem]">Форма добавления заказа</h1>
+        <h1 className="md:text-[2rem] text-[20px]">Форма добавления заказа</h1>
         <p>{checkStatusSubmit(statusSubmit)}</p>
       </div>
-      <form action={submitForm} className="text-[18px] pl-10 mr-10 mb-10">
-        <div className="grid grid-cols-2 gap-8">
+      <form
+        action={submitForm}
+        className="md:text-[18px] text-[16px] md:pl-10 p-2 md:mr-10 mx-2 mb-10"
+      >
+        <div className="grid md:grid-cols-2 md:grid-rows-1 grid-rows-2 md:gap-8 gap-y-2">
           <TitleTextCreateOrderForm />
           <PriceTextCreateOrderForm />
         </div>
         <AddressTextCreateOrderForm />
         <DescriptionTextCreateOrderForm />
-        <div className="flex justify-between items-center">
+        <div className="flex md:justify-between md:items-center md:flex-row flex-col">
           <DateCreateOrderForm />
           <ButtonViolet
             typeBtn="submit"

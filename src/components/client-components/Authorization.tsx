@@ -1,5 +1,5 @@
 "use client";
-import styles from "@/styles/home/Home.module.scss";
+import styles from "@/styles/auth/auth.module.scss";
 import { ChangeEvent, useState } from "react";
 import SyncIcon from "@mui/icons-material/Sync";
 import { IRegisterForm } from "@/types/auth.interface";
@@ -48,13 +48,13 @@ function Authorization() {
   };
   return (
     <main className={styles.authContainer}>
-      <div className={styles.authForm_wrapper}>
+      <div className={`${styles.authForm_wrapper} `}>
         <h1
           className={`${LOBSTER_FONT.className} font-thin mb-5 text-center text-2xl border-b-2 border-black pb-2`}
         >
           {isLoginForm ? "Авторизация" : "Регистрация"}
         </h1>
-        <form className={`${styles.authForm} font-thin`} onSubmit={handleSubmit(onSubmit)}>
+        <form className={`${styles.authForm} font-thin `} onSubmit={handleSubmit(onSubmit)}>
           {isLoginForm ? (
             <LoginFormAuth
               register={register}

@@ -26,7 +26,7 @@
     transform-origin: 100% 100%;
   }
 }
-
+//---
 @-webkit-keyframes scale-down-br {
   0% {
     -webkit-transform: scale(1);
@@ -55,7 +55,7 @@
     transform-origin: 100% 100%;
   }
 }
-
+//---
 @keyframes left-Right-Walking {
   0% {
     background-position: 0 0;
@@ -66,4 +66,63 @@
   100% {
     background-position: 0 0;
   } /* Идет в начальное положение фона */
+}
+//---
+@-webkit-keyframes scale-up-open {
+  0% {
+    -webkit-transform: scaleY(0.4);
+    transform: scaleY(0.4);
+    -webkit-transform-origin: 0% 100%;
+    transform-origin: 0% 100%;
+  }
+  100% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: 0% 100%;
+    transform-origin: 0% 100%;
+  }
+}
+@keyframes scale-up-open {
+  0% {
+    -webkit-transform: scaleY(0);
+    transform: scaleY(0);
+    -webkit-transform-origin: 0% 100%;
+    transform-origin: 0% 100%;
+  }
+  100% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: 0% 100%;
+    transform-origin: 0% 100%;
+  }
+}
+
+//---
+@-webkit-keyframes scale-down-open {
+  0% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: 0% 100%;
+    transform-origin: 0% 100%;
+  }
+  100% {
+    -webkit-transform: scaleY(0);
+    transform: scaleY(0);
+    -webkit-transform-origin: 0% 100%;
+    transform-origin: 0% 100%;
+  }
+}
+@keyframes scale-down-open {
+  0% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: 0% 100%;
+    transform-origin: 0% 100%;
+  }
+  100% {
+    -webkit-transform: scaleY(0);
+    transform: scaleY(0);
+    -webkit-transform-origin: 0% 100%;
+    transform-origin: 0% 100%;
+  }
 }
