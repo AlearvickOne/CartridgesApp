@@ -2,14 +2,14 @@
 import { observer } from "mobx-react-lite";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
 interface ILiLink {
   link: string;
   children: ReactNode;
 }
 
-export const LiLink = observer(({ link, children }: ILiLink) => {
+export const ElementListLinkNav = observer(({ link, children }: ILiLink) => {
   const pathname = usePathname();
 
   return (

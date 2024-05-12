@@ -1,5 +1,5 @@
 "use client";
-import { CheckBoxOrderProviderStore } from "@/stores/checkBoxOrderProviderStore";
+import { CheckBoxOrderProviderStore } from "@/stores/StoreCheckBoxOrderProvider";
 import { IUser } from "@/types/auth.interface";
 import { EnumRoles } from "@/types/enums";
 import { Checkbox } from "@mui/material";

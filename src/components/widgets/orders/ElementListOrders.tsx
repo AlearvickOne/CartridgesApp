@@ -10,7 +10,7 @@ import { useSetOrderInBasket } from "@/hooks/OrdersBasket/useSetOrderInBasket";
 import { StoreDataUser } from "@/stores/StoreDataUser";
 import { ButtonViolet } from "../ButtonViolet";
 
-export const LiOrder = memo(({ ...propsOrder }: ILiOrder) => {
+export const ElementListOrders = memo(({ ...propsOrder }: ILiOrder) => {
   const [isOpenDesc, setIsOpenDesc] = useState<boolean>(false);
 
   const bakset = useGetBasket();

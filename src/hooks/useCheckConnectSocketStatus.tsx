@@ -7,7 +7,6 @@ export const useCheckConnectSocketStatus = () => {
   useEffect(() => {
     const statusFn = async () => {
       await SocketApiClass.connectionCheck(setStatus);
-      console.log(status);
     };
 
     statusFn();

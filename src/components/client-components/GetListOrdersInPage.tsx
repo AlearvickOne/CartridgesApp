@@ -1,17 +1,17 @@
 "use client";
 import { observer } from "mobx-react-lite";
 
-import { LiOrder } from "@/components/widgets/orders/LiOrder";
+import { ElementListOrders } from "@/components/widgets/orders/ElementListOrders";
 import {
   IGetListOrderInPage,
   IOrderNotDesc,
   IOrders,
   IOrdersInArray,
 } from "@/types/orders.interface";
-import { useGetOrdersData } from "@/hooks/useGetOrdersData";
+import { useGetOrdersData } from "@/hooks/orders/useGetOrdersData";
 import { CircularProgress } from "@mui/material";
 import { useGetOrdersByProvider } from "@/hooks/orders/useGetOrdersByProvider";
-import { CheckBoxOrderProviderStore } from "@/stores/checkBoxOrderProviderStore";
+import { CheckBoxOrderProviderStore } from "@/stores/StoreCheckBoxOrderProvider";
 import { EnumPaidStatus } from "@/types/enums";
 
 export const GetListOrdersInPage = ({ isPaidOrder }: IGetListOrderInPage) => {
@@ -54,9 +54,9 @@ const GetElements = observer(({ ordersByProvider, orders, isPaidOrder }: IGetEle
       {(CheckBoxOrderProviderStore.isClickProviderCheckBox ? ordersByProvider : orders)?.map(
         ({ description, ...propsOrder }: IOrders) =>
           check(propsOrder) && (
-            <LiOrder key={propsOrder.id} {...propsOrder}>
+            <ElementListOrders key={propsOrder.id} {...propsOrder}>
               {description}
-            </LiOrder>
+            </ElementListOrders>
           )
       )}
     </ul>

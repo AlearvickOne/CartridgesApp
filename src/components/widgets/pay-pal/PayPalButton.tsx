@@ -1,7 +1,6 @@
 import { usePaymentsOrdersFromBasket } from "@/hooks/OrdersBasket/usePaymentsOrdersFromBasket";
 import { IBasket } from "@/types/orders-basket.interface";
 import { PayPalButtons } from "@paypal/react-paypal-js";
-import React from "react";
 
 interface IPayPalButton {
   dataBasket: IBasket;

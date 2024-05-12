@@ -1,5 +1,6 @@
 import { authService } from "@/api/services/authService";
 import { AllPagesClass } from "@/constants/constants";
+import { M_AUTH } from "@/constants/constantsQuery";
 import { DisBoolean } from "@/types/Dispatch.types";
 import { ILoginForm, IRegisterForm } from "@/types/auth.interface";
 import { useMutation } from "@tanstack/react-query";
@@ -15,7 +16,7 @@ export const useMutationAuth = (
   const { push } = useRouter();
 
   return useMutation({
-    mutationKey: ["auth"],
+    mutationKey: [M_AUTH],
     mutationFn: (data: IRegisterForm) => {
       setIsClick(true);
       setIsError(false);

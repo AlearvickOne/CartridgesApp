@@ -1,16 +1,16 @@
 "use client";
 
 import { AllPagesClass } from "@/constants/constants";
-import { LiLink } from "@/components/widgets/navigate/LiLink";
+import { ElementListLinkNav } from "@/components/widgets/navigate/ElementListLinkNav";
 import stylesGradient from "@/styles/styles-gradient.module.scss";
 import { ButtonSignOut } from "../widgets/navigate/ButtonLink";
 import { UserCard } from "../widgets/navigate/UserCard";
-import { LiLinkAdmin } from "../widgets/navigate/LiLinkAdmin";
-import { LiLinkProviderUser } from "../widgets/navigate/LiLinkProviderUser";
+import { ElementListLinkNavAdmin } from "../widgets/navigate/ElementListLinkNavAdmin";
+import { ElementListLinkProviderUser } from "../widgets/navigate/ElementListLinkProviderUser";
 import { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 
-const Header = () => {
+export const NavigationMenu = () => {
   const [isClickOpenMenu, setIsClickOpenMenu] = useState(false);
 
   return (
@@ -36,12 +36,18 @@ const Header = () => {
             onClick={() => setIsClickOpenMenu(!isClickOpenMenu)}
           >
             <ul className="flex flex-col gap-5 my-2">
-              <LiLinkAdmin />
-              <LiLinkProviderUser link={AllPagesClass.CREATE_ORDER_PAGE}>
+              <ElementListLinkNavAdmin link={AllPagesClass.ADMIN_PANEL_PAGE}>
+                Админ панель
+              </ElementListLinkNavAdmin>
+              <ElementListLinkProviderUser link={AllPagesClass.CREATE_ORDER_PAGE}>
                 Вписать свой заказ
-              </LiLinkProviderUser>
-              <LiLink link={AllPagesClass.NOT_PAID_ORDERS_PAGE}>Не оплаченные заказы</LiLink>
-              <LiLink link={AllPagesClass.YES_PAID_ORDERS_PAGE}>Оплаченные заказы</LiLink>
+              </ElementListLinkProviderUser>
+              <ElementListLinkNav link={AllPagesClass.NOT_PAID_ORDERS_PAGE}>
+                Не оплаченные заказы
+              </ElementListLinkNav>
+              <ElementListLinkNav link={AllPagesClass.YES_PAID_ORDERS_PAGE}>
+                Оплаченные заказы
+              </ElementListLinkNav>
             </ul>
           </button>
         </nav>
@@ -52,5 +58,3 @@ const Header = () => {
     </>
   );
 };
-
-export default Header;

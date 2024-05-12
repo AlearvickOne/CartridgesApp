@@ -1,6 +1,6 @@
 import { FormDataNamingOrderClass } from "@/constants/constants";
 import { TextField } from "@material-ui/core";
-import React, { ChangeEvent, memo, useCallback } from "react";
+import { ChangeEvent, memo, useCallback } from "react";
 
 export const TitleTextCreateOrderForm = memo(() => {
   const titleChange = useCallback((e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {

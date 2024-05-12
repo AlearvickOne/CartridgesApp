@@ -74,7 +74,9 @@ export const RegisterFormAuth = ({ register, changeInput, errors, isError }: IAu
         </span>
       )}
       {isError && (
-        <p className="text-center text-xl text-red-500">Ошибка! Проверьте введенные данные!</p>
+        <p className="text-center text-xl text-red-500">
+          Ошибка! Проверьте введенные данные! Возможно Логин или Email уже зарегистрированы.
+        </p>
       )}
     </>
   );
