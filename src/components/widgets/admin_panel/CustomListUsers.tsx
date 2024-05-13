@@ -1,3 +1,5 @@
+"use client";
+
 import { useGetProfilesUsers } from "@/hooks/ProfilesUser/useGetProfilesUsers";
 import { Checkbox } from "@mui/material";
 import { useState } from "react";

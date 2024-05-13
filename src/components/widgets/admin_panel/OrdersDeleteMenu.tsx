@@ -1,3 +1,4 @@
+"use client";
 import { SocketApiClass } from "@/api/socket-api";
 import { ButtonViolet } from "../ButtonViolet";
 import { Checkbox } from "@mui/material";

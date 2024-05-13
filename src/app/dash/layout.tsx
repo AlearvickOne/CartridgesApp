@@ -1,9 +1,9 @@
-"useServer";
+"use server";
 
 import { NavigationMenu } from "@/components/client-components/NavigationMenu";
 import { OrdersBasket } from "@/components/widgets/orders-basket/OrdersBasket";
 
-import React, { PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 
 export default async function DashboardLayout({ children }: PropsWithChildren) {
   return (

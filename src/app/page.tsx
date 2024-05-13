@@ -1,3 +1,4 @@
+"use server";
 import { RedirectFromUndefinedPages } from "@/api/services/RedirectFromUndefinedPages";
 
 export default async function Home() {

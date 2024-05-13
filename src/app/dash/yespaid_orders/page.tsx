@@ -4,9 +4,5 @@ import { GetListOrdersInPage } from "@/components/client-components/GetListOrder
 import { EnumPaidStatus } from "@/types/enums";
 
 export default async function YesPaidOrders() {
-  return (
-    <>
-      <GetListOrdersInPage isPaidOrder={EnumPaidStatus.PAID} />
-    </>
-  );
+  return <GetListOrdersInPage isPaidOrder={EnumPaidStatus.PAID} />;
 }

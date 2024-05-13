@@ -1,4 +1,4 @@
-"use client";
+"use server";
 
 import { LOBSTER_FONT } from "@/constants/constants";
 import { OrdersDeleteMenu } from "../widgets/admin_panel/OrdersDeleteMenu";
