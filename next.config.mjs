@@ -8,8 +8,8 @@ const nextConfig = {
   },
   env: {
     AUTH_SECRET: process.env.AUTH_SECRET,
-    NEXT_PUBLIC_DOMAIN: process.env.NEXT_PUBLIC_DOMAIN,
-    NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
+    DOMAIN: process.env.DOMAIN,
+    BASE_URL: process.env.BASE_URL,
     NEXT_PUBLIC_YANDEX_MAPS_API: process.env.NEXT_PUBLIC_YANDEX_MAPS_API,
     NEXT_PUBLIC_YANDEX_MAPS_GEO_API: process.env.NEXT_PUBLIC_YANDEX_MAPS_GEO_API,
   },
