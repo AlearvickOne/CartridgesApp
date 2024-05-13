@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "http://cartridje-app-backend-y2zy.vercel.app/"
+    }
+  ]
+}

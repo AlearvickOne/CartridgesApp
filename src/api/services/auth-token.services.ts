@@ -9,7 +9,7 @@ export const getAccessToken = () => {
 
 export const saveTokenStorage = (accessToken: string) => {
   Cookies.set(EnumTokens.ACCESS_TOKEN, accessToken, {
-    domain: "cartridje-app-backend-y2zy.vercel.app",
+    domain: process.env.NEXT_PUBLIC_BASE_URL,
     sameSite: "strict",
     expires: 1,
   });

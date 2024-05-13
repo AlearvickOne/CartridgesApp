@@ -3,7 +3,7 @@ import { DisArrayOrders, DisString } from "@/types/Dispatch.types";
 import io from "socket.io-client";
 
 class SocketApi {
-  SOCKET = io(process.env.BASE_URL!);
+  SOCKET = io(process.env.NEXT_PUBLIC_BASE_URL!);
 
   async connectionCheck(setStatus: DisString) {
     if (this.SOCKET.connected) {
