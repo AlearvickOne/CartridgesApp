@@ -10,8 +10,8 @@ const nextConfig = {
     AUTH_SECRET: process.env.AUTH_SECRET,
     DOMAIN: process.env.DOMAIN,
     BASE_URL: process.env.BASE_URL,
-    NEXT_PUBLIC_YANDEX_MAPS_API: process.env.NEXT_PUBLIC_YANDEX_MAPS_API,
-    NEXT_PUBLIC_YANDEX_MAPS_GEO_API: process.env.NEXT_PUBLIC_YANDEX_MAPS_GEO_API,
+    YANDEX_MAPS_API: process.env.YANDEX_MAPS_API,
+    YANDEX_MAPS_GEO_API: process.env.YANDEX_MAPS_GEO_API,
   },
 };
 

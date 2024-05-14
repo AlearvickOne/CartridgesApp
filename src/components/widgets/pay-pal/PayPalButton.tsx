@@ -11,29 +11,32 @@ export const PayPalButton = ({ valute, dataBasket }: IPayPalButton) => {
   const paymentOrdersBasket = usePaymentsOrdersFromBasket();
 
   return (
-    <PayPalButtons
-      className="mb-2  w-full h-full"
-      createOrder={(data, actions) => {
-        return actions.order.create({
-          purchase_units: [
-            {
-              amount: {
-                value: valute.toString(),
-                currency_code: "USD",
+    <>
+      {/* <button onClick={() => paymentOrdersBasket.mutate(+dataBasket.id)}>Оплата</button> */}
+      <PayPalButtons
+        className="mb-2  w-full h-full"
+        createOrder={(data, actions) => {
+          return actions.order.create({
+            purchase_units: [
+              {
+                amount: {
+                  value: valute.toString(),
+                  currency_code: "USD",
+                },
               },
-            },
-          ],
-          intent: "CAPTURE",
-        });
-      }}
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      onApprove={async (data, action) => {
-        try {
-          return paymentOrdersBasket.mutate(+dataBasket.id);
-        } catch (error) {
-          console.log(error);
-        }
-      }}
-    />
+            ],
+            intent: "CAPTURE",
+          });
+        }}
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        onApprove={async (data, action) => {
+          try {
+            return paymentOrdersBasket.mutate(+dataBasket.id);
+          } catch (error) {
+            console.log(error);
+          }
+        }}
+      />
+    </>
   );
 };

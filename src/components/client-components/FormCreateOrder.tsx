@@ -63,7 +63,7 @@ export const FormCreateOrder = ({ createOrderForm }: IFormCreateOrder) => {
           <ButtonViolet
             typeBtn="submit"
             OnClickFn={() => setStatusSubmit(EnumFormCreateStatus.LOADING)}
-            otherClasses="w-[14rem] "
+            otherClasses="md:w-[14rem] w-[16rem]"
           >
             Добавить
           </ButtonViolet>

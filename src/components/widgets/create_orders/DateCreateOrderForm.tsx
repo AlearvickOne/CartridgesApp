@@ -7,15 +7,12 @@ import { memo } from "react";
 export const DateCreateOrderForm = memo(() => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <div className="text-center mb-2">
-        <DatePicker
-          className="w-30"
-          name={FormDataNamingOrderClass.NAME_DATE_ORIGIN_ORDER}
-          format={"               DD-MM-YYYY"}
-          defaultValue={dayjs()}
-          maxDate={dayjs()}
-        />
-      </div>
+      <DatePicker
+        name={FormDataNamingOrderClass.NAME_DATE_ORIGIN_ORDER}
+        format={"                  DD.MM.YYYY"}
+        defaultValue={dayjs()}
+        maxDate={dayjs()}
+      />
     </LocalizationProvider>
   );
 });

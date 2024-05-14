@@ -1,7 +1,8 @@
 import { Lobster, PT_Serif } from "next/font/google";
 
-/* FONTS */  
-export const LOBSTER_FONT =  Lobster({ subsets: ["latin"], weight: ["400"] });
+/* FONTS */
+
+export const LOBSTER_FONT = Lobster({ subsets: ["latin"], weight: ["400"] });
 export const PT_SERIF_FONT = PT_Serif({ subsets: ["latin"], weight: ["400", "700"] });
 /* ----------------- */
 
@@ -23,10 +24,9 @@ class FormDataNamingOrder {
 }
 
 class Keys {
-  readonly API_KEY_YANDEX_MAP = process.env.NEXT_PUBLIC_YANDEX_MAPS_API;
-  readonly YANDEX_MAPS_GEO_API = process.env.NEXT_PUBLIC_YANDEX_MAPS_GEO_API;
+  readonly API_KEY_YANDEX_MAP = process.env.YANDEX_MAPS_API;
+  readonly YANDEX_MAPS_GEO_API = process.env.YANDEX_MAPS_GEO_API;
 }
-
 
 export const AllPagesClass = new AllPages();
 export const FormDataNamingOrderClass = new FormDataNamingOrder();
